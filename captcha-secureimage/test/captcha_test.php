@@ -113,7 +113,7 @@ if ($requires == 'fail') {
 if (isset($_POST['action']) && ($_POST['action'] == 'check')) {
    $code    = htmlspecialchars(strip_tags($_POST['code']));
    // check the cookie can be read
-   if (!isset($_SESSION['securimage_code_value']) || empty($_SESSION['securimage_code_value'])) {
+   if (!isset($_SESSION['securimage_code_si_com']) || empty($_SESSION['securimage_code_si_com'])) {
           $error = 1;
           $error_captcha = 'Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings.';
    }else{
@@ -124,6 +124,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'check')) {
       } else {
          include "../securimage.php";
          $img = new Securimage();
+         $img->form_id = 'com';
          $valid = $img->check("$code");
          // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
          if($valid == true) {

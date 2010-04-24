@@ -124,9 +124,43 @@ especially "Warning: session_start...", they could be indicating a problem with 
     <br />No FreeType support.  Cannot use TTF fonts, but it will use GD fonts instead.
     <?php endif; ?>
   </li>
+
+  <li>
+    <strong>imagettftext Support:</strong>
+    <?php print_status( function_exists('imagettftext') ); ?>
+  </li>
+
+  <li>
+    <strong>imagettfbbox Support:</strong>
+    <?php print_status( function_exists('imagettfbbox') ); ?>
+  </li>
+
+   <li>
+    <strong>imagecreatetruecolor Support:</strong>
+    <?php print_status( function_exists('imagecreatetruecolor') ); ?>
+  </li>
+
+  <li>
+    <strong>imagefilledrectangle Support:</strong>
+    <?php print_status( function_exists('imagefilledrectangle') ); ?>
+  </li>
+
+  <li>
+    <strong>imagecolorallocatealpha Support:</strong>
+    <?php print_status( function_exists('imagecolorallocatealpha') ); ?>
+  </li>
+
   <li>
     <strong>JPEG Support:</strong>
-    <?php print_status($gd_support && $gd_info['JPG Support']); ?>
+    <?php
+
+     if ( isset($gd_info['JPG Support']) ) {
+         print_status($gd_support && $gd_info['JPG Support']);
+     } else if ( isset($gd_info['JPEG Support']) ) {
+         print_status($gd_support && $gd_info['JPEG Support']);
+     }
+
+    ?>
   </li>
   <li>
     <strong>PNG Support:</strong>

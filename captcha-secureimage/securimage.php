@@ -52,7 +52,7 @@
  - Flash button to stream mp3 audio (Douglas Walsh www.douglaswalsh.net)
  - Audio output is mp3 format by default
  - Change font to AlteHaasGrotesk by yann le coroller
- - Some code cleanup 
+ - Some code cleanup
 
  1.0.4 (unreleased)
  - Ability to output audible codes in mp3 format to stream from flash
@@ -115,6 +115,13 @@ class Securimage {
 	 * @var int
 	 */
 	var $code_length;
+
+	/**
+	 * Form id (for multi-captchas on same page).
+	 *
+	 * @var string
+	 */
+	var $form_id;
 
 	/**
 	 * The character set for individual characters in the image.<br />
@@ -423,8 +430,18 @@ class Securimage {
 		}
 
 		// Set Default Values
-		$this->image_width   = 230;
-		$this->image_height  = 80;
+        $this->form_id = 'com';
+        if( isset($_GET['si_form_id']) && in_array($_GET['si_form_id'], array('com', 'reg', 'log')) ) {
+            $this->form_id = $_GET['si_form_id'];
+        }
+
+        $this->image_width   = 175;
+		$this->image_height  = 60;
+        if( isset($_GET['si_sm_captcha']) ) {
+            $this->image_width   = 132;
+		    $this->image_height  = 45;
+        }
+
 		$this->image_type    = 'png'; // png, jpg or gif
 
 		$this->code_length   = 6;
@@ -1046,7 +1063,7 @@ class Securimage {
 	 */
 	function saveData()
 	{
-		$_SESSION['securimage_code_value'] = strtolower($this->code);
+		$_SESSION['securimage_code_si_'.$this->form_id] = strtolower($this->code);
 	}
 
 	/**
@@ -1057,10 +1074,10 @@ class Securimage {
 	 */
 	function validate()
 	{
-		if ( isset($_SESSION['securimage_code_value']) && !empty($_SESSION['securimage_code_value']) ) {
-			if ( strtolower($_SESSION['securimage_code_value']) == strtolower(trim($this->code_entered)) ) {
+		if ( isset($_SESSION['securimage_code_si_'.$this->form_id]) && !empty($_SESSION['securimage_code_si_'.$this->form_id]) ) {
+			if ( strtolower($_SESSION['securimage_code_si_'.$this->form_id]) == strtolower(trim($this->code_entered)) ) {
 				$this->correct_code = true;
-				$_SESSION['securimage_code_value'] = '';  // clear code to prevent session re-use
+				$_SESSION['securimage_code_si_'.$this->form_id] = '';  // clear code to prevent session re-use
 			} else {
 				$this->correct_code = false;
 			}
@@ -1077,8 +1094,9 @@ class Securimage {
 	 */
 	function getCode()
 	{
-		if (isset($_SESSION['securimage_code_value']) && !empty($_SESSION['securimage_code_value'])) {
-			return strtolower($_SESSION['securimage_code_value']);
+
+        if (isset($_SESSION['securimage_code_si_'.$this->form_id]) && !empty($_SESSION['securimage_code_si_'.$this->form_id])) {
+			return strtolower($_SESSION['securimage_code_si_'.$this->form_id]);
 		} else {
 			return '';
 		}

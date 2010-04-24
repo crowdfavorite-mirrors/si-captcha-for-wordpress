@@ -223,6 +223,11 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+= 2.5 =
+- (23 Apr 2010) - Updated for latest version of buddypress 1.2.3 compatibility.
+- Added setting to make the CAPTCHA image smaller.
+- Fixed so multiple forms can be on the same page. 
+- Split code into 2 smaller files for better performance.
 - Updated Danish (da_DK) 
 
 = 2.2.9 =
