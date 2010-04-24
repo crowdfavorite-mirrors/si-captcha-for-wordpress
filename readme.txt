@@ -7,13 +7,13 @@ Requires at least: WP/MU 2.6, BuddyPress 1.1
 Tested up to: WP/MU 2.9.2, BuddyPress 1.2.3
 Stable tag: trunk
 
-Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. Also is fully WPMU and BuddyPress compatible.
+Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
 
 == Description ==
 
 Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all.
 In order to post comments or register, users will have to type in the code shown on the image.
-This prevents spam from automated bots. Adds security. Works great with Akismet. Also is fully WPMU and BuddyPress compatible.
+This prevents spam from automated bots. Adds security. Works great with Akismet. Also is fully WP, WPMU, and BuddyPress compatible.
 
 [Plugin URI]: (http://www.642weather.com/weather/scripts-wordpress-captcha.php)
 
@@ -38,7 +38,7 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.6+, WPMU, and BuddyPress
+ * Works with Wordpress 2.6+, WPMU, and BuddyPress 1.1 -> 1.2.3
  * PHP 4.0.6 or above with GD2 library support.
  * Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
