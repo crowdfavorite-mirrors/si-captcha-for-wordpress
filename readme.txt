@@ -223,6 +223,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+
 = 2.5 =
 - (23 Apr 2010) - Updated for latest version of buddypress 1.2.3 compatibility.
 - Added setting to make the CAPTCHA image smaller.
