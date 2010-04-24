@@ -66,11 +66,11 @@ Requirements/Restrictions:
 
 == Screenshots ==
 
-1. screenshot-1.jpg is the captcha on the comment form.
+1. screenshot-1.gif is the captcha on the comment form.
 
-2. screenshot-2.jpg is the captcha on the registration form.
+2. screenshot-2.gif is the captcha on the registration form.
 
-3. screenshot-3.jpg is the `Captcha options` tab on the `Admin Plugins` page.
+3. screenshot-3.gif is the `Captcha options` tab on the `Admin Plugins` page.
 
 
 == Configuration ==
