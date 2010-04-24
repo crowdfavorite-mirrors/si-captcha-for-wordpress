@@ -3,8 +3,8 @@ Contributors: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
-Requires at least: WP/MU 2.6, BuddyPress 1.1
-Tested up to: WP/MU 2.9.2, BuddyPress 1.2.3
+Requires at least: 2.6
+Tested up to: 2.9.2
 Stable tag: trunk
 
 Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
