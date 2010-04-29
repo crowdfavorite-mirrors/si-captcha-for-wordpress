@@ -134,6 +134,8 @@ function si_captcha_options_page() {
   global $wpmu, $si_captcha_path, $si_captcha_url, $si_captcha_opt, $si_captcha_option_defaults;
 
   $si_captcha_admin_path = str_replace('/captcha-secureimage','',$si_captcha_path);
+  if ($wpmu == 1)
+     $si_captcha_admin_path = 'si-captcha-for-wordpress';
   require_once($si_captcha_admin_path . '/si-captcha-admin.php');
 
 }// end function si_captcha_options_page

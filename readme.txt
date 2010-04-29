@@ -223,6 +223,7 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Fixed file path issue when installed in mu-plugins folder
 - Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
 
 = 2.5 =
