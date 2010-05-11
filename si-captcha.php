@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.5
+Version: 2.5.1
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -62,6 +62,7 @@ function si_captcha_get_options() {
          'si_captcha_login' => 'false',
          'si_captcha_register' => 'true',
          'si_captcha_rearrange' => 'false',
+         'si_captcha_enable_audio' => 'true',
          'si_captcha_enable_audio_flash' => 'false',
          'si_captcha_captcha_small' => 'false',
          'si_captcha_no_trans' => 'false',
@@ -641,7 +642,8 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" />';
 
-  if($si_captcha_opt['si_captcha_enable_audio_flash'] == 'true') {
+  if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
+     if($si_captcha_opt['si_captcha_enable_audio_flash'] == 'true') {
         $parseUrl = parse_url($si_captcha_url);
         $secureimage_url = $parseUrl['path'];
         echo '
@@ -655,7 +657,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
 			    <param name="bgcolor" value="#ffffff" />
 		</object>
         <br />';
-  }else{
+     }else{
         echo '<a href="'.$si_captcha_url.'/securimage_play.php?si_form_id='.$form_id.'" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
@@ -664,8 +666,8 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo  '" ';
         echo ($si_captcha_opt['si_captcha_audio_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_audio_image_style'] ).'"' : '';
         echo ' onclick="this.blur()" /></a><br />';
+     }
   }
-
   echo '<a href="#" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$si_captcha_url.'/'.$captcha_level_file.'?';

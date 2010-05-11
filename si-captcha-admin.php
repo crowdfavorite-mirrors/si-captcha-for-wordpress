@@ -25,6 +25,7 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_login' =>              (isset( $_POST['si_captcha_login'] ) ) ? 'true' : 'false',
          'si_captcha_register' =>           (isset( $_POST['si_captcha_register'] ) ) ? 'true' : 'false',
          'si_captcha_rearrange' =>          (isset( $_POST['si_captcha_rearrange'] ) ) ? 'true' : 'false',
+         'si_captcha_enable_audio' =>       (isset( $_POST['si_captcha_enable_audio'] ) ) ? 'true' : 'false',
          'si_captcha_enable_audio_flash' => (isset( $_POST['si_captcha_enable_audio_flash'] ) ) ? 'true' : 'false',
          'si_captcha_captcha_small' =>      (isset( $_POST['si_captcha_captcha_small'] ) ) ? 'true' : 'false',
          'si_captcha_no_trans' =>           (isset( $_POST['si_captcha_no_trans'] ) ) ? 'true' : 'false',
@@ -244,6 +245,9 @@ foreach ($captcha_difficulty_array as $k => $v) {
     <tr>
         <th scope="row"><?php _e('CAPTCHA Options:', 'si-captcha') ?></th>
         <td>
+        <input name="si_captcha_enable_audio" id="si_captcha_enable_audio" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio'] == 'true' ) echo 'checked="checked"'; ?> />
+       <label name="si_captcha_enable_audio" for="si_captcha_enable_audio"><?php _e('Enable Audio for the CAPTCHA.', 'si-captcha') ?></label><br />
+
        <input name="si_captcha_enable_audio_flash" id="si_captcha_enable_audio_flash" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio_flash'] == 'true' ) echo 'checked="checked"'; ?> />
        <label name="si_captcha_enable_audio_flash" for="si_captcha_enable_audio_flash"><?php _e('Enable Flash Audio for the CAPTCHA.', 'si-captcha') ?></label><br />
 
