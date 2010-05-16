@@ -139,14 +139,18 @@ else
       <input name="si_captcha_donated" id="si_captcha_donated" type="checkbox" <?php if( $si_captcha_opt['si_captcha_donated'] == 'true' ) echo 'checked="checked"'; ?> />
       <label name="si_captcha_donated" for="si_captcha_donated"><?php echo esc_html( __('I have donated to help contribute for the development of this plugin.', 'si-captcha')); ?></label>
       <br />
-
+<?php
+    if( $wp_version[0] == 2 ) { // wp 2 series
+?>
 <h3><?php _e('Usage', 'si-captcha') ?></h3>
 
 <p>
 <?php _e('Your theme must have a', 'si-captcha') ?> &lt;?php do_action('comment_form', $post->ID); ?&gt; <?php _e('tag inside your comments.php form. Most themes do.', 'si-captcha'); echo ' '; ?>
 <?php _e('The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea, or the captcha image and captcha code entry might display after the submit button.', 'si-captcha') ?>
 </p>
-
+<?php
+    }
+?>
 <h3><?php _e('Options', 'si-captcha') ?></h3>
 
         <p class="submit">

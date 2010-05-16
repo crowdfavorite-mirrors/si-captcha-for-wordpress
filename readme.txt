@@ -4,7 +4,7 @@ Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
 Requires at least: 2.6
-Tested up to: 2.9.2
+Tested up to: 3.0
 Stable tag: trunk
 
 Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
@@ -39,8 +39,8 @@ Captcha Image Support:
 Requirements/Restrictions:
 -------------------------
  * Works with Wordpress 2.6+, WPMU, and BuddyPress 1.1 -> 1.2.3
- * PHP 4.0.6 or above with GD2 library support.
- * Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
+ * PHP 4.3 or above with GD2 library support.
+ * (WP 2 series) Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
 
 
@@ -105,11 +105,11 @@ Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag insi
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
 This tag is exactly where the captcha image and captcha code entry will display on the form, so
 move the line to before the comment textarea, uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page,
-and the problem should be fixed.
+and the problem should be fixed. (WP3 with a WP3 theme will not have this problem)
 
 = Alternate Fix for the captcha image display order =
 
-You can just check the 'Comment Form Rearrange' box on the admin plugins 'Captcha options' page and javascript will attempt to rearrange it for you. Editing the comments.php, moving the tag, and uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page is the best solution.
+You can just check the 'Comment Form Rearrange' box on the admin plugins 'Captcha options' page and javascript will attempt to rearrange it for you. Editing the comments.php, moving the tag, and uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page is the best solution.(WP3 with a WP3 theme will not have this problem)
 
 = Why is it better to uncheck the 'Comment Form Rearrange' box and move the tag? =
 Because the XHTML will no longer validate if it is checked.
@@ -137,7 +137,7 @@ Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag insi
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
 This tag is exactly where the captcha image and captcha code entry will display on the form, so
 move the line to before the comment textarea, uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page,
-and the problem should be fixed.
+and the problem should be fixed. (WP3 with a WP3 theme will not have this problem)
 
 
 = Troubleshooting if the CAPTCHA image itself is not being shown: =
@@ -222,6 +222,9 @@ Of course! It will be very gratefully received. Use PoEdit, it makes translation
 If you use PoEdit to translate, it is easy to translate for a new version. You can open your current .po file, then select from the PoEdit menu: "Catalog" > "Update from POT file". Now all you have to change are the new language strings.
 
 == Changelog ==
+
+= 2.5.2 =
+- (15 May 2010) - Made WP3 Compatible.
 
 = 2.5.1 =
 - (11 May 2010) - Added option to disable audio.

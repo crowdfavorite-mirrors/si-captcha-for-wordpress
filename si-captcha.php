@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.5.1
+Version: 2.5.2
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -266,6 +266,49 @@ EOT;
 }
     return true;
 } // end function si_captcha_comment_form
+
+
+// this function adds the captcha to the comment form WP3
+function si_captcha_comment_form_wp3() {
+    global $user_ID, $si_captcha_url, $si_captcha_opt;
+
+    // skip the captcha if user is loggged in and the settings allow
+    if (isset($user_ID) && intval($user_ID) > 0 && $si_captcha_opt['si_captcha_perm'] == 'true') {
+       // skip the CAPTCHA display if the minimum capability is met
+       if ( current_user_can( $si_captcha_opt['si_captcha_perm_level'] ) ) {
+               // skip capthca
+               return true;
+       }
+    }
+
+// the captch html
+// Test for some required things, print error message right here if not OK.
+if ($this->si_captcha_check_requires()) {
+
+  $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
+
+// the captcha html - comment form
+echo '<p';
+if ($si_captcha_opt['si_captcha_comment_class'] != '') {
+  echo ' class="'.$si_captcha_opt['si_captcha_comment_class'].'"';
+}
+echo '><label for="captcha_code">';
+echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? esc_html( $si_captcha_opt['si_captcha_label_captcha'] ) : esc_html( __('CAPTCHA Code', 'si-captcha'));
+echo '</label><span class="required">*</span>
+<input id="captcha_code" name="captcha_code" type="text" size="6" style="width:65px;" ' . $si_aria_required . ' /></p>';
+
+echo '
+<div style="width: 250px; height: 55px; padding-top:10px;">';
+$this->si_captcha_captcha_html('si_image_com','com');
+echo '</div>
+<br />
+';
+}
+    // prevent double captcha fields
+    remove_action('comment_form', array(&$this, 'si_captcha_comment_form'), 1);
+
+    return true;
+} // end function si_captcha_comment_form_wp3
 
 // this function adds the captcha to the login form
 function si_captcha_login_form() {
@@ -894,8 +937,15 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   add_filter( 'plugin_action_links', array(&$si_image_captcha,'si_captcha_plugin_action_links'),10,2);
 
   if ($si_captcha_opt['si_captcha_comment'] == 'true') {
-     // set the minimum capability needed to skip the captcha if there is one
+
+     // for WP 3.0+
+     if( $wp_version[0] > 2 ) { // wp 3.0 +
+       add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
+     }
+
+     // for WP before WP 3.0
      add_action('comment_form', array(&$si_image_captcha, 'si_captcha_comment_form'), 1);
+
      add_filter('preprocess_comment', array(&$si_image_captcha, 'si_captcha_comment_post'), 1);
   }
 
