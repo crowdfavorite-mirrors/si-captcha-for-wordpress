@@ -185,10 +185,10 @@ function si_captcha_check_requires() {
 
 // this function adds the captcha to the comment form
 function si_captcha_comment_form() {
-    global $user_ID, $si_captcha_url, $si_captcha_opt;
+    global $si_captcha_url, $si_captcha_opt;
 
-    // skip the captcha if user is loggged in and the settings allow
-    if (isset($user_ID) && intval($user_ID) > 0 && $si_captcha_opt['si_captcha_perm'] == 'true') {
+    // skip the captcha if user is logged in and the settings allow
+    if (is_user_logged_in() && $si_captcha_opt['si_captcha_perm'] == 'true') {
        // skip the CAPTCHA display if the minimum capability is met
        if ( current_user_can( $si_captcha_opt['si_captcha_perm_level'] ) ) {
                // skip capthca
@@ -270,10 +270,10 @@ EOT;
 
 // this function adds the captcha to the comment form WP3
 function si_captcha_comment_form_wp3() {
-    global $user_ID, $si_captcha_url, $si_captcha_opt;
+    global $si_captcha_url, $si_captcha_opt;
 
-    // skip the captcha if user is loggged in and the settings allow
-    if (isset($user_ID) && intval($user_ID) > 0 && $si_captcha_opt['si_captcha_perm'] == 'true') {
+    // skip the captcha if user is logged in and the settings allow
+    if (is_user_logged_in() && $si_captcha_opt['si_captcha_perm'] == 'true') {
        // skip the CAPTCHA display if the minimum capability is met
        if ( current_user_can( $si_captcha_opt['si_captcha_perm_level'] ) ) {
                // skip capthca
@@ -614,7 +614,7 @@ function si_captcha_register_post($errors) {
 
 // this function checks the captcha posted with the comment
 function si_captcha_comment_post($comment) {
-    global $user_ID, $si_captcha_path, $si_captcha_opt;
+    global $si_captcha_path, $si_captcha_opt;
 
     // added for compatibility with WP Wall plugin
     // this does NOT add CAPTCHA to WP Wall plugin,
@@ -624,8 +624,8 @@ function si_captcha_comment_post($comment) {
         return $comment;
     }
 
-    // skip the captcha if user is loggged in and the settings allow
-    if (isset($user_ID) && intval($user_ID) > 0 && $si_captcha_opt['si_captcha_perm'] == 'true') {
+    // skip the captcha if user is logged in and the settings allow
+    if (is_user_logged_in() && $si_captcha_opt['si_captcha_perm'] == 'true') {
        // skip the CAPTCHA display if the minimum capability is met
        if ( current_user_can( $si_captcha_opt['si_captcha_perm_level'] ) ) {
                // skip capthca
