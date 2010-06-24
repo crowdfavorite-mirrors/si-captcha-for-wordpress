@@ -223,6 +223,9 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+= 2.5.3 =
+- (23 Jun 2010) - Fix placement of CAPTCHA on comment form.
+
 = 2.5.2 =
 - (15 May 2010) - Made WP3 Compatible.
 

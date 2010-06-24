@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.5.2
+Version: 2.5.3
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -237,7 +237,7 @@ echo '/>
 
  }
 echo ' </div>
-<div style="width: 250px; height: 55px; padding-top:10px;">';
+<div style="width: 250px; height: 40px; padding-top:10px;">';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
 </div>
@@ -248,7 +248,7 @@ echo '</div>
 if ($si_captcha_opt['si_captcha_rearrange'] == 'true') {
      print  <<<EOT
       <script type='text/javascript'>
-          var sUrlInput = document.getElementById("url");
+          var sUrlInput = document.getElementById("comment");
                   var oParent = sUrlInput.parentNode;
           var sSubstitue = document.getElementById("captchaImgDiv");
                   oParent.appendChild(sSubstitue, sUrlInput);
@@ -288,6 +288,9 @@ if ($this->si_captcha_check_requires()) {
   $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
 
 // the captcha html - comment form
+if (is_user_logged_in()) {
+      echo '<br />';
+}
 echo '<p';
 if ($si_captcha_opt['si_captcha_comment_class'] != '') {
   echo ' class="'.$si_captcha_opt['si_captcha_comment_class'].'"';
@@ -298,7 +301,7 @@ echo '</label><span class="required">*</span>
 <input id="captcha_code" name="captcha_code" type="text" size="6" style="width:65px;" ' . $si_aria_required . ' /></p>';
 
 echo '
-<div style="width: 250px; height: 55px; padding-top:10px;">';
+<div style="width: 250px; height: 40px; padding-top:10px;">';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
 <br />
@@ -941,6 +944,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
      // for WP 3.0+
      if( $wp_version[0] > 2 ) { // wp 3.0 +
        add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
+       add_action( 'comment_form_logged_in_after', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
      }
 
      // for WP before WP 3.0
