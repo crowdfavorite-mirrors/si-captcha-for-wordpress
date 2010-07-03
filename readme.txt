@@ -223,6 +223,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Fixed rare problem on some servers, CAPTCHA image had missing letters.
+
 = 2.5.3 =
 - (23 Jun 2010) - Fix placement of CAPTCHA on comment form.
 
