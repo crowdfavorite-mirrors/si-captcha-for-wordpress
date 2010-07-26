@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.5.3
+Version: 2.5.4
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -771,7 +771,7 @@ function si_captcha_start_session() {
 } // function si_captcha_start_session
 
 function si_wp_authenticate_username_password($user, $username, $password) {
-        global $si_captcha_path, $si_captcha_opt;
+        global $si_captcha_path, $si_captcha_opt, $wp_version;
 
 		if ( is_a($user, 'WP_User') ) { return $user; }
 
@@ -816,6 +816,21 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 			return new WP_Error('invalid_username', sprintf(__('<strong>ERROR</strong>: Invalid username. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
 		}
 
+   // for WP 3.0+ ONLY!
+   if( $wp_version[0] > 2 ) { // wp 3.0 +
+     if ( is_multisite() ) {
+		// Is user marked as spam?
+		if ( 1 == $userdata->spam)
+			return new WP_Error('invalid_username', __('<strong>ERROR</strong>: Your account has been marked as a spammer.'));
+
+		// Is a user's blog marked as spam?
+		if ( !is_super_admin( $userdata->ID ) && isset($userdata->primary_blog) ) {
+			$details = get_blog_details( $userdata->primary_blog );
+			if ( is_object( $details ) && $details->spam == 1 )
+				return new WP_Error('blog_suspended', __('Site Suspended.'));
+		}
+	}
+   }
 		$userdata = apply_filters('wp_authenticate_user', $userdata, $password);
 		if ( is_wp_error($userdata) ) {
 			return $userdata;

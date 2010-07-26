@@ -140,6 +140,7 @@ else
       <label name="si_captcha_donated" for="si_captcha_donated"><?php echo esc_html( __('I have donated to help contribute for the development of this plugin.', 'si-captcha')); ?></label>
       <br />
 <?php
+global $wp_version;
     if( $wp_version[0] == 2 ) { // wp 2 series
 ?>
 <h3><?php _e('Usage', 'si-captcha') ?></h3>
@@ -277,6 +278,18 @@ foreach ($captcha_difficulty_array as $k => $v) {
     </tr>
 
         </table>
+
+      <br />
+  <?php
+
+    // Check for older than PHP5
+   if (phpversion() < 5) {
+      echo '<br /><span style="color:red;">'. __('Warning: Your web host has not upgraded from PHP4 to PHP5.', 'si-contact-form');
+      echo '</span> ';
+      echo __('PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.', 'si-contact-form')."<br />\n";
+      echo __('PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support.', 'si-contact-form')."<br /><br />\n";
+    }
+  ?>
 
         <h3><a style="cursor:pointer;" title="<?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?>" onclick="toggleVisibility('si_captcha_advanced');"><?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?></a></h3>
         <div style="text-align:left; display:none" id="si_captcha_advanced">

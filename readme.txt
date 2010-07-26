@@ -38,8 +38,8 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.6+, WPMU, and BuddyPress 1.1 -> 1.2.3
- * PHP 4.3 or above with GD2 library support.
+ * Works with Wordpress 2.6+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
+ * PHP 4.3 or above with GD2 library support. (PHP5 is highly recommended)
  * (WP 2 series) Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
 
@@ -223,6 +223,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+= 2.5.4 =
+- (25 Jul 2010) - Added compatibility for WP 3.0 feature: "multisite user or blog marked as spammer".
 - Fixed rare problem on some servers, CAPTCHA image had missing letters.
 
 = 2.5.3 =
