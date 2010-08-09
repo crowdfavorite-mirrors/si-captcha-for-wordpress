@@ -75,26 +75,12 @@ Requirements/Restrictions:
 
 == Configuration ==
 
-After the plugin is activated, you can configure it by selecting the `Captcha options` tab on the `Admin Plugins` page.
-Here is a list of the options:
-
-1. CAPTCHA on Login Form:    - Enable CAPTCHA on the Login form.(not enabled by default)
-
-2. CAPTCHA on Register Form: - Enable CAPTCHA on the register form.
-
-3. CAPTCHA on Comment Form:  - Enable CAPTCHA on the comment form.
-
-4. CAPTCHA on Comment Form:  - Hide CAPTCHA for registered users (select permission level)
-
-5. CAPTCHA on Comment Form:  - CSS class name for CAPTCHA input field on the comment form: 
-(Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.)
-
-6. Comment Form Rearrange: - Changes the display order of the catpcha input field on the comment form.
+After the plugin is activated, you can configure it by selecting the `SI Captcha options` tab on the `Admin Plugins` page.
 
 
 == Usage ==
 
-Once activated, a captcha image and captcha code entry is added to the comment and register forms. The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in
+Once activated, a captcha image and captcha code entry is added to the comment and register forms. The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in.
 
 
 == Frequently Asked Questions ==
@@ -109,7 +95,7 @@ and the problem should be fixed. (WP3 with a WP3 theme will not have this proble
 
 = Alternate Fix for the captcha image display order =
 
-You can just check the 'Comment Form Rearrange' box on the admin plugins 'Captcha options' page and javascript will attempt to rearrange it for you. Editing the comments.php, moving the tag, and uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page is the best solution.(WP3 with a WP3 theme will not have this problem)
+You can just check the 'Comment Form Rearrange' box on the admin plugins 'Captcha options' page and javascript will attempt to rearrange it for you. Editing the comments.php, moving the tag, and uncheck the 'Comment Form Rearrange' box on the 'SI Captcha options' page is the best solution.(WP3 with a WP3 theme will not have this problem)
 
 = Why is it better to uncheck the 'Comment Form Rearrange' box and move the tag? =
 Because the XHTML will no longer validate if it is checked.
@@ -118,7 +104,6 @@ Because the XHTML will no longer validate if it is checked.
 
 Check your web browser settings and make sure you are not blocking cookies for your blog domain. Cookies have to be enabled in your web browser and not blocked for the blog web domain.
 
-If you get this error, your browser is blocking cookies or you have another plugin that is conflicting (in that case I would like to help you further to determine which one). I can tell you that the plugin called "Shopp" is not compatible because it handles sessions differently causing the "ERROR: Could not read CAPTCHA cookie. Make sure you have cookies enabled".
 
 The Cookie Test can be used to test if your browser is accepting cookies from your site:
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
@@ -222,6 +207,14 @@ Of course! It will be very gratefully received. Use PoEdit, it makes translation
 If you use PoEdit to translate, it is easy to translate for a new version. You can open your current .po file, then select from the PoEdit menu: "Catalog" > "Update from POT file". Now all you have to change are the new language strings.
 
 == Changelog ==
+
+= 2.6 =
+- (09 Aug 2010) - PHP Sessions are no longer required for the CAPTCHA. The new method uses temporary files to store the CAPTCHA codes until validation. PHP sessions can still be reactivated by unchecking the setting: "Use CAPTCHA without PHP session".
+- Added rel="nofollow" tag to CAPTCHA Audio and CAPTCHA Refresh links.
+- Removed CAPTCHA WAV sound files, included mp3 ones take up 500k less space.
+- Improved the CAPTCHA test page. 
+- Added captcha-temp directory permission check to alert the admin if there is a problem. This check is on the admin settings page, the captcha test page, and when posting the captcha.
+- Added more help notes to the admin settings page.
 
 = 2.5.4 =
 - (25 Jul 2010) - Added compatibility for WP 3.0 feature: "multisite user or blog marked as spammer".

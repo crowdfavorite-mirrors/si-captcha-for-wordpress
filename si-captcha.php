@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.5.4
+Version: 2.6
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -62,6 +62,7 @@ function si_captcha_get_options() {
          'si_captcha_login' => 'false',
          'si_captcha_register' => 'true',
          'si_captcha_rearrange' => 'false',
+         'si_captcha_disable_session' => 'true',
          'si_captcha_enable_audio' => 'true',
          'si_captcha_enable_audio_flash' => 'false',
          'si_captcha_captcha_small' => 'false',
@@ -132,9 +133,9 @@ function si_captcha_migrate($si_captcha_option_defaults) {
 } // end function si_captcha_migrate
 
 function si_captcha_options_page() {
-  global $wpmu, $si_captcha_path, $si_captcha_url, $si_captcha_opt, $si_captcha_option_defaults;
+  global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults;
 
-  $si_captcha_admin_path = str_replace('/captcha-secureimage','',$si_captcha_path);
+  $si_captcha_admin_path = str_replace('/captcha-secureimage','',$si_captcha_dir);
   if ($wpmu == 1)
      $si_captcha_admin_path = 'si-captcha-for-wordpress';
   require_once($si_captcha_admin_path . '/si-captcha-admin.php');
@@ -161,7 +162,7 @@ function si_captcha_perm_dropdown($select_name, $checked_value='') {
  } // end function si_captcha_perm_dropdown
 
 function si_captcha_check_requires() {
-  global $si_captcha_path;
+  global $si_captcha_dir;
 
   $ok = 'ok';
   // Test for some required things, print error message if not OK.
@@ -175,7 +176,7 @@ function si_captcha_check_requires() {
        echo '<p>'.__('Contact your web host and ask them why imagepng function is not enabled for PHP.', 'si-captcha').'</p>';
       $ok = 'no';
   }
-  if ( !@strtolower(ini_get('safe_mode')) == 'on' && !file_exists("$si_captcha_path/securimage.php") ) {
+  if ( !@strtolower(ini_get('safe_mode')) == 'on' && !file_exists("$si_captcha_dir/securimage.php") ) {
        echo '<p style="color:maroon">'.__('ERROR: si-captcha.php plugin says captcha_library not found.', 'si-captcha').'</p>';
        $ok = 'no';
   }
@@ -344,7 +345,7 @@ echo '
     /></label>
 </p>
 <div style="width:250px; height:55px;">';
-$this->si_captcha_captcha_html('si_image_login','log');
+$this->si_captcha_captcha_html('si_image_log','log');
 echo '</div>
 
 <br />
@@ -372,7 +373,7 @@ if ($this->si_captcha_check_requires()) {
 // the captcha html - buddypress login form
 echo '
 <div style="width:440px; height:45px">';
-$this->si_captcha_captcha_html('si_image_login','log');
+$this->si_captcha_captcha_html('si_image_log','log');
 echo '<input type="text" value="" name="captcha_code" id="captcha_code" class="input" '.$si_aria_required.' style="width:65px;" />
          <label for="captcha_code">';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? esc_html( $si_captcha_opt['si_captcha_label_captcha'] ) : esc_html( __('CAPTCHA Code', 'si-captcha'));
@@ -525,11 +526,70 @@ echo '</div>
 }
 } // end function si_captcha_wpmu_signup_form
 
+function si_captcha_token_error(){
+   global $si_captcha_dir_ns;
+
+   $si_cec = '';
+   $check_this_dir = untrailingslashit( $si_captcha_dir_ns );
+   if(is_writable($check_this_dir)) {
+				//echo '<span style="color: green">OK - Writable</span> ' . substr(sprintf('%o', fileperms($check_this_dir)), -4);
+   } else if(!file_exists($check_this_dir)) {
+   $si_cec .= '<br />';
+   $si_cec .= __('There is a problem with the directory', 'si-captcha');
+   $si_cec .= ' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
+   $si_cec .= __('The directory is not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.', 'si-captcha');
+   $si_cec .= ' ';
+   $si_cec .= __('Fixing the actual problem is recommended, but you can uncheck this setting on the si captcha options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).', 'si-captcha');
+   } else {
+   $si_cec .= '<br />';
+   $si_cec .= __('There is a problem with the directory', 'si-captcha') .' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
+   $si_cec .= __('The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha').'. ';
+   $si_cec .= __('Permissions are: ', 'si-captcha');
+   $si_cec .= ' ';
+   $si_cec .= substr(sprintf('%o', fileperms($check_this_dir)), -4);
+   $si_cec .= ' ';
+   $si_cec .=__('Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)', 'si-captcha');
+   $si_cec .= ' ';
+   $si_cec .= __('Fixing the actual problem is recommended, but you can uncheck this setting on the si captcha options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).', 'si-captcha');
+   }
+  return $si_cec;
+}
+
 // this function checks the captcha posted with registration on BuddyPress 1.1+
 // hooks into bp-core-signup.php do_action( 'bp_signup_validate' );
 function si_captcha_bp_signup_validate() {
-   global $bp, $si_captcha_path;
+   global $bp, $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
 
+  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         $bp->signup->errors['captcha_code'] = __('Please complete the CAPTCHA.', 'si-captcha');
+         return;
+      }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
+         $bp->signup->errors['captcha_code'] = __('Could not find CAPTCHA token.', 'si-captcha');
+         return;
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+           $prefix = $_POST['si_code_reg'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+			} else {
+              $bp->signup->errors['captcha_code'] = __('That CAPTCHA was incorrect.', 'si-captcha');
+              return;
+            }
+	     } else {
+           $bp->signup->errors['captcha_code'] =  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error();
+           return;
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
     if (!isset($_SESSION['securimage_code_si_reg']) || empty($_SESSION['securimage_code_si_reg'])) {
           $bp->signup->errors['captcha_code'] = __('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha');
           return;
@@ -540,7 +600,7 @@ function si_captcha_bp_signup_validate() {
       } else {
         $captcha_code = trim(strip_tags($_POST['captcha_code']));
       }
-      require_once "$si_captcha_path/securimage.php";
+      require_once "$si_captcha_dir/securimage.php";
       $img = new Securimage();
       $img->form_id = 'reg'; // makes compatible with multi-forms on same page
       $valid = $img->check("$captcha_code");
@@ -552,14 +612,46 @@ function si_captcha_bp_signup_validate() {
           return;
       }
    }
+  } // end if captcha use session
    return;
 } // end function si_captcha_bp_signup_validate
 
 // this function checks the captcha posted with registration on wpmu and buddypress before 1.1
 function si_captcha_wpmu_signup_post($errors) {
-   global $si_captcha_path;
+   global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
 
  if ($_POST['stage'] == 'validate-user-signup') {
+  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
+         return $errors;
+      }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
+         $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+         return $errors;
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+           $prefix = $_POST['si_code_reg'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+			} else {
+              $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
+              return $errors;
+            }
+	     } else {
+           $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+           return $errors;
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
+
     if (!isset($_SESSION['securimage_code_si_reg']) || empty($_SESSION['securimage_code_si_reg'])) {
           $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
           return $errors;
@@ -570,7 +662,7 @@ function si_captcha_wpmu_signup_post($errors) {
       } else {
         $captcha_code = trim(strip_tags($_POST['captcha_code']));
       }
-      require_once "$si_captcha_path/securimage.php";
+      require_once "$si_captcha_dir/securimage.php";
       $img = new Securimage();
       $img->form_id = 'reg'; // makes compatible with multi-forms on same page
       $valid = $img->check("$captcha_code");
@@ -581,6 +673,7 @@ function si_captcha_wpmu_signup_post($errors) {
           $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('That CAPTCHA was incorrect. Make sure you have not disabled cookies.', 'si-captcha'));
       }
    }
+  } // end if captcha use session
  }
    return($errors);
 
@@ -588,7 +681,38 @@ function si_captcha_wpmu_signup_post($errors) {
 
 // this function checks the captcha posted with registration
 function si_captcha_register_post($errors) {
-   global $si_captcha_path;
+   global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
+
+ if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         $errors['errors']->add('captcha_blank', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
+         return $errors;
+      }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
+         $errors['errors']->add('captcha_no_token', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+         return $errors;
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+           $prefix = $_POST['si_code_reg'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+			} else {
+              $errors['errors']->add('captcha_wrong', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
+              return $errors;
+            }
+	     } else {
+           $errors['errors']->add('captcha_no_file', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+           return $errors;
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
 
    if (!isset($_SESSION['securimage_code_si_reg']) || empty($_SESSION['securimage_code_si_reg'])) {
           $errors->add('captcha_no_cookie', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
@@ -601,7 +725,7 @@ function si_captcha_register_post($errors) {
         $captcha_code = trim(strip_tags($_POST['captcha_code']));
       }
 
-      require_once "$si_captcha_path/securimage.php";
+      require_once "$si_captcha_dir/securimage.php";
       $img = new Securimage();
       $img->form_id = 'reg'; // makes compatible with multi-forms on same page
       $valid = $img->check("$captcha_code");
@@ -612,12 +736,13 @@ function si_captcha_register_post($errors) {
           $errors->add('captcha_wrong', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('That CAPTCHA was incorrect. Make sure you have not disabled cookies.', 'si-captcha'));
       }
    }
+ } // end if captcha use session
    return($errors);
 } // end function si_captcha_register_post
 
 // this function checks the captcha posted with the comment
 function si_captcha_comment_post($comment) {
-    global $si_captcha_path, $si_captcha_opt;
+    global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
 
     // added for compatibility with WP Wall plugin
     // this does NOT add CAPTCHA to WP Wall plugin,
@@ -641,6 +766,34 @@ function si_captcha_comment_post($comment) {
                // skip capthca
                return $comment;
     }
+
+   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         wp_die( __('Error: You did not enter a Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+      }else if (!isset($_POST['si_code_com']) || empty($_POST['si_code_com'])) {
+         wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_com']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_com']) ){
+           $prefix = $_POST['si_code_com'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              return($comment);
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+			} else {
+               wp_die( __('Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+            }
+	     } else {
+            wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
     if (!isset($_SESSION['securimage_code_si_com']) || empty($_SESSION['securimage_code_si_com'])) {
           wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
     }else{
@@ -648,7 +801,7 @@ function si_captcha_comment_post($comment) {
            wp_die( __('Error: You did not enter a Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
        }
        $captcha_code = trim(strip_tags($_POST['captcha_code']));
-       require_once "$si_captcha_path/securimage.php";
+       require_once "$si_captcha_dir/securimage.php";
        $img = new Securimage();
        $img->form_id = 'com'; // makes compatible with multi-forms on same page
        $valid = $img->check("$captcha_code");
@@ -660,72 +813,204 @@ function si_captcha_comment_post($comment) {
            wp_die( __('Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
        }
     }
-
+   } // end if captcha use session
 } // end function si_captcha_comment_post
+
+function si_wp_authenticate_username_password($user, $username, $password) {
+        global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt, $wp_version;
+
+		if ( is_a($user, 'WP_User') ) { return $user; }
+
+		if ( empty($username) || empty($password) || isset($_POST['captcha_code']) && empty($_POST['captcha_code'])) {
+		    $error = new WP_Error();
+
+			if ( empty($username) )
+				$error->add('empty_username', __('<strong>ERROR</strong>: The username field is empty.'));
+
+			if ( empty($password) )
+				$error->add('empty_password', __('<strong>ERROR</strong>: The password field is empty.'));
+
+            if (isset($_POST['captcha_code']) && empty($_POST['captcha_code']))
+                $error->add('empty_captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Please complete the CAPTCHA.', 'si-captcha'));
+
+			return $error;
+		}
+  // begin si captcha check
+  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         return new WP_Error('captcha_error',  '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
+      }else if (!isset($_POST['si_code_log']) || empty($_POST['si_code_log'])) {
+         return new WP_Error('captcha_error',  '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_log']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_log']) ){
+           $prefix = $_POST['si_code_log'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+			} else {
+              return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
+            }
+	     } else {
+           return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
+   if (!isset($_SESSION['securimage_code_si_log']) || empty($_SESSION['securimage_code_si_log'])) {
+          return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
+   }else{
+
+      $captcha_code = trim(strip_tags($_POST['captcha_code']));
+
+      require_once "$si_captcha_dir/securimage.php";
+      $img = new Securimage();
+      $img->form_id = 'log'; // makes compatible with multi-forms on same page
+      $valid = $img->check("$captcha_code");
+      // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
+      if($valid == true) {
+          // ok can continue
+      } else {
+          return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('That CAPTCHA was incorrect. Make sure you have not disabled cookies.', 'si-captcha'));
+      }
+   }
+
+  } // end if captcha use session
+   // end si captcha check
+
+		$userdata = get_userdatabylogin($username);
+
+		if ( !$userdata ) {
+			return new WP_Error('invalid_username', sprintf(__('<strong>ERROR</strong>: Invalid username. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
+		}
+
+   // for WP 3.0+ ONLY!
+   if( $wp_version[0] > 2 ) { // wp 3.0 +
+     if ( is_multisite() ) {
+		// Is user marked as spam?
+		if ( 1 == $userdata->spam)
+			return new WP_Error('invalid_username', __('<strong>ERROR</strong>: Your account has been marked as a spammer.'));
+
+		// Is a user's blog marked as spam?
+		if ( !is_super_admin( $userdata->ID ) && isset($userdata->primary_blog) ) {
+			$details = get_blog_details( $userdata->primary_blog );
+			if ( is_object( $details ) && $details->spam == 1 )
+				return new WP_Error('blog_suspended', __('Site Suspended.'));
+		}
+	}
+   }
+		$userdata = apply_filters('wp_authenticate_user', $userdata, $password);
+		if ( is_wp_error($userdata) ) {
+			return $userdata;
+		}
+
+		if ( !wp_check_password($password, $userdata->user_pass, $userdata->ID) ) {
+			return new WP_Error('incorrect_password', sprintf(__('<strong>ERROR</strong>: Incorrect password. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
+		}
+
+		$user =  new WP_User($userdata->ID);
+		return $user;
+} // end function si_wp_authenticate_username_password
 
 
 function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
-  global $si_captcha_url, $si_captcha_opt;
+  global $si_captcha_url, $si_captcha_dir, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt;
 
-  $captcha_level_file = 'securimage_show_medium.php';
-  if ($si_captcha_opt['si_captcha_captcha_difficulty'] == 'low') {
-      $captcha_level_file = 'securimage_show_low.php';
-  } else if ($si_captcha_opt['si_captcha_captcha_difficulty'] == 'high') {
-      $captcha_level_file = 'securimage_show_high.php';
+  $capt_disable_sess = 0;
+   if ($si_captcha_opt['si_captcha_disable_session'] == 'true')
+     $capt_disable_sess = 1;
+
+  // url for no session captcha image
+  $securimage_show_url = $si_captcha_url .'/securimage_show.php?';
+  if($si_captcha_opt['si_captcha_captcha_small'] == 'true') $securimage_show_url .= 'si_sm_captcha=1&amp;';
+  if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'low') $securimage_show_url .= 'difficulty=1&amp;';
+  if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'high') $securimage_show_url .= 'difficulty=2&amp;';
+  if($si_captcha_opt['si_captcha_no_trans'] == 'true') $securimage_show_url .= 'no_trans=1&amp;';
+  $securimage_show_url .= 'si_form_id=' .$form_id;
+
+  if($capt_disable_sess) {
+     // clean out old captcha no session temp files
+    $this->si_captcha_clean_temp_dir($si_captcha_dir_ns, 30);
+    // pick new prefix token
+    $prefix_length = 16;
+    $prefix_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
+    $prefix = '';
+    $prefix_count = strlen($prefix_characters);
+    while ($prefix_length--) {
+        $prefix .= $prefix_characters[mt_rand(0, $prefix_count-1)];
+    }
+    $securimage_show_rf_url = $securimage_show_url . '&amp;prefix=';
+    $securimage_show_url .= '&amp;prefix='.$prefix;
   }
-  if ($si_captcha_opt['si_captcha_no_trans'] == 'true')
-     $captcha_level_file = 'securimage_show_no_trans.php';
 
-  echo '<img id="'.$label.'" ';
-  //captcha style="border-style:none; margin:0; padding-right:5px; float:left;"
+  echo '<img class="si-captcha" id="'.$label.'" ';
   echo ($si_captcha_opt['si_captcha_captcha_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_captcha_image_style'] ).'"' : '';
-  echo ' src="'.$si_captcha_url.'/'.$captcha_level_file.'?';
-         if($si_captcha_opt['si_captcha_captcha_small'] == 'true')
-             echo 'si_sm_captcha=1&amp;';
-  echo 'si_form_id='.$form_id.'&amp;sid='.md5(uniqid(time())).'" alt="';
+  echo ' src="'.$securimage_show_url.'" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
-  echo '" />';
+  echo '" />'."\n";
+  if($capt_disable_sess)
+        echo '    <input id="si_code_'.$form_id.'" type="hidden" name="si_code_'.$form_id.'" value="'.$prefix.'" />'."\n";
 
   if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
+     $parseUrl = parse_url($si_captcha_url);
+     $securimage_url = $parseUrl['path'];
+     $si_audio_type = 'mp3';
      if($si_captcha_opt['si_captcha_enable_audio_flash'] == 'true') {
-        $parseUrl = parse_url($si_captcha_url);
-        $secureimage_url = $parseUrl['path'];
-        echo '
+          $si_audio_type = 'flash';
+          $securimage_play_url = $securimage_url.'/securimage_play.swf?si_form_id='.$form_id;
+          $securimage_play_url2 = $securimage_url.'/securimage_play.php?si_form_id='.$form_id;
+          if($capt_disable_sess){
+             $securimage_play_url = $securimage_url.'/securimage_play.swf?prefix='.$prefix;
+             $securimage_play_url2 = $securimage_url.'/securimage_play.php?prefix='.$prefix;
+          }
+          echo '<div id="si_flash_'.$form_id.'">
         <object type="application/x-shockwave-flash"
-                data="'.$secureimage_url.'/securimage_play.swf?si_form_id='.$form_id.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$secureimage_url.'/securimage_play.php?si_form_id='.$form_id.'"
-                id="SecurImage_as3" width="19" height="19" align="middle">
+                data="'.$securimage_play_url.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$securimage_play_url2.'"
+                id="SecurImage_as3_'.$form_id.'" width="19" height="19" align="middle">
 			    <param name="allowScriptAccess" value="sameDomain" />
 			    <param name="allowFullScreen" value="false" />
-			    <param name="movie" value="'.$secureimage_url.'/securimage_play.swf?si_form_id='.$form_id.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$secureimage_url.'/securimage_play.php?si_form_id='.$form_id.'" />
+			    <param name="movie" value="'.$securimage_play_url.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$securimage_play_url2.'" />
 			    <param name="quality" value="high" />
 			    <param name="bgcolor" value="#ffffff" />
-		</object>
-        <br />';
+		</object></div>
+        ';
      }else{
-        echo '<a href="'.$si_captcha_url.'/securimage_play.php?si_form_id='.$form_id.'" title="';
+                 $securimage_play_url = $si_captcha_url.'/securimage_play.php?si_form_id='.$form_id;
+         if($capt_disable_sess)
+                $securimage_play_url .= '&amp;prefix='.$prefix;
+        echo '    <div id="si_audio_'.$form_id.'">'."\n";
+        echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
-        <img src="'.$si_captcha_url.'/images/audio_icon.gif" alt="';
+     <img src="'.$si_captcha_url.'/images/audio_icon.gif" alt="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo  '" ';
         echo ($si_captcha_opt['si_captcha_audio_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_audio_image_style'] ).'"' : '';
-        echo ' onclick="this.blur()" /></a><br />';
+        echo ' onclick="this.blur();" /></a>
+     </div>'."\n";
      }
   }
-  echo '<a href="#" title="';
+  echo '    <div id="si_refresh_'.$form_id.'">'."\n";
+  echo '<a href="#" rel="nofollow" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
-  echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$si_captcha_url.'/'.$captcha_level_file.'?';
-         if($si_captcha_opt['si_captcha_captcha_small'] == 'true')
-            echo 'si_sm_captcha=1&amp;';
-  echo 'si_form_id='.$form_id.'&amp;sid=\' + Math.random(); return false">
-  <img src="'.$si_captcha_url.'/images/refresh.gif" alt="';
+  if($capt_disable_sess) {
+    echo '" onclick="si_captcha_refresh(\''.$label.'\',\''.$form_id.'\',\''.$si_audio_type.'\',\''.$securimage_url.'\',\''.$securimage_show_rf_url.'\'); return false;">'."\n";
+  }else{
+    echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
+  }
+  echo '      <img src="'.$si_captcha_url.'/images/refresh.gif" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   echo '" ';
-  // refresh style="border-style:none; margin:0; vertical-align:bottom;"
   echo ($si_captcha_opt['si_captcha_refresh_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_refresh_image_style'] ).'"' : '';
-  echo ' onclick="this.blur()" /></a>
+  echo ' onclick="this.blur();" /></a>
+  </div>
   ';
 
 } // end function si_captcha_captcha_html
@@ -761,7 +1046,7 @@ function si_captcha_start_session() {
   // this has to be set before any header output
    //echo "before starting session si captcha";
   if( !isset( $_SESSION ) ) { // play nice with other plugins
-   if ( !defined('XMLRPC_REQUEST') ) {
+   if ( !defined('XMLRPC_REQUEST') ) { // buddypress fix
      session_cache_limiter ('private, must-revalidate');
      session_start();
      //echo "session started si captcha";
@@ -770,78 +1055,49 @@ function si_captcha_start_session() {
 
 } // function si_captcha_start_session
 
-function si_wp_authenticate_username_password($user, $username, $password) {
-        global $si_captcha_path, $si_captcha_opt, $wp_version;
-
-		if ( is_a($user, 'WP_User') ) { return $user; }
-
-		if ( empty($username) || empty($password) || isset($_POST['captcha_code']) && empty($_POST['captcha_code'])) {
-		    $error = new WP_Error();
-            
-			if ( empty($username) )
-				$error->add('empty_username', __('<strong>ERROR</strong>: The username field is empty.'));
-
-			if ( empty($password) )
-				$error->add('empty_password', __('<strong>ERROR</strong>: The password field is empty.'));
-
-            if (isset($_POST['captcha_code']) && empty($_POST['captcha_code']))
-                $error->add('empty_captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Please complete the CAPTCHA.', 'si-captcha'));
-
-			return $error;
-		}
-
-   // begin si captcha check
-   if (!isset($_SESSION['securimage_code_si_log']) || empty($_SESSION['securimage_code_si_log'])) {
-          return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
-   }else{
-
-      $captcha_code = trim(strip_tags($_POST['captcha_code']));
-
-      require_once "$si_captcha_path/securimage.php";
-      $img = new Securimage();
-      $img->form_id = 'log'; // makes compatible with multi-forms on same page
-      $valid = $img->check("$captcha_code");
-      // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
-      if($valid == true) {
-          // ok can continue
-      } else {
-          return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('That CAPTCHA was incorrect. Make sure you have not disabled cookies.', 'si-captcha'));
-      }
-   }
-   // end si captcha check
-
-		$userdata = get_userdatabylogin($username);
-
-		if ( !$userdata ) {
-			return new WP_Error('invalid_username', sprintf(__('<strong>ERROR</strong>: Invalid username. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
-		}
-
-   // for WP 3.0+ ONLY!
-   if( $wp_version[0] > 2 ) { // wp 3.0 +
-     if ( is_multisite() ) {
-		// Is user marked as spam?
-		if ( 1 == $userdata->spam)
-			return new WP_Error('invalid_username', __('<strong>ERROR</strong>: Your account has been marked as a spammer.'));
-
-		// Is a user's blog marked as spam?
-		if ( !is_super_admin( $userdata->ID ) && isset($userdata->primary_blog) ) {
-			$details = get_blog_details( $userdata->primary_blog );
-			if ( is_object( $details ) && $details->spam == 1 )
-				return new WP_Error('blog_suspended', __('Site Suspended.'));
-		}
+// needed for making temp directories for attachments and captcha session files
+function si_captcha_init_temp_dir($dir) {
+    $dir = trailingslashit( $dir );
+    // make the temp directory
+	wp_mkdir_p( $dir );
+	@chmod( $dir, 0733 );
+	$htaccess_file = $dir . '.htaccess';
+	if ( !file_exists( $htaccess_file ) ) {
+	   if ( $handle = @fopen( $htaccess_file, 'w' ) ) {
+		   fwrite( $handle, "Deny from all\n" );
+		   fclose( $handle );
+	   }
+    }
+    $php_file = $dir . 'index.php';
+	if ( !file_exists( $php_file ) ) {
+       	if ( $handle = @fopen( $php_file, 'w' ) ) {
+		   fwrite( $handle, '<?php //do not delete ?>' );
+		   fclose( $handle );
+     	}
 	}
-   }
-		$userdata = apply_filters('wp_authenticate_user', $userdata, $password);
-		if ( is_wp_error($userdata) ) {
-			return $userdata;
-		}
+} // end function si_contact_init_temp_dir
 
-		if ( !wp_check_password($password, $userdata->user_pass, $userdata->ID) ) {
-			return new WP_Error('incorrect_password', sprintf(__('<strong>ERROR</strong>: Incorrect password. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
-		}
+// needed for emptying temp directories for attachments and captcha session files
+function si_captcha_clean_temp_dir($dir, $minutes = 60) {
+    // deletes all files over xx minutes old in a temp directory
+  	if ( ! is_dir( $dir ) || ! is_readable( $dir ) || ! is_writable( $dir ) )
+		return false;
 
-		$user =  new WP_User($userdata->ID);
-		return $user;
+	$count = 0;
+	if ( $handle = @opendir( $dir ) ) {
+		while ( false !== ( $file = readdir( $handle ) ) ) {
+			if ( $file == '.' || $file == '..' || $file == '.htaccess' || $file == 'index.php')
+				continue;
+
+			$stat = @stat( $dir . $file );
+			if ( ( $stat['mtime'] + $minutes * 60 ) < time() ) {
+			    @unlink( $dir . $file );
+				$count += 1;
+			}
+		}
+		closedir( $handle );
+	}
+	return $count;
 }
 
 // functions for form vars
@@ -853,6 +1109,25 @@ function si_stripslashes($string) {
         }
 } // end function si_stripslashes
 
+function si_captcha_convert_css($string) {
+
+    if( preg_match("/^style=\"(.*)\"$/i", $string) ){
+      return $string;
+    }
+    if( preg_match("/^class=\"(.*)\"$/i", $string) ){
+      return $string;
+    }
+    return 'style="'.$string.'"';
+
+} // end function si_captcha_convert_css
+
+function si_captcha_enqueue_scripts(){
+   wp_enqueue_script('si_captcha', plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js'));
+}
+
+function si_captcha_login_head(){
+  echo '<script type="text/javascript" src="'.plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js?ver='.time()).'"></script>'."\n";
+}
 
 function get_captcha_url_si() {
    global $wpmu;
@@ -929,24 +1204,39 @@ if (basename(dirname(__FILE__)) == "mu-plugins") // forced activated
 else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_exists('is_site_admin')) // optionally activated
    $wpmu = 2;
 
-  $si_captcha_path = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha-secureimage';
+  $si_captcha_dir = WP_PLUGIN_DIR . '/si-captcha-for-wordpress/captcha-secureimage';
   if ($wpmu == 1) {
      if ( defined( 'MUPLUGINDIR' ) )
-         $si_captcha_path = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha-secureimage';
+         $si_captcha_dir = MUPLUGINDIR . '/si-captcha-for-wordpress/captcha-secureimage';
      else
-         $si_captcha_path = WP_CONTENT_DIR . '/mu-plugins/si-captcha-for-wordpress/captcha-secureimage';
+         $si_captcha_dir = WP_CONTENT_DIR . '/mu-plugins/si-captcha-for-wordpress/captcha-secureimage';
   }
 
   $si_captcha_url  = $si_image_captcha->get_captcha_url_si();
 
+  // only used for the no-session captcha setting
+  $si_captcha_url_ns = $si_captcha_url  . '/captcha-temp/';
+  $si_captcha_dir_ns = $si_captcha_dir . '/captcha-temp/';
+  $si_image_captcha->si_captcha_init_temp_dir($si_captcha_dir_ns);
+
   //Actions
   add_action('init', array(&$si_image_captcha, 'si_captcha_init'));
 
-  // buddypress had session error on member and groups pages, so start session here instead of init
-  add_action('plugins_loaded', array(&$si_image_captcha, 'si_captcha_start_session'));
-
-    // get the options now
+  // get the options now
   $si_image_captcha->si_captcha_get_options();
+
+  if ( isset($si_captcha_opt['si_captcha_disable_session']) && $si_captcha_opt['si_captcha_disable_session'] == 'true') {
+      // add javascript header hooks
+      add_action( 'init', array(&$si_image_captcha,'si_captcha_enqueue_scripts'),2);
+  }  else {
+     // start the PHP session
+     // buddypress had session error on member and groups pages, so start session here instead of init
+     add_action('plugins_loaded', array(&$si_image_captcha, 'si_captcha_start_session'));
+  }
+
+
+
+
 
   // si captcha admin options
   add_action('admin_menu', array(&$si_image_captcha,'si_captcha_add_tabs'),1);
@@ -986,6 +1276,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
 
   if ($si_captcha_opt['si_captcha_login'] == 'true') {
     add_action('login_form', array( &$si_image_captcha, 'si_captcha_login_form' ) );
+    add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head' ) );
     add_action('bp_login_bar_logged_out', array( &$si_image_captcha, 'si_captcha_bp_login_form' ) );
     add_action('bp_sidebar_login_form', array( &$si_image_captcha, 'si_captcha_bp_login_sidebar_form' ) );
     remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);

@@ -25,6 +25,7 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_login' =>              (isset( $_POST['si_captcha_login'] ) ) ? 'true' : 'false',
          'si_captcha_register' =>           (isset( $_POST['si_captcha_register'] ) ) ? 'true' : 'false',
          'si_captcha_rearrange' =>          (isset( $_POST['si_captcha_rearrange'] ) ) ? 'true' : 'false',
+         'si_captcha_disable_session' =>    (isset( $_POST['si_captcha_disable_session'] ) ) ? 'true' : 'false',
          'si_captcha_enable_audio' =>       (isset( $_POST['si_captcha_enable_audio'] ) ) ? 'true' : 'false',
          'si_captcha_enable_audio_flash' => (isset( $_POST['si_captcha_enable_audio_flash'] ) ) ? 'true' : 'false',
          'si_captcha_captcha_small' =>      (isset( $_POST['si_captcha_captcha_small'] ) ) ? 'true' : 'false',
@@ -116,11 +117,19 @@ if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" style="border:none;" name="submit" alt="Paypal Donate" />
 <img alt="" style="border:none;" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 </td>
-<td><?php _e('If you find this plugin useful to you, please consider making a small donation to help contribute to further development. Thanks for your kind support!', 'si-captcha') ?> - Mike Challis</td>
+<td><?php _e('If you find this plugin useful to you, please consider making a small donation to help contribute to further development. Thanks for your kind support!', 'si-captcha') ?> - <a style="cursor:pointer;" title="<?php _e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a></td>
 </tr></table>
 </form>
 <br />
 
+<div style="text-align:left; display:none" id="si_captcha_mike_challis_tip">
+<img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/si-captcha.jpg" width="250" height="185" alt="Mike Challis" /><br />
+<?php _e('Mike Challis says: "Hello, I have spend hundreds of hours coding this plugin just for you. If you are satisfied with my programs and support please consider making a small donation. If you are not able to, that is OK.', 'si-captcha'); ?>
+<?php echo ' '; _e('Most people donate $5, $10, $20, or more. Though no amount is too small. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also rate my plugin."', 'si-captcha'); ?>
+ <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php _e('Rate This', 'si-captcha'); ?></a>.
+<br />
+<a style="cursor:pointer;" title="Close" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('Close this message', 'si-captcha'); ?></a>
+</div>
 <?php
 }
 ?>
@@ -187,6 +196,12 @@ foreach ($captcha_difficulty_array as $k => $v) {
 }
 ?>
 </select>
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_contact_captcha_difficulty_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_contact_captcha_difficulty_tip">
+        <?php _e('Changes level of distortion of the CAPTCHA image text.', 'si-captcha') ?>
+        </div>
+        <br />
+
     </td>
         </tr>
 
@@ -206,7 +221,12 @@ foreach ($captcha_difficulty_array as $k => $v) {
             <th scope="row"><?php _e('CAPTCHA on Register Form:', 'si-captcha') ?></th>
         <td>
     <input name="si_captcha_register" id="si_captcha_register" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_register'] == 'true' ) echo ' checked="checked" '; ?> />
-    <label for="si_captcha_register"><?php _e('Enable CAPTCHA on the register form.', 'si-captcha') ?></label><br />
+    <label for="si_captcha_register"><?php _e('Enable CAPTCHA on the register form.', 'si-captcha') ?></label>
+             <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_register_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_register_tip">
+        <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering.', 'si-captcha') ?>
+        </div>
+        <br />
     </td>
         </tr>
 
@@ -214,7 +234,13 @@ foreach ($captcha_difficulty_array as $k => $v) {
             <th scope="row"><?php _e('CAPTCHA on Comment Form:', 'si-captcha') ?></th>
         <td>
     <input name="si_captcha_comment" id="si_captcha_comment" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_comment'] == 'true' ) echo ' checked="checked" '; ?> />
-    <label for="si_captcha_comment"><?php _e('Enable CAPTCHA on the comment form.', 'si-captcha') ?></label><br />
+    <label for="si_captcha_comment"><?php _e('Enable CAPTCHA on the comment form.', 'si-captcha') ?></label>
+         <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_enable_tip">
+        <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before posting comments.', 'si-captcha') ?>
+        </div>
+        <br />
+
 
         <input name="si_captcha_perm" id="si_captcha_perm" type="checkbox" <?php if( $si_captcha_opt['si_captcha_perm'] == 'true' ) echo 'checked="checked"'; ?> />
         <label name="si_captcha_perm" for="si_captcha_perm"><?php _e('Hide CAPTCHA for', 'si-captcha') ?>
@@ -250,17 +276,74 @@ foreach ($captcha_difficulty_array as $k => $v) {
     <tr>
         <th scope="row"><?php _e('CAPTCHA Options:', 'si-captcha') ?></th>
         <td>
+
+       <input name="si_captcha_disable_session" id="si_captcha_disable_session" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_disable_session'] == 'true' ) echo ' checked="checked" '; ?> />
+        <label for="si_captcha_disable_session"><?php _e('Use CAPTCHA without PHP session.', 'si-captcha'); ?></label>
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_disable_session_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_disable_session_tip">
+        <?php _e('Sometimes the CAPTCHA code never validates because of a server problem with PHP session handling. If the CAPTCHA code never validates and does not work, you can enable this setting to use files for session.', 'si-captcha'); ?>
+        </div>
+        <br />
+        <?php
+         if ( $si_captcha_opt['si_captcha_disable_session'] == 'true' ){
+            $check_this_dir = untrailingslashit( $si_captcha_dir_ns );
+           if(is_writable($check_this_dir)) {
+				//echo '<span style="color: green">OK - Writable</span> ' . substr(sprintf('%o', fileperms($check_this_dir)), -4);
+           } else if(!file_exists($check_this_dir)) {
+              echo '<span style="color: red;">';
+              echo __('There is a problem with the directory', 'si-captcha');
+              echo ' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/. ';
+	          echo __('The directory is not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.', 'si-captcha');
+              echo ' ';
+              echo __('Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).', 'si-captcha');
+              echo '</span><br />';
+           } else {
+             echo '<span style="color: red;">';
+             echo __('There is a problem with the directory', 'si-captcha') .' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/. ';
+             echo __('The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha').'. ';
+             echo __('Permissions are: ', 'si-captcha');
+             echo ' ';
+             echo substr(sprintf('%o', fileperms($check_this_dir)), -4);
+             echo ' ';
+             echo __('Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)', 'si-captcha');
+             echo ' ';
+             echo __('Fixing the actual problem is recommended, but you can uncheck this setting on the SI CAPTCHA options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).', 'si-captcha');
+             echo '</span><br />';
+          }
+         }
+
+        ?>
+
         <input name="si_captcha_enable_audio" id="si_captcha_enable_audio" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio'] == 'true' ) echo 'checked="checked"'; ?> />
-       <label name="si_captcha_enable_audio" for="si_captcha_enable_audio"><?php _e('Enable Audio for the CAPTCHA.', 'si-captcha') ?></label><br />
+        <label name="si_captcha_enable_audio" for="si_captcha_enable_audio"><?php _e('Enable Audio for the CAPTCHA.', 'si-captcha') ?></label>
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_audio_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_enable_audio_tip">
+        <?php _e('Enables an icon so the user can listen to an audio sound of the CAPTCHA.', 'si-captcha') ?>
+        </div>
+        <br />
 
        <input name="si_captcha_enable_audio_flash" id="si_captcha_enable_audio_flash" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio_flash'] == 'true' ) echo 'checked="checked"'; ?> />
-       <label name="si_captcha_enable_audio_flash" for="si_captcha_enable_audio_flash"><?php _e('Enable Flash Audio for the CAPTCHA.', 'si-captcha') ?></label><br />
+       <label name="si_captcha_enable_audio_flash" for="si_captcha_enable_audio_flash"><?php _e('Enable Flash Audio for the CAPTCHA.', 'si-captcha') ?></label>
+       <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_audio_flash_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_enable_audio_flash_tip">
+        <?php _e('Enables a flash object so the user can listen to an audio sound of the CAPTCHA without having to download the sound file.', 'si-captcha') ?>
+        </div>
+        <br />
 
        <input name="si_captcha_captcha_small" id="si_captcha_captcha_small" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_captcha_small'] == 'true' ) echo ' checked="checked" '; ?> />
-       <label for="si_captcha_captcha_small"><?php echo esc_html( __('Enable smaller size CAPTCHA image.', 'si-captcha')); ?></label><br />
+       <label for="si_captcha_captcha_small"><?php echo esc_html( __('Enable smaller size CAPTCHA image.', 'si-captcha')); ?></label>
+       <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_captcha_small_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_captcha_small_tip">
+        <?php _e('Makes the CAPTCHA image smaller.', 'si-captcha') ?>
+        </div>
+        <br />
 
        <input name="si_captcha_no_trans" id="si_captcha_no_trans" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_no_trans'] == 'true' ) echo ' checked="checked" '; ?> />
-       <label for="si_captcha_no_trans"><?php echo esc_html( __('Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix).', 'si-captcha')); ?></label><br />
+       <label for="si_captcha_no_trans"><?php echo esc_html( __('Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix).', 'si-captcha')); ?></label>
+       <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_captcha_no_trans_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_captcha_no_trans_tip">
+        <?php _e('Sometimes fixes missing text on the CAPTCHA image. If this does not fix missing text, your PHP server is not compatible with the CAPTCHA functions. You should have your web server fixed.', 'si-captcha') ?>
+        </div>
 
        </td>
     </tr>
@@ -284,10 +367,10 @@ foreach ($captcha_difficulty_array as $k => $v) {
 
     // Check for older than PHP5
    if (phpversion() < 5) {
-      echo '<br /><span style="color:red;">'. __('Warning: Your web host has not upgraded from PHP4 to PHP5.', 'si-contact-form');
+      echo '<br /><span style="color:red;">'. __('Warning: Your web host has not upgraded from PHP4 to PHP5.', 'si-captcha');
       echo '</span> ';
-      echo __('PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.', 'si-contact-form')."<br />\n";
-      echo __('PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support.', 'si-contact-form')."<br /><br />\n";
+      echo __('PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.', 'si-captcha')."<br />\n";
+      echo __('PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support.', 'si-captcha')."<br /><br />\n";
     }
   ?>
 
@@ -339,7 +422,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
 
 <p><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></p>
 <ul>
-<li><a href="http://wordpress.org/extend/plugins/si-contact-form/" target="_blank"><?php echo esc_html( __('Fast and Secure Contact Form', 'si-captcha')); ?></a></li>
+<li><a href="http://wordpress.org/extend/plugins/si-contact-form/" target="_blank"><?php echo esc_html( __('Fast Secure Contact Form', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo esc_html( __('SI CAPTCHA Anti-Spam', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo esc_html( __('Visitor Maps and Who\'s Online', 'si-captcha')); ?></a></li>
 
