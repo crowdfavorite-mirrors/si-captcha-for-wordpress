@@ -10,8 +10,8 @@ The script will tell you if you meet the requirements for running Securimage.
 http://www.phpcaptcha.org
 */
 //error_reporting(E_ALL ^ E_NOTICE); // Report all errors except E_NOTICE warnings
-error_reporting(E_ALL); // Report all errors and warnings (very strict, use for testing only)
-ini_set('display_errors', 1); // turn error reporting on
+//error_reporting(E_ALL); // Report all errors and warnings (very strict, use for testing only)
+//ini_set('display_errors', 1); // turn error reporting on
 
 // start a session cookie
 if( !isset( $_SESSION ) ) {
@@ -62,7 +62,18 @@ function print_status($supported)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Secureimage PHP Requirements Test</title>
+<title>CAPTCHA PHP Requirements Test</title>
+<script type="text/javascript" language="javascript">
+<!--
+function toggleVisibility(id) {
+   var e = document.getElementById(id);
+   if(e.style.display == 'block')
+       e.style.display = 'none';
+   else
+       e.style.display = 'block';
+}
+//-->
+</script>
 <style type="text/css" media="all">
 body
 {
@@ -89,28 +100,44 @@ body
 <body>
 
 <div class="group" style="margin-left:20%; margin-right:20%; padding:20px;">
-<h2>Secureimage PHP Requirements Test</h2>
+<h2>CAPTCHA PHP Requirements Test</h2>
 <p>
   This script will test your PHP installation to see if (Secureimage) CAPTCHA will run on your server.
-  <br /><br />
-Note: If you see any errors or warnings at the top of the page,
-especially "Warning: session_start...", they could be indicating a problem with your PHP server that will prevent the CAPTCHA from working.
+  Make sure to perform all 3 tests using the links below.
 </p>
+
+Note: If you see any errors or warnings at the top of the page<br />
+<a href="#" style="cursor:pointer;" title="Click for Help!" onclick="toggleVisibility('session_tip');">Click for Help!</a>
+
+<div style="text-align:left; display:none" id="session_tip">
+<br />
+<b>If you see an error "Warning: session_start..."</b><br />
+There is a problem with
+your PHP server that will prevent the CAPTCHA from working with PHP sessions.
+Sometimes PHP session do not work because of a file permissions problem.
+The solution is to make a trouble ticket with your web host,
+send them a URL link to this page so they can see the error and fix it.
+Alternatively, you can enable the setting "Use CAPTCHA without PHP Session",
+then temporary files will be used for storing the CAPTCHA phrase.
+This allows the CAPTCHA to function without using PHP Sessions.
+You can find this setting on the contact form admin settings page.
+</div>
 
  <?php
    // Check for safe mode
     $safe_mode_is_on = ((boolean)@ini_get('safe_mode') === false) ? 0 : 1;
     if($safe_mode_is_on){
-      echo '<p><span style="color:red;">Warning:</span> Your web host has PHP safe_mode turned on. PHP safe_mode can cause problems like sending mail failures and file permission errors.'."\n";
+      echo '<p><span style="color:red;">Warning: Your web host has PHP safe_mode turned on.</span> PHP safe_mode can cause problems like sending mail failures and file permission errors.'."\n";
       echo 'PHP safe_mode is better turned off, relying on this feature might work, but is highly discouraged. Contact your web host for support.</p>'."\n";
     }
 
     // Check for older than PHP5
    if (phpversion() < 5) {
-      echo '<p><span style="color:red;">Warning:</span> Your web host has not upgraded from PHP4 to PHP5. PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.'."\n";
+      echo '<p><span style="color:red;">Warning: Your web host has not upgraded from PHP4 to PHP5.</span> PHP4 was officially discontinued August 8, 2008 and is no longer considered safe.'."\n";
       echo 'PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support.</p>'."\n";
     }
   ?>
+
 
 <ul>
   <li>
@@ -139,7 +166,7 @@ especially "Warning: session_start...", they could be indicating a problem with 
     <br />No FreeType support.  Cannot use TTF fonts, but it will use GD fonts instead.
     <?php endif; ?>
   </li>
-
+  
   <li>
     <strong>imagettftext Support:</strong>
     <?php print_status( function_exists('imagettftext') ); ?>
@@ -205,17 +232,10 @@ Based on the requirements, you do not have what it takes to run (Secureimage) CA
 <a href="captcha_test.php">Try the CAPTCHA Test</a><br />
 </p>
 
-<p>PHP Scripts by Mike Challis<br />
+<p>PHP Scripts and WordPress plugins by Mike Challis<br />
 <a href="http://www.642weather.com/weather/scripts.php">Free PHP Scripts</a><br />
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=2319642">Donate</a>, even small amounts are appreciated
-<br />
-<br />
-Contact me: <a href="http://www.642weather.com/weather/wxblog/support/">(Mike Challis)</a><br />
-I will need to know this information: (fill in this information on my support form)<br />
-Plugin: SI CAPTCHA for WordPress<br />
-Plugin Version:<br />
-Your web site URL:<br />
-Problem you are having:
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=8086141">Donate</a>, even small amounts are appreciated<br />
+Contact Mike Challis for support: <a href="http://www.642weather.com/weather/wxblog/support/">(Mike Challis)</a>
 </p>
 </div>
 
