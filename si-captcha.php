@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.6
+Version: 2.6.1
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -536,13 +536,13 @@ function si_captcha_token_error(){
    } else if(!file_exists($check_this_dir)) {
    $si_cec .= '<br />';
    $si_cec .= __('There is a problem with the directory', 'si-captcha');
-   $si_cec .= ' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
+   $si_cec .= ' /si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
    $si_cec .= __('The directory is not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.', 'si-captcha');
    $si_cec .= ' ';
    $si_cec .= __('Fixing the actual problem is recommended, but you can uncheck this setting on the si captcha options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).', 'si-captcha');
    } else {
    $si_cec .= '<br />';
-   $si_cec .= __('There is a problem with the directory', 'si-captcha') .' /wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
+   $si_cec .= __('There is a problem with the directory', 'si-captcha') .' /si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
    $si_cec .= __('The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha').'. ';
    $si_cec .= __('Permissions are: ', 'si-captcha');
    $si_cec .= ' ';
@@ -756,9 +756,16 @@ function si_captcha_comment_post($comment) {
     if (is_user_logged_in() && $si_captcha_opt['si_captcha_perm'] == 'true') {
        // skip the CAPTCHA display if the minimum capability is met
        if ( current_user_can( $si_captcha_opt['si_captcha_perm_level'] ) ) {
-               // skip capthca
-               return $comment;
+           // skip capthca
+           return $comment;
         }
+    }
+
+    // skip captcha for comment replies from admin menu
+    if ( isset($_POST['action']) && $_POST['action'] == 'replyto-comment' &&
+    ( check_ajax_referer( 'replyto-comment', '_ajax_nonce', false ) || check_ajax_referer( 'replyto-comment', '_ajax_nonce-replyto-comment', false )) ) {
+          // skip capthca
+          return $comment;
     }
 
     // Skip captcha for trackback or pingback
