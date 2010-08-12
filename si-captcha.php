@@ -837,17 +837,20 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 			if ( empty($password) )
 				$error->add('empty_password', __('<strong>ERROR</strong>: The password field is empty.'));
 
-            if (isset($_POST['captcha_code']) && empty($_POST['captcha_code']))
+            if (isset($_POST['captcha_code']) && empty($_POST['captcha_code'])) {
+                remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
                 $error->add('empty_captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Please complete the CAPTCHA.', 'si-captcha'));
-
+            }
 			return $error;
 		}
   // begin si captcha check
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
       if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+         remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
          return new WP_Error('captcha_error',  '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
       }else if (!isset($_POST['si_code_log']) || empty($_POST['si_code_log'])) {
+         remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
          return new WP_Error('captcha_error',  '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
       }else{
          $prefix = 'xxxxxx';
@@ -860,9 +863,11 @@ function si_wp_authenticate_username_password($user, $username, $password) {
               // captcha was matched
               @unlink ($si_captcha_dir_ns . $prefix . '.php');
 			} else {
+			  remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
               return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
             }
 	     } else {
+	       remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
            return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
 	    }
 	  }
@@ -870,6 +875,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
   }else{
    //captcha with PHP sessions
    if (!isset($_SESSION['securimage_code_si_log']) || empty($_SESSION['securimage_code_si_log'])) {
+          remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
           return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
    }else{
 
@@ -883,6 +889,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
       if($valid == true) {
           // ok can continue
       } else {
+          remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
           return new WP_Error('captcha_error', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('That CAPTCHA was incorrect. Make sure you have not disabled cookies.', 'si-captcha'));
       }
    }
@@ -1286,8 +1293,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
     add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head' ) );
     add_action('bp_login_bar_logged_out', array( &$si_image_captcha, 'si_captcha_bp_login_form' ) );
     add_action('bp_sidebar_login_form', array( &$si_image_captcha, 'si_captcha_bp_login_sidebar_form' ) );
-    remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
-	add_filter('authenticate', array( &$si_image_captcha, 'si_wp_authenticate_username_password'), 20, 3);
+	add_filter('authenticate', array( &$si_image_captcha, 'si_wp_authenticate_username_password'), 9, 3);
   }
 
   // options deleted when this plugin is deleted in WP 2.7+
