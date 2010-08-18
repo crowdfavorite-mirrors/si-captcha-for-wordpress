@@ -208,6 +208,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Added download count and star rating on admin options page. 
+
 = 2.6.1 =
 - (11 Aug 2010) - Fixed critical error that broke comment replies from admin menu with "CAPTCHA ERROR".
 

@@ -1143,6 +1143,25 @@ function si_captcha_login_head(){
   echo '<script type="text/javascript" src="'.plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js?ver='.time()).'"></script>'."\n";
 }
 
+function si_captcha_admin_head() {
+ // only load this header stuff on the admin settings page
+if(isset($_GET['page']) && $_GET['page'] == 'si-captcha-for-wordpress/si-captcha.php' ) {
+?>
+<!-- begin SI CAPTCHA Anti-Spam - admin settings page header code -->
+<style type="text/css">
+div.star-holder { position: relative; height:19px; width:100px; font-size:19px;}
+div.star {height: 100%; position:absolute; top:0px; left:0px; background-color: transparent; letter-spacing:1ex; border:none;}
+.star1 {width:20%;} .star2 {width:40%;} .star3 {width:60%;} .star4 {width:80%;} .star5 {width:100%;}
+.star.star-rating {background-color: #fc0;}
+.star img{display:block; position:absolute; right:0px; border:none; text-decoration:none;}
+div.star img {width:19px; height:19px; border-left:1px solid #fff; border-right:1px solid #fff;}
+</style>
+<!-- end SI CAPTCHA Anti-Spam - admin settings page header code -->
+<?php
+  } // end if(isset($_GET['page'])
+
+}
+
 function get_captcha_url_si() {
    global $wpmu;
   // The captcha URL cannot be on a different domain as the site rewrites to or the cookie won't work
@@ -1248,12 +1267,9 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
      add_action('plugins_loaded', array(&$si_image_captcha, 'si_captcha_start_session'));
   }
 
-
-
-
-
   // si captcha admin options
   add_action('admin_menu', array(&$si_image_captcha,'si_captcha_add_tabs'),1);
+  add_action('admin_head', array(&$si_image_captcha,'si_captcha_admin_head'),1);
 
   // adds "Settings" link to the plugin action page
   add_filter( 'plugin_action_links', array(&$si_image_captcha,'si_captcha_plugin_action_links'),10,2);
