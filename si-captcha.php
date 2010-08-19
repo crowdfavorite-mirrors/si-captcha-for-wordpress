@@ -3,7 +3,7 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
-Version: 2.6.1
+Version: 2.6.2
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
@@ -686,10 +686,10 @@ function si_captcha_register_post($errors) {
  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
          if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
-         $errors['errors']->add('captcha_blank', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
+         $errors->add('captcha_blank', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
          return $errors;
       }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
-         $errors['errors']->add('captcha_no_token', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+         $errors->add('captcha_no_token', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
          return $errors;
       }else{
          $prefix = 'xxxxxx';
@@ -702,11 +702,11 @@ function si_captcha_register_post($errors) {
               // captcha was matched
               @unlink ($si_captcha_dir_ns . $prefix . '.php');
 			} else {
-              $errors['errors']->add('captcha_wrong', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
+              $errors->add('captcha_wrong', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('That CAPTCHA was incorrect.', 'si-captcha'));
               return $errors;
             }
 	     } else {
-           $errors['errors']->add('captcha_no_file', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+           $errors->add('captcha_no_file', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
            return $errors;
 	    }
 	  }
@@ -1246,6 +1246,10 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   }
 
   $si_captcha_url  = $si_image_captcha->get_captcha_url_si();
+  // set the type of request (SSL or not)
+  if ( getenv('HTTPS') == 'on' ) {
+		$si_captcha_url = preg_replace('|http://|', 'https://', $si_captcha_url);
+  }
 
   // only used for the no-session captcha setting
   $si_captcha_url_ns = $si_captcha_url  . '/captcha-temp/';

@@ -208,7 +208,12 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+= 2.6.2 =
+- (19 Aug 2010) - Fixed error "WP_Error as array" recorded in error log when on register page. 
+- Added Akismet spam prevention status to the contact form settings page, so you can know if Akismet is protecting or not.
+- Added automatic SSL support for the CAPTCHA URL.
 - Added download count and star rating on admin options page. 
+- cleaned up options page.
 
 = 2.6.1 =
 - (11 Aug 2010) - Fixed critical error that broke comment replies from admin menu with "CAPTCHA ERROR".

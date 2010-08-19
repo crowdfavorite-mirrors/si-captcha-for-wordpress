@@ -120,7 +120,7 @@ send them a URL link to this page so they can see the error and fix it.
 Alternatively, you can enable the setting "Use CAPTCHA without PHP Session",
 then temporary files will be used for storing the CAPTCHA phrase.
 This allows the CAPTCHA to function without using PHP Sessions.
-You can find this setting on the contact form admin settings page.
+You can find this setting on the plugin admin settings page.
 </div>
 
  <?php
@@ -224,12 +224,12 @@ You can find this setting on the contact form admin settings page.
 				echo '<span style="color: green">OK - Writable</span> ' . substr(sprintf('%o', fileperms($check_this_dir)), -4);
 			} else if(!file_exists($check_this_dir)) {
 				echo '<span style="color: red; font-weight: bold;">Directory not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.</span>';
-                echo ' ' .'Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).';
+                echo ' ' .'Fixing the actual problem is recommended, but you can uncheck this setting on the plugin options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).';
 			} else {
                 echo '<span style="color: red; font-weight: bold;">Directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)</span>.';
                 echo ' ' .'Permissions are:' . ' ' .substr(sprintf('%o', fileperms($check_this_dir)), -4);
                 echo ' ' .'Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)';
-                echo ' ' .'Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).';
+                echo ' ' .'Fixing the actual problem is recommended, but you can uncheck this setting on the plugin options page: "Use CAPTCHA without PHP session" and the captcha will work this way just fine (as long as PHP sessions are working).';
             }
             ?>
             <br />
@@ -240,7 +240,7 @@ You can find this setting on the contact form admin settings page.
 Since you can see this...<br /><br />
 <img src="<?php echo $_SERVER['PHP_SELF']; ?>?testimage=1" alt="Test Image" align="bottom" />
 <?php else: ?>
-Based on the requirements, you do not have what it takes to run (Secureimage) CAPTCHA :(
+Based on the requirements, you do not have what it takes to run (Securimage) CAPTCHA :(
 <?php endif; ?>
 
 <p>
@@ -251,14 +251,12 @@ Based on the requirements, you do not have what it takes to run (Secureimage) CA
 
 <p>PHP Scripts and WordPress plugins by Mike Challis<br />
 <a href="http://www.642weather.com/weather/scripts.php">Free PHP Scripts</a><br />
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=8086141">Donate</a>, even small amounts are appreciated<br />
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6105441">Donate</a>, even small amounts are appreciated<br />
 Contact Mike Challis for support: <a href="http://www.642weather.com/weather/wxblog/support/">(Mike Challis)</a>
 </p>
 </div>
- <?php
-if( isset($_GET['phpinfo']) ) {
-    phpinfo();
-}
+<?php
+//if( isset($_GET['phpinfo']) ) { phpinfo();}
 ?>
 </body>
 </html>

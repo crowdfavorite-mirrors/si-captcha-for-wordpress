@@ -213,16 +213,13 @@ global $wp_version;
         <fieldset class="options">
 
         <table width="100%" cellspacing="2" cellpadding="5" class="form-table">
-        <tr>
-             <th scope="row"><?php _e('CAPTCHA Support Test:', 'si-captcha') ?></th>
-          <td>
-            <a href="<?php echo "$si_captcha_url/test/index.php"; ?>" target="_new"><?php _e('Test if your PHP installation will support the CAPTCHA', 'si-captcha') ?></a>
-          </td>
-        </tr>
 
         <tr>
-            <th scope="row"><?php _e('CAPTCHA difficulty:', 'si-captcha') ?></th>
+            <th scope="row" style="width: 75px;"><?php _e('CAPTCHA:', 'si-captcha') ?></th>
         <td>
+        <a href="<?php echo "$si_captcha_url/test/index.php"; ?>" target="_new"><?php _e('Test if your PHP installation will support the CAPTCHA', 'si-captcha') ?></a>
+        <br />
+
         <label for="si_captcha_captcha_difficulty"><?php echo esc_html(__('CAPTCHA difficulty level:', 'si-captcha')); ?></label>
       <select id="si_captcha_captcha_difficulty" name="si_captcha_captcha_difficulty">
 <?php
@@ -245,60 +242,44 @@ foreach ($captcha_difficulty_array as $k => $v) {
         </div>
         <br />
 
-    </td>
-        </tr>
-
-        <tr>
-            <th scope="row"><?php _e('CAPTCHA on Login Form:', 'si-captcha') ?></th>
-        <td>
     <input name="si_captcha_login" id="si_captcha_login" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_login'] == 'true' ) echo ' checked="checked" '; ?> />
     <label for="si_captcha_login"><?php _e('Enable CAPTCHA on the login form.', 'si-captcha') ?></label>
     <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_login_tip');"><?php _e('help', 'si-captcha'); ?></a>
     <div style="text-align:left; display:none" id="si_captcha_login_tip">
     <?php _e('The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in.', 'si-captcha') ?>
     </div>
+    <br />
 
-    </td>
-        </tr>
-        <tr>
-            <th scope="row"><?php _e('CAPTCHA on Register Form:', 'si-captcha') ?></th>
-        <td>
     <input name="si_captcha_register" id="si_captcha_register" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_register'] == 'true' ) echo ' checked="checked" '; ?> />
     <label for="si_captcha_register"><?php _e('Enable CAPTCHA on the register form.', 'si-captcha') ?></label>
-             <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_register_tip');"><?php _e('help', 'si-captcha'); ?></a>
-        <div style="text-align:left; display:none" id="si_captcha_register_tip">
-        <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering.', 'si-captcha') ?>
-        </div>
-        <br />
-    </td>
-        </tr>
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_register_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_register_tip">
+    <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering.', 'si-captcha') ?>
+    </div>
+    <br />
 
-        <tr>
-            <th scope="row"><?php _e('CAPTCHA on Comment Form:', 'si-captcha') ?></th>
-        <td>
     <input name="si_captcha_comment" id="si_captcha_comment" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_comment'] == 'true' ) echo ' checked="checked" '; ?> />
     <label for="si_captcha_comment"><?php _e('Enable CAPTCHA on the comment form.', 'si-captcha') ?></label>
-         <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_tip');"><?php _e('help', 'si-captcha'); ?></a>
-        <div style="text-align:left; display:none" id="si_captcha_enable_tip">
-        <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before posting comments.', 'si-captcha') ?>
-        </div>
-        <br />
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_enable_tip">
+    <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before posting comments.', 'si-captcha') ?>
+    </div>
+    <br />
 
 
-        <input name="si_captcha_perm" id="si_captcha_perm" type="checkbox" <?php if( $si_captcha_opt['si_captcha_perm'] == 'true' ) echo 'checked="checked"'; ?> />
-        <label name="si_captcha_perm" for="si_captcha_perm"><?php _e('Hide CAPTCHA for', 'si-captcha') ?>
-        <strong><?php _e('registered', 'si-captcha') ?></strong>
-         <?php _e('users who can:', 'si-captcha') ?></label>
-        <?php $this->si_captcha_perm_dropdown('si_captcha_perm_level', $si_captcha_opt['si_captcha_perm_level']);  ?><br />
+    <input name="si_captcha_perm" id="si_captcha_perm" type="checkbox" <?php if( $si_captcha_opt['si_captcha_perm'] == 'true' ) echo 'checked="checked"'; ?> />
+    <label name="si_captcha_perm" for="si_captcha_perm"><?php _e('Hide CAPTCHA for', 'si-captcha') ?>
+    <strong><?php _e('registered', 'si-captcha') ?></strong>
+    <?php _e('users who can:', 'si-captcha') ?></label>
+    <?php $this->si_captcha_perm_dropdown('si_captcha_perm_level', $si_captcha_opt['si_captcha_perm_level']);  ?><br />
 
-        <?php _e('CSS class name for CAPTCHA input field on the comment form', 'si-captcha') ?>:<input name="si_captcha_comment_class" id="si_captcha_comment_class" type="text" value="<?php echo $si_captcha_opt['si_captcha_comment_class'];  ?>" /><br />
-        <?php _e('(Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.)', 'si-captcha') ?>
-    </td>
-        </tr>
+    <?php _e('CSS class name for CAPTCHA input field on the comment form', 'si-captcha') ?>:<input name="si_captcha_comment_class" id="si_captcha_comment_class" type="text" value="<?php echo $si_captcha_opt['si_captcha_comment_class'];  ?>" />
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_comment_class_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_comment_class_tip">
+    <?php _e('Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.', 'si-captcha') ?>
+    </div>
+    <br />
 
-    <tr>
-        <th scope="row"><?php _e('Comment Form Rearrange:', 'si-captcha') ?></th>
-        <td>
     <input name="si_captcha_rearrange" id="si_captcha_rearrange" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_rearrange'] == 'true' ) echo ' checked="checked" '; ?> />
     <label for="si_captcha_rearrange"><?php _e('Change the display order of the catpcha input field on the comment form.', 'si-captcha') ?></label>
     <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_rearrange_tip');"><?php _e('help', 'si-captcha'); ?></a>
@@ -313,20 +294,16 @@ foreach ($captcha_difficulty_array as $k => $v) {
      <?php _e('Why is it better to uncheck this and move the tag? because the XHTML will no longer validate on the comment page if it is checked.', 'si-captcha') ?>
     </p>
     </div>
-      </td>
-    </tr>
+    <br />
 
-    <tr>
-        <th scope="row"><?php _e('CAPTCHA Options:', 'si-captcha') ?></th>
-        <td>
+    <input name="si_captcha_disable_session" id="si_captcha_disable_session" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_disable_session'] == 'true' ) echo ' checked="checked" '; ?> />
+    <label for="si_captcha_disable_session"><?php _e('Use CAPTCHA without PHP session.', 'si-captcha'); ?></label>
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_disable_session_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_disable_session_tip">
+    <?php _e('Sometimes the CAPTCHA code never validates because of a server problem with PHP session handling. If the CAPTCHA code never validates and does not work, you can enable this setting to use files for session.', 'si-captcha'); ?>
+    </div>
+    <br />
 
-       <input name="si_captcha_disable_session" id="si_captcha_disable_session" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_disable_session'] == 'true' ) echo ' checked="checked" '; ?> />
-        <label for="si_captcha_disable_session"><?php _e('Use CAPTCHA without PHP session.', 'si-captcha'); ?></label>
-        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_disable_session_tip');"><?php _e('help', 'si-captcha'); ?></a>
-        <div style="text-align:left; display:none" id="si_captcha_disable_session_tip">
-        <?php _e('Sometimes the CAPTCHA code never validates because of a server problem with PHP session handling. If the CAPTCHA code never validates and does not work, you can enable this setting to use files for session.', 'si-captcha'); ?>
-        </div>
-        <br />
         <?php
          if ( $si_captcha_opt['si_captcha_disable_session'] == 'true' ){
             $check_this_dir = untrailingslashit( $si_captcha_dir_ns );
@@ -392,7 +369,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
     </tr>
 
     <tr>
-        <th scope="row"><?php _e('Accessibility:', 'si-captcha') ?></th>
+        <th scope="row" style="width: 75px;"><?php _e('Accessibility:', 'si-captcha') ?></th>
         <td>
        <input name="si_captcha_aria_required" id="si_captcha_aria_required" type="checkbox" <?php if( $si_captcha_opt['si_captcha_aria_required'] == 'true' ) echo 'checked="checked"'; ?> />
        <label name="si_captcha_aria_required" for="si_captcha_aria_required"><?php _e('Enable aria-required tags for screen readers', 'si-captcha') ?>.</label>
@@ -401,6 +378,57 @@ foreach ($captcha_difficulty_array as $k => $v) {
        <?php _e('aria-required is a form input WAI ARIA tag. Screen readers use it to determine which fields are required. Enabling this is good for accessability, but will cause the HTML to fail the W3C Validation (there is no attribute "aria-required"). WAI ARIA attributes are soon to be accepted by the HTML validator, so you can safely ignore the validation error it will cause.', 'si-captcha') ?>
        </div>
     </td>
+    </tr>
+
+     <tr>
+       <th scope="row" style="width: 75px;"><?php _e('Akismet:', 'si-captcha'); ?></th>
+      <td>
+     <strong><?php _e('Akismet spam prevention status:', 'si-captcha'); ?></strong>
+
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_contact_akismet_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_contact_akismet_tip">
+    <?php _e('Akismet is a WordPress plugin. Akismet will greatly reduce or even completely eliminate the comment and trackback spam you get on your site. If one does happen to get through, simply mark it as "spam" on the moderation screen and Akismet will learn from the mistakes. When Akismet is installed and active, all comment posts will be checked with Akismet to help prevent spam.', 'si-captcha') ?>
+    </div>
+    <br />
+
+  <?php
+   if (function_exists('akismet_verify_key')) {
+     if (!isset($_POST['si_contact_akismet_check'])){
+       echo '<span style="background-color:#99CC99; padding:4px;">'.
+             __('Akismet is installed.', 'si-captcha'). '</strong></span>';
+     }
+  ?>
+  <input name="si_contact_akismet_check" id="si_contact_akismet_check" type="checkbox" value="1" />
+  <label for="si_contact_akismet_check"><?php _e('Check this and click "Update Options" to determine if Akismet key is active.', 'si-captcha'); ?></label>
+   <?php
+    if (isset($_POST['si_contact_akismet_check'])){
+      echo '<br/>';
+      $key_status = 'failed';
+	  $key = get_option('wordpress_api_key');
+		if ( empty( $key ) ) {
+			$key_status = 'empty';
+		} else {
+			$key_status = akismet_verify_key( $key );
+		}
+		if ( $key_status == 'valid' ) {
+			echo '<span style="background-color:#99CC99; padding:4px;">'.
+             __('Akismet is installed and the key is valid. Comment posts will be checked with Akismet to help prevent spam.', 'si-captcha'). '</strong></span>';
+		} else if ( $key_status == 'invalid' ) {
+			echo '<span style="background-color:#FFE991; padding:4px;">'.
+            __('Akismet plugin is installed but key needs to be activated.', 'si-captcha'). '</span>';
+		} else if ( !empty($key) && $key_status == 'failed' ) {
+			echo '<span style="background-color:#FFE991; padding:4px;">'.
+             __('Akismet plugin is installed but key failed to verify.', 'si-captcha'). '</span>';
+		}
+    }
+         echo '<br/><a href="'.admin_url(  "plugins.php?page=akismet-key-config" ).'">Configure Akismet</a>';
+   }else{
+     echo '<span style="background-color:#FFE991; padding:4px;">'.
+            __('Akismet plugin is not installed or is deactivated.', 'si-captcha'). '</span>';
+   }
+    ?>
+
+      </td>
     </tr>
 
         </table>
@@ -417,13 +445,13 @@ foreach ($captcha_difficulty_array as $k => $v) {
     }
   ?>
 
-        <h3><a style="cursor:pointer;" title="<?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?>" onclick="toggleVisibility('si_captcha_advanced');"><?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?></a></h3>
+        <h3><a style="cursor:pointer;" title="<?php echo __('Click for Advanced Options', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_advanced');"><?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?></a></h3>
         <div style="text-align:left; display:none" id="si_captcha_advanced">
 
          <table cellspacing="2" cellpadding="5" class="form-table">
 
       <tr>
-         <th scope="row"><?php echo esc_html( __('Inline CSS Style:', 'si-captcha')); ?></th>
+         <th scope="row" style="width: 75px;"><?php echo esc_html( __('Inline CSS Style:', 'si-captcha')); ?></th>
         <td>
 
         <input name="si_captcha_reset_styles" id="si_captcha_reset_styles" type="checkbox" />
@@ -438,7 +466,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
 
 
         <tr>
-          <th scope="row"><?php echo esc_html( __('Text Labels:', 'si-captcha')); ?></th>
+          <th scope="row" style="width: 75px;"><?php echo esc_html( __('Text Labels:', 'si-captcha')); ?></th>
          <td>
         <a style="cursor:pointer;" title="<?php echo esc_html( __('Click for Help!', 'si-captcha')); ?>" onclick="toggleVisibility('si_captcha_labels_tip');"><?php echo esc_html( __('help', 'si-captcha')); ?></a>
        <div style="text-align:left; display:none" id="si_captcha_labels_tip">
@@ -465,7 +493,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
 
 <p><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></p>
 <ul>
-<li><a href="http://wordpress.org/extend/plugins/si-contact-form/" target="_blank"><?php echo esc_html( __('Fast Secure Contact Form', 'si-captcha')); ?></a></li>
+<li><a href="http://www.fastsecurecontactform.com/" target="_blank"><?php echo esc_html( __('Fast Secure Contact Form', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo esc_html( __('SI CAPTCHA Anti-Spam', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo esc_html( __('Visitor Maps and Who\'s Online', 'si-captcha')); ?></a></li>
 
