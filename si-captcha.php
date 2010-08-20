@@ -1191,10 +1191,9 @@ function get_captcha_url_si() {
           $url = get_option( 'home' ) . '/' . MUPLUGINDIR . $si_dir;
   }
 
-  // SSL aware: set the type of request (secure or not)
-  $request_type = ( isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ) ? 'SSL' : 'NONSSL';
-  if ($request_type == 'SSL' && !preg_match("#^https#i", $url)) {
-    $url = str_replace('http','https',$url);
+  // set the type of request (SSL or not)
+  if ( getenv('HTTPS') == 'on' ) {
+      $url = preg_replace('|http://|', 'https://', $url);
   }
 
   return $url;
@@ -1246,10 +1245,6 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   }
 
   $si_captcha_url  = $si_image_captcha->get_captcha_url_si();
-  // set the type of request (SSL or not)
-  if ( getenv('HTTPS') == 'on' ) {
-		$si_captcha_url = preg_replace('|http://|', 'https://', $si_captcha_url);
-  }
 
   // only used for the no-session captcha setting
   $si_captcha_url_ns = $si_captcha_url  . '/captcha-temp/';
