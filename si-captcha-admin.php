@@ -104,7 +104,6 @@ http://www.642weather.com/weather/scripts.php
 </p>
 
 <?php
-
   require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
   // Before, try to access the data, check the cache.
@@ -112,12 +111,13 @@ http://www.642weather.com/weather/scripts.php
     // The cache data doesn't exist or it's expired.
 
     $api = plugins_api('plugin_information', array('slug' => stripslashes( 'si-captcha-for-wordpress' ) ));
-
-    // cache isn't up to date, write this fresh information to it now to avoid the query for xx time.
-    $myexpire = 60 * 15; // Cache data for 15 minutes
-    set_transient('si_captcha_info', $api, $myexpire);
+    if ( !is_wp_error($api) ) {
+      // cache isn't up to date, write this fresh information to it now to avoid the query for xx time.
+      $myexpire = 60 * 15; // Cache data for 15 minutes
+      set_transient('si_captcha_info', $api, $myexpire);
+    }
   }
-
+  if ( !is_wp_error($api) ) {
 	$plugins_allowedtags = array('a' => array('href' => array(), 'title' => array(), 'target' => array()),
 								'abbr' => array('title' => array()), 'acronym' => array('title' => array()),
 								'code' => array(), 'pre' => array(), 'em' => array(), 'strong' => array(),
@@ -130,9 +130,9 @@ http://www.642weather.com/weather/scripts.php
 	foreach ( array('version', 'author', 'requires', 'tested', 'homepage', 'downloaded', 'slug') as $key )
 		$api->$key = wp_kses($api->$key, $plugins_allowedtags);
 
-if ( ! empty($api->downloaded) ) {
-  _e('Downloaded:', 'si-captcha'); printf(_n('%s time', '%s times', $api->downloaded), number_format_i18n($api->downloaded), 'si-captcha'); echo '.';
-}
+    if ( ! empty($api->downloaded) ) {
+      _e('Downloaded:', 'si-captcha'); printf(_n('%s time', '%s times', $api->downloaded), number_format_i18n($api->downloaded), 'si-captcha'); echo '.';
+    }
 ?>
 		<?php if ( ! empty($api->rating) ) : ?>
 		<div class="star-holder" title="<?php printf(_n('Average rating based on %s rating)', '(Average rating based on %s ratings)', $api->num_ratings), number_format_i18n($api->num_ratings), 'si-captcha'); ?>">
@@ -147,6 +147,7 @@ if ( ! empty($api->downloaded) ) {
 		<?php endif; ?>
 
 <?php
+  } // if ( !is_wp_error($api)
 if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 ?>
 <h3><?php echo esc_html( __('Donate', 'si-captcha')); ?></h3>
