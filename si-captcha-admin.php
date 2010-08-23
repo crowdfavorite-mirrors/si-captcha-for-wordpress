@@ -130,12 +130,13 @@ http://www.642weather.com/weather/scripts.php
 	foreach ( array('version', 'author', 'requires', 'tested', 'homepage', 'downloaded', 'slug') as $key )
 		$api->$key = wp_kses($api->$key, $plugins_allowedtags);
 
-    if ( ! empty($api->downloaded) ) {
-      _e('Downloaded:', 'si-captcha'); printf(_n('%s time', '%s times', $api->downloaded), number_format_i18n($api->downloaded), 'si-captcha'); echo '.';
-    }
+      if ( ! empty($api->downloaded) ) {
+        echo sprintf(__('Downloaded %s times', 'si-captcha'),number_format_i18n($api->downloaded));
+        echo '.';
+      }
 ?>
 		<?php if ( ! empty($api->rating) ) : ?>
-		<div class="star-holder" title="<?php printf(_n('Average rating based on %s rating)', '(Average rating based on %s ratings)', $api->num_ratings), number_format_i18n($api->num_ratings), 'si-captcha'); ?>">
+		<div class="star-holder" title="<?php echo esc_attr(sprintf(__('(Average rating based on %s ratings)', 'si-captcha'),number_format_i18n($api->num_ratings))); ?>">
 			<div class="star star-rating" style="width: <?php echo esc_attr($api->rating) ?>px"></div>
 			<div class="star star5"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('5 stars', 'si-captcha') ?>" /></div>
 			<div class="star star4"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('4 stars', 'si-captcha') ?>" /></div>
@@ -143,7 +144,7 @@ http://www.642weather.com/weather/scripts.php
 			<div class="star star2"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('2 stars', 'si-captcha') ?>" /></div>
 			<div class="star star1"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('1 star', 'si-captcha') ?>" /></div>
 		</div>
-		<small><?php printf(_n('(Average rating based on %s rating)', '(Average rating based on %s ratings)', $api->num_ratings), number_format_i18n($api->num_ratings), 'si-captcha'); ?> <a target="_blank" href="http://wordpress.org/extend/plugins/<?php echo $api->slug ?>/"> <?php _e('rate', 'si-captcha') ?></a></small>
+		<small><?php echo sprintf(__('(Average rating based on %s ratings)', 'si-captcha'),number_format_i18n($api->num_ratings)); ?> <a target="_blank" href="http://wordpress.org/extend/plugins/<?php echo $api->slug ?>/"> <?php _e('rate', 'si-captcha') ?></a></small>
 		<?php endif; ?>
 
 <?php
