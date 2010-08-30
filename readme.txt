@@ -3,7 +3,7 @@ Contributors: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
-Requires at least: 2.6
+Requires at least: 2.8
 Tested up to: 3.0.1
 Stable tag: trunk
 
@@ -38,7 +38,7 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.6+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
+ * Works with Wordpress 2.8+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
  * PHP 4.3 or above with GD2 library support. (PHP5 is highly recommended)
  * (WP 2 series) Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
