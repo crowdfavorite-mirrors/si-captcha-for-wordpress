@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SI CAPTCHA Anti-Spam 2.5.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2010-05-11 22:58+0000\n"
-"PO-Revision-Date: 2010-08-31 02:16+0900\n"
+"PO-Revision-Date: 2010-08-31 16:58+0900\n"
 "Last-Translator: BNG NET <webmaster@bng.net>\n"
 "Language-Team: BNG NET <webmaster@bng.net>\n"
 "MIME-Version: 1.0\n"
@@ -243,8 +243,8 @@ msgid "CSS class name for CAPTCHA input field on the comment form"
 msgstr "コメントフォームにおけるキャプチャ入力フィールド用CSSクラス名"
 
 #: si-captcha-admin.php:221
-msgid "(Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.)"
-msgstr "(ご使用のテーマがコメントテキスト入力用にCSSクラス名を使っている場合のみ。使っていなければデフォルトは空白です。)"
+msgid "Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none."
+msgstr "ご使用のテーマがコメントテキスト入力用にCSSクラス名を使っている場合のみ。使っていなければデフォルトは空白です。"
 
 #: si-captcha-admin.php:226
 msgid "Comment Form Rearrange:"
