@@ -177,6 +177,7 @@ The following translations are included in the download zip file:
 * Hungarian (hu_HU) - Translated by [Vil]
 * Indonesian (id_ID) - Translated by [Masino Sinaga](http://www.openscriptsolution.com)
 * Italian (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+* Japanese (ja) - Translated by [Chestnut](http://staff.blog.bng.net/)
 * Norwegian (nb_NO) - Translated by [Roger Sylte](http://roger.inro.net/)
 * Polish (pl_PL) - Translated by [Tomasz](http://www.ziolczynski.pl/)
 * Portuguese Brazil (pt_BR) - Translated by [Newton Dan Faoro]
@@ -207,6 +208,8 @@ Of course! It will be very gratefully received. Use PoEdit, it makes translation
 If you use PoEdit to translate, it is easy to translate for a new version. You can open your current .po file, then select from the PoEdit menu: "Catalog" > "Update from POT file". Now all you have to change are the new language strings.
 
 == Changelog ==
+
+- Added Japanese (ja) - Translated by [Chestnut](http://staff.blog.bng.net/)
 
 = 2.6.2 =
 - (19 Aug 2010) - Fixed error "WP_Error as array" recorded in error log when on register page. 
