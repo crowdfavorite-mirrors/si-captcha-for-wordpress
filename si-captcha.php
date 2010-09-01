@@ -543,7 +543,7 @@ function si_captcha_token_error(){
    } else {
    $si_cec .= '<br />';
    $si_cec .= __('There is a problem with the directory', 'si-captcha') .' /si-captcha-for-wordpress/captcha-secureimage/captcha-temp/.<br />';
-   $si_cec .= __('The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha').'. ';
+   $si_cec .= __('Directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)', 'si-captcha').'. ';
    $si_cec .= __('Permissions are: ', 'si-captcha');
    $si_cec .= ' ';
    $si_cec .= substr(sprintf('%o', fileperms($check_this_dir)), -4);
@@ -1003,7 +1003,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
-     <img src="'.$si_captcha_url.'/images/audio_icon.gif" alt="';
+     <img src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo  '" ';
         echo ($si_captcha_opt['si_captcha_audio_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_audio_image_style'] ).'"' : '';
@@ -1019,7 +1019,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   }else{
     echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
   }
-  echo '      <img src="'.$si_captcha_url.'/images/refresh.gif" alt="';
+  echo '      <img src="'.$si_captcha_url.'/images/refresh.png" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   echo '" ';
   echo ($si_captcha_opt['si_captcha_refresh_image_style'] != '') ? 'style="' . esc_attr( $si_captcha_opt['si_captcha_refresh_image_style'] ).'"' : '';
