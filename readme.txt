@@ -212,8 +212,10 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
-- Improved transparent audio and refresh images for the CAPTCHA
+= 2.6.3 =
+- (28 Sep 2010) - Improved transparent audio and refresh images for the CAPTCHA
 - Added Japanese (ja) - Translated by [Chestnut](http://staff.blog.bng.net/)
+- Added Persian Iran (fa_IR) - Translated by [najeekurd](http://www.najeekurd.net/)
 
 = 2.6.2 =
 - (19 Aug 2010) - Fixed error "WP_Error as array" recorded in error log when on register page. 
