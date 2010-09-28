@@ -154,7 +154,7 @@ if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 <h3><?php echo esc_html( __('Donate', 'si-captcha')); ?></h3>
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<table style="background-color:#FFE991; border:none; margin: -5px 0;" width="500">
+<table style="background-color:#FFE991; border:none; margin: -5px 0;" width="600">
   <tr>
     <td>
 <input type="hidden" name="cmd" value="_s-xclick" />
@@ -162,7 +162,9 @@ if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" style="border:none;" name="submit" alt="Paypal Donate" />
 <img alt="" style="border:none;" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 </td>
-<td><?php _e('If you find this plugin useful to you, please consider making a small donation to help contribute to further development. Thanks for your kind support!', 'si-captcha') ?> - <a style="cursor:pointer;" title="<?php _e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a></td>
+<td><?php
+_e('Please donate to keep this plugin FREE', 'si-captcha'); echo '<br />';
+_e('If you find this plugin useful to you, please consider making a small donation to help contribute to my time invested and to further development. Thanks for your kind support!', 'si-captcha') ?> - <a style="cursor:pointer;" title="<?php _e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a></td>
 </tr></table>
 </form>
 <br />
@@ -170,7 +172,7 @@ if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 <div style="text-align:left; display:none" id="si_captcha_mike_challis_tip">
 <img src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/si-captcha.jpg" width="250" height="185" alt="Mike Challis" /><br />
 <?php _e('Mike Challis says: "Hello, I have spend hundreds of hours coding this plugin just for you. If you are satisfied with my programs and support please consider making a small donation. If you are not able to, that is OK.', 'si-captcha'); ?>
-<?php echo ' '; _e('Most people donate $5, $10, $20, or more. Though no amount is too small. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also rate my plugin."', 'si-captcha'); ?>
+<?php echo ' '; _e('Most people donate $3, $5, $10, $20, or more. Though no amount is too small. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also rate my plugin."', 'si-captcha'); ?>
  <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php _e('Rate This', 'si-captcha'); ?></a>.
 <br />
 <a style="cursor:pointer;" title="Close" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('Close this message', 'si-captcha'); ?></a>
