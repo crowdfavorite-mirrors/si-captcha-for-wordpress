@@ -12,8 +12,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SI CAPTCHA Anti-Spam in italiano\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
-"POT-Creation-Date: 2010-09-28 21:57+0000\n"
-"PO-Revision-Date: 2010-09-29 00:51+0100\n"
+"POT-Creation-Date: 2010-09-29 00:12+0000\n"
+"PO-Revision-Date: 2010-09-29 08:14+0100\n"
 "Last-Translator: Gianni Diurno (aka gidibao) <gidibao[at]gmail[dot]com>\n"
 "Language-Team: Gianni Diurno | gidibao.net <gidibao[at]gmail[dot]com>\n"
 "MIME-Version: 1.0\n"
@@ -101,7 +101,7 @@ msgstr "1 stella"
 
 #: si-captcha-admin.php:147
 msgid "rate"
-msgstr "valutazione"
+msgstr "vota!"
 
 #: si-captcha-admin.php:166
 msgid "Please donate to keep this plugin FREE"
@@ -390,7 +390,7 @@ msgstr "Stato del plugin anti-spam Akismet:"
 
 #: si-captcha-admin.php:394
 msgid "Akismet is a WordPress plugin. Akismet will greatly reduce or even completely eliminate the comment and trackback spam you get on your site. If one does happen to get through, simply mark it as \"spam\" on the moderation screen and Akismet will learn from the mistakes. When Akismet is installed and active, all comment posts will be checked with Akismet to help prevent spam."
-msgstr "Akismet é un plugin WordPress. Akismet ridurrà se non eliminerà completamente i commenti ed i trackback spam ricevuti dal tuo sito. Nel caso in cui uno di essi oltrepassasse la barriera, marcalo semplicemente come \"spam\" nella pagina di moderazione ed Akismet imparerà dai propri errori. Dal momento in cui Akismet sarà installato ed attivo, tutti i commenti saranno controllati da Akismet per la prevenzione allo spam."
+msgstr "Akismet é un plugin WordPress. Akismet ridurrà o eliminerà completamente i commenti ed i trackback spam ricevuti dal tuo sito. Nel caso in cui uno di essi oltrepassasse la barriera, marcalo semplicemente come \"spam\" nella pagina di moderazione ed Akismet imparerà dai propri errori. Dal momento in cui Akismet sarà installato ed attivato, tutti i commenti verranno controllati da Akismet in modo tale da potere prevenire lo spam."
 
 #: si-captcha-admin.php:402
 msgid "Akismet is installed."
@@ -411,6 +411,10 @@ msgstr "Il plugin Akismet é stato installato: attiva la chiave!"
 #: si-captcha-admin.php:425
 msgid "Akismet plugin is installed but key failed to verify."
 msgstr "Il plugin Akismet é stato installato: la chiave non ha superato la verifica!"
+
+#: si-captcha-admin.php:428
+msgid "Configure Akismet"
+msgstr "Configura Akismet"
 
 #: si-captcha-admin.php:431
 msgid "Akismet plugin is not installed or is deactivated."
