@@ -23,7 +23,6 @@ If you find this plugin useful to you, please consider [__making a small donatio
 Features:
 --------
  * Configure from Admin panel
- * JavaScript is not required
  * Valid HTML
  * Section 508 and WAI Accessibility Validation.
  * Allows Trackbacks and Pingbacks
