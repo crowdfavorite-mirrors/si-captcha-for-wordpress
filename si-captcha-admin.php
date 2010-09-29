@@ -425,7 +425,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
              __('Akismet plugin is installed but key failed to verify.', 'si-captcha'). '</span>';
 		}
     }
-         echo '<br/><a href="'.admin_url(  "plugins.php?page=akismet-key-config" ).'">Configure Akismet</a>';
+         echo '<br/><a href="'.admin_url(  "plugins.php?page=akismet-key-config" ).'">'. __('Configure Akismet', 'si-captcha'). '</a>';
    }else{
      echo '<span style="background-color:#FFE991; padding:4px;">'.
             __('Akismet plugin is not installed or is deactivated.', 'si-captcha'). '</span>';
