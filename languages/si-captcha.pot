@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
-"POT-Creation-Date: 2010-09-28 21:57+0000\n"
+"POT-Creation-Date: 2010-09-29 00:12+0000\n"
 "PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -448,6 +448,10 @@ msgstr ""
 
 #: si-captcha-admin.php:425
 msgid "Akismet plugin is installed but key failed to verify."
+msgstr ""
+
+#: si-captcha-admin.php:428
+msgid "Configure Akismet"
 msgstr ""
 
 #: si-captcha-admin.php:431
