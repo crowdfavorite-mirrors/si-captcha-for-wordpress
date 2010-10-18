@@ -182,7 +182,12 @@ _e('If you find this plugin useful to you, please consider making a small donati
 ?>
 
 <form name="formoptions" action="<?php
-if ($wpmu == 1)
+global $wp_version;
+
+// for WP 3.0+ ONLY!
+if( $wpmu == 1 && $wp_version[0] > 2 && is_multisite() && is_super_admin() )  // wp 3.0 +
+ echo admin_url( 'ms-admin.php?page=si-captcha.php' );
+else if ($wpmu == 1)
  echo admin_url( 'wpmu-admin.php?page=si-captcha.php' );
 else
  echo admin_url( 'plugins.php?page=si-captcha-for-wordpress/si-captcha.php' );
@@ -196,7 +201,6 @@ else
       <label name="si_captcha_donated" for="si_captcha_donated"><?php echo esc_html( __('I have donated to help contribute for the development of this plugin.', 'si-captcha')); ?></label>
       <br />
 <?php
-global $wp_version;
     if( $wp_version[0] == 2 ) { // wp 2 series
 ?>
 <h3><?php _e('Usage', 'si-captcha') ?></h3>

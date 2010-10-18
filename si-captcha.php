@@ -38,9 +38,14 @@ if (!class_exists('siCaptcha')) {
  class siCaptcha {
 
 function si_captcha_add_tabs() {
-   global $wpmu;
+   global $wpmu, $wp_version;
 
-   if ($wpmu == 1 && function_exists('is_site_admin') && is_site_admin()) {
+   // for WP 3.0+ ONLY!
+   if( $wpmu == 1 && $wp_version[0] > 2 && is_multisite() && is_super_admin() ) { // wp 3.0 +
+     add_submenu_page('ms-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
+     add_options_page( __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
+   }
+   else if ($wpmu == 1 && function_exists('is_site_admin') && is_site_admin()) {
 		add_submenu_page('wpmu-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
 		add_options_page( __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
    }
