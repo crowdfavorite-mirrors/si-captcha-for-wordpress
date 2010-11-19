@@ -211,7 +211,9 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
-- Fixed WP 3.0 multi-site admin settings page 404 (hopefully).
+= 2.6.3.1 =
+- (19 Nov 2010) - Fixed WP 3.0 multi-site admin settings page 404 (hopefully).
+- Updated Japanese
 
 = 2.6.3 =
 - (28 Sep 2010) - Improved transparent audio and refresh images for the CAPTCHA
