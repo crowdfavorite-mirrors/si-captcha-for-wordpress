@@ -1150,7 +1150,7 @@ function si_captcha_login_head(){
 
 function si_captcha_admin_head() {
  // only load this header stuff on the admin settings page
-if(isset($_GET['page']) && $_GET['page'] == 'si-captcha-for-wordpress/si-captcha.php' ) {
+if(isset($_GET['page']) && preg_match('/si-captcha.php$/',$_GET['page']) ) {
 ?>
 <!-- begin SI CAPTCHA Anti-Spam - admin settings page header code -->
 <style type="text/css">
