@@ -211,6 +211,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Rename CAPTCHA font files all lower case.
+
 = 2.6.3.1 =
 - (19 Nov 2010) - Fixed WP 3.0 multi-site admin settings page 404 (hopefully).
 - Updated Japanese
