@@ -176,13 +176,13 @@ if (isset($_POST['action']) && ($_POST['action'] == 'check')) {
 
 
    // check the cookie can be read
-   if (!isset($_SESSION['securimage_code_ctf_1']) || empty($_SESSION['securimage_code_ctf_1'])) {
+   if (!isset($_SESSION['securimage_code_si_com']) || empty($_SESSION['securimage_code_si_com'])) {
           $error = 1;
           $error_captcha = 'Could not read CAPTCHA cookie.<br />
           Make sure you have cookies enabled and not blocking in your web browser settings.<br />
           Sometimes PHP session do not work, have your web host fix the broken PHP sessions.
           Alternatively, you can enable the setting "Use CAPTCHA without PHP Session".
-          You can find this setting on the contact form admin settings page.
+          You can find this setting on the plugin admin settings page.
           ';
    }else{
       // begin captcha check
@@ -224,7 +224,7 @@ if(!isset($_GET['session']) ) {
   echo 'Did this test pass but when testing with "Test CAPTCHA with PHP Session" fail?
     Solution: Sometimes PHP session do not work, have your web host fix the broken PHP sessions.
     Alternatively, you can enable the setting "Use CAPTCHA without PHP Session".
-    You can find this setting on the contact form admin settings page.
+    You can find this setting on the plugin admin settings page.
      <br /><br />';
 
 }
@@ -314,6 +314,7 @@ echo '</p>
  ';
 
  if(!isset($_GET['session'])) {
+    clean_temp_dir('../captcha-temp/', 60);
     // pick new prefix token
     $prefix_length = 16;
     $prefix_characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
@@ -366,14 +367,14 @@ if(is_writable($check_this_dir)) {
     echo '<br />';
     echo '<span style="color: red; font-weight: bold;"><strong>There is a problem with the directory /captcha-temp/.</strong><br />';
 	echo 'The directory is not found, a <a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">permissions</a> problem may have prevented this directory from being created.</span>';
-    echo ' '. 'Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: "Use CAPTCHA without PHP session" and the captcha will work this way (as long as PHP sessions are working).';
+    echo ' '. 'Fixing the actual problem is recommended, but you can uncheck this setting on the plugin options page: "Use CAPTCHA without PHP session" and the captcha will work this way (as long as PHP sessions are working).';
 } else {
    echo '<br />';
    echo '<span style="color: red; font-weight: bold;"><strong>There is a problem with the directory /captcha-temp/</strong>.<br />';
    echo 'The directory Unwritable (<a href="http://codex.wordpress.org/Changing_File_Permissions" target="_blank">fix permissions</a>)</span>.';
    echo ' ' .'Permissions are:' . ' ' .substr(sprintf('%o', fileperms($check_this_dir)), -4);
    echo ' ' .'Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)';
-   echo ' '. 'Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: "Use CAPTCHA without PHP session" and the captcha will work this way (as long as PHP sessions are working).';
+   echo ' '. 'Fixing the actual problem is recommended, but you can uncheck this setting on the plugin options page: "Use CAPTCHA without PHP session" and the captcha will work this way (as long as PHP sessions are working).';
 }
 
 
@@ -413,6 +414,29 @@ function echo_if_error($this_error){
   }
 }
 
+// needed for emptying temp directories for captcha session files
+function clean_temp_dir($dir, $minutes = 60) {
+    // deletes all files over xx minutes old in a temp directory
+  	if ( ! is_dir( $dir ) || ! is_readable( $dir ) || ! is_writable( $dir ) )
+		return false;
+
+	$count = 0;
+	if ( $handle = @opendir( $dir ) ) {
+		while ( false !== ( $file = readdir( $handle ) ) ) {
+			if ( $file == '.' || $file == '..' || $file == '.htaccess' || $file == 'index.php')
+				continue;
+
+			$stat = @stat( $dir . $file );
+			if ( ( $stat['mtime'] + $minutes * 60 ) < time() ) {
+			    @unlink( $dir . $file );
+				$count += 1;
+			}
+		}
+		closedir( $handle );
+	}
+	return $count;
+}
+
 ?>
 
 <p>
@@ -423,7 +447,7 @@ function echo_if_error($this_error){
 
 <p>PHP Scripts and WordPress plugins by Mike Challis<br />
 <a href="http://www.642weather.com/weather/scripts.php">Free PHP Scripts</a><br />
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=8086141">Donate</a>, even small amounts are appreciated<br />
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=6105441">Donate</a>, even small amounts are appreciated<br />
 Contact Mike Challis for support: <a href="http://www.642weather.com/weather/wxblog/support/">(Mike Challis)</a>
 </p>
 </div>
