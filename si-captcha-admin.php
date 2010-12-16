@@ -103,7 +103,12 @@ http://www.642weather.com/weather/scripts.php
 <a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo esc_html( __('Contact', 'si-captcha')); ?> Mike Challis</a>
 </p>
 
+<table style="border:none;" width="625">
+  <tr>
+  <td>
+
 <?php
+if (function_exists('get_transient')) {
   require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 
   // Before, try to access the data, check the cache.
@@ -149,6 +154,17 @@ http://www.642weather.com/weather/scripts.php
 
 <?php
   } // if ( !is_wp_error($api)
+ }// end if (function_exists('get_transient'
+  echo '</td><td>';
+  if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
+        <a href="http://secure.hostgator.com/cgi-bin/affiliates/clickthru.cgi?id=mchallis" target="_blank"><img title="Web Site Hosting" alt="Web Site Hosting" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
+<?php
+  }
+ ?>
+  </td>
+ </tr>
+ </table>
+    <?php
 if ($si_captcha_opt['si_captcha_donated'] != 'true') {
 ?>
 <h3><?php echo esc_html( __('Donate', 'si-captcha')); ?></h3>
