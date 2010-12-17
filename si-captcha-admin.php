@@ -103,10 +103,6 @@ http://www.642weather.com/weather/scripts.php
 <a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo esc_html( __('Contact', 'si-captcha')); ?> Mike Challis</a>
 </p>
 
-<table style="border:none;" width="625">
-  <tr>
-  <td>
-
 <?php
 if (function_exists('get_transient')) {
   require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
@@ -150,39 +146,49 @@ if (function_exists('get_transient')) {
 			<div class="star star1"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('1 star', 'si-captcha') ?>" /></div>
 		</div>
 		<small><?php echo sprintf(__('(Average rating based on %s ratings)', 'si-captcha'),number_format_i18n($api->num_ratings)); ?> <a target="_blank" href="http://wordpress.org/extend/plugins/<?php echo $api->slug ?>/"> <?php _e('rate', 'si-captcha') ?></a></small>
+        <br /> <br />
 		<?php endif; ?>
 
 <?php
   } // if ( !is_wp_error($api)
  }// end if (function_exists('get_transient'
-  echo '</td><td>';
-  if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
-        <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=sicaptchawp" target="_blank"><img title="Web Site Hosting" alt="Web Site Hosting" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
-<?php
-  }
- ?>
-  </td>
- </tr>
- </table>
-    <?php
-if ($si_captcha_opt['si_captcha_donated'] != 'true') {
-?>
-<h3><?php echo esc_html( __('Donate', 'si-captcha')); ?></h3>
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-<table style="background-color:#FFE991; border:none; margin: -5px 0;" width="600">
+if ($si_captcha_opt['si_captcha_donated'] != 'true') {
+ ?>
+
+  <table style="border:none; width:850px;">
   <tr>
-    <td>
+  <td>
+  <div style="width:385px;height:200px; float:left;background-color:white;padding: 10px 10px 10px 10px; border: 1px solid #ddd; background-color:#FFFFE0;">
+		<div>
+         <h3><?php echo __('Donate', 'si-captcha'); ?></h3>
+
+<?php
+_e('Please donate to keep this plugin FREE', 'si-captcha'); echo '<br />';
+_e('If you find this plugin useful to you, please consider making a small donation to help contribute to my time invested and to further development. Thanks for your kind support!', 'si-captcha') ?> - <a style="cursor:pointer;" title="<?php _e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a>
+<br /><br />
+   </div>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick" />
 <input type="hidden" name="hosted_button_id" value="6105441" />
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" style="border:none;" name="submit" alt="Paypal Donate" />
 <img alt="" style="border:none;" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
-</td>
-<td><?php
-_e('Please donate to keep this plugin FREE', 'si-captcha'); echo '<br />';
-_e('If you find this plugin useful to you, please consider making a small donation to help contribute to my time invested and to further development. Thanks for your kind support!', 'si-captcha') ?> - <a style="cursor:pointer;" title="<?php _e('More from Mike Challis', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_mike_challis_tip');"><?php _e('More from Mike Challis', 'si-captcha'); ?></a></td>
-</tr></table>
 </form>
+  </td><td>
+
+  <div style="width:385px;height:200px; float:left;background-color:white;padding: 10px 10px 10px 20px; border: 1px solid #ddd;">
+		<div>
+			<h3>ThemeFuse Original WP Themes</h3>
+            Try <a href="https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937" target="_blank">ThemeFuse</a>,
+            they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services.
+            Check out some of their themes!
+		</div>
+        <a href="https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937" target="_blank"><img title="ThemeFuse" alt="ThemeFuse" src="<?php echo WP_PLUGIN_URL; ?>/si-contact-form/themefuse.png" width="375" height="85" /></a>
+  </div>
+  </td>
+ </tr>
+ </table>
+
 <br />
 
 <div style="text-align:left; display:none" id="si_captcha_mike_challis_tip">
@@ -515,11 +521,25 @@ foreach ($captcha_difficulty_array as $k => $v) {
 
 </form>
 
-<p><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></p>
+<table style="border:none;" width="775">
+  <tr>
+  <td width="325">
+<p><strong><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></strong></p>
 <ul>
 <li><a href="http://www.fastsecurecontactform.com/" target="_blank"><?php echo esc_html( __('Fast Secure Contact Form', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo esc_html( __('SI CAPTCHA Anti-Spam', 'si-captcha')); ?></a></li>
 <li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo esc_html( __('Visitor Maps and Who\'s Online', 'si-captcha')); ?></a></li>
-
 </ul>
+<?php
+  if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
+   </td><td width="350">
+   "I recommend <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp" target="_blank">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features." - Mike Challis
+   </td><td width="100">
+     <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp" target="_blank"><img title="Web Site Hosting" alt="Web Site Hosting" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
+<?php
+  }
+ ?>
+</td>
+</tr>
+</table>
 </div>
