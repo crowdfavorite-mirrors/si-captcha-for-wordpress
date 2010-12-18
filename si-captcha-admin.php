@@ -181,7 +181,7 @@ _e('If you find this plugin useful to you, please consider making a small donati
 			<h3><?php _e('ThemeFuse Original WP Themes', 'si-captcha'); ?></h3>
             <?php echo sprintf(__('Try <a href="%s" target="_blank">ThemeFuse</a>, they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services. Check out some of their themes!', 'si-captcha'), 'https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937'); ?>
 		</div>
-        <a href="https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937" target="_blank"><img title="<?php _e('ThemeFuse', 'si-captcha'); ?>" alt="<?php _e('ThemeFuse', 'si-captcha'); ?>" src="http://themefuse.com/wp-content/themes/themefuse/images/campaigns/themefuse.jpg" width="375" height="85" /></a>
+        <a href="https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937" target="_blank"><img title="<?php echo esc_attr(__('ThemeFuse', 'si-captcha')); ?>" alt="<?php echo esc_attr(__('ThemeFuse', 'si-captcha')); ?>" src="http://themefuse.com/wp-content/themes/themefuse/images/campaigns/themefuse.jpg" width="375" height="85" /></a>
   </div>
   </td>
  </tr>
