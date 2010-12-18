@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SI CAPTCHA Anti-Spam 2.6.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2010-05-11 22:58+0000\n"
-"PO-Revision-Date: 2010-11-10 10:47+0900\n"
+"PO-Revision-Date: 2010-12-18 20:06+0900\n"
 "Last-Translator: BNG NET <webmaster@bng.net>\n"
 "Language-Team: BNG NET <webmaster@bng.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,46 @@ msgstr ""
 "X-Poedit-Country: JAPAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Bookmarks: -1,12,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: Added on 2010/12/18
+msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the SI CAPTCHA options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
+msgstr "実際に問題を解決することが望ましいのですが、この「CAPTCHAをPHPセッションなしで使う」という SI CAPTCHA の設定からチェックを外すと、（PHP セッションが動作している限り）キャプチャを正常に動かせるようにできます: "
+
+#: Added on 2010/12/18
+msgid "Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)"
+msgstr "パーミッションを0755以上に設定してください (例：ホストによっては0777にする必要がありますが、それでは動かない場合があるので、まずは0755でお試しください)"
+
+#: Added on 2010/12/18
+msgid "Permissions are: "
+msgstr "パーミッションは: "
+
+#: Added on 2010/12/18
+msgid "The directory Unwritable (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">fix permissions</a>)"
+msgstr "ディレクトリに書き込めません (<a href=\"http://wpdocs.sourceforge.jp/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%83%9F%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%A4%89%E6%9B%B4\" target=\"_blank\">ファイルパーミッションの変更</a>)"
+
+#: Added on 2010/12/18
+msgid "\"I recommend <a href=\"http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp\" target=\"_blank\">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features.\" - Mike Challis"
+msgstr "「<a href=\"http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp\" target=\"_blank\">HostGator ウェブホスティング</a>をお勧めします。わたしのサイトは全てお任せしています。値段は手頃で機能も充実しています」 - Mike Challis"
+
+#: Added on 2010/12/18
+msgid "Configure Akismet"
+msgstr "Akismet の設定"
+
+#: Added on 2010/12/18
+msgid "Check out some of their themes!"
+msgstr "どんなテーマがあるか、見てみてください！"
+
+#: Added on 2010/12/18
+msgid "they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services."
+msgstr "ワンクリックで自動インストール機能や素晴らしいアフターケアサポートなど、驚くべきオリジナル WP テーマがあります。"
+
+#: Added on 2010/12/18
+msgid "Try <a href=\"https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937\" target=\"_blank\">ThemeFuse</a>,"
+msgstr "<a href=\"https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937\" target=\"_blank\">ThemeFuse</a>をお試しください。"
+
+#: Added on 2010/12/18
+msgid "ThemeFuse Original WP Themes"
+msgstr "ThemeFuse オリジナル WP テーマ"
 
 #: Added on 2010/11/10
 msgid "Akismet:"
