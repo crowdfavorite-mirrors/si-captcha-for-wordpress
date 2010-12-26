@@ -186,7 +186,7 @@ The following translations are included in the download zip file:
 * Romanian (ro_RO) - Translated by [Laszlo SZOKE](http://www.naturaumana.ro)
 * Russian (ru_RU) - Translated by [Neponyatka](http://www.free-lance.ru/users/neponyatka)
 * Slovakian (sk_SK) - Translated by [Marek Chochol]
-* Spanish (en_ES) - Translated by [LoPsT](http://www.lopst.com/)
+* Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
 * Swedish (sv_SE) - Translated by [Benct]
 * Traditional Chinese, Taiwan Language (zh_TW) - Translated by [Cjh]
 * Turkish (tr_TR) - Translated by [Volkan](http://www.kirpininyeri.com/)
@@ -210,6 +210,8 @@ Of course! It will be very gratefully received. Use PoEdit, it makes translation
 If you use PoEdit to translate, it is easy to translate for a new version. You can open your current .po file, then select from the PoEdit menu: "Catalog" > "Update from POT file". Now all you have to change are the new language strings.
 
 == Changelog ==
+
+- Updated Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
 
 = 2.6.3.2 =
 - (17 Dec 2010) - Rename CAPTCHA font files all lower case.
