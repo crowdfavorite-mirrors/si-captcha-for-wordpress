@@ -185,6 +185,7 @@ The following translations are included in the download zip file:
 * Portuguese Brazil (pt_BR) - Translated by [Newton Dan Faoro]
 * Romanian (ro_RO) - Translated by [Laszlo SZOKE](http://www.naturaumana.ro)
 * Russian (ru_RU) - Translated by [Neponyatka](http://www.free-lance.ru/users/neponyatka)
+* Serbian (sr_SR) - Translated by [Milan Dinic]
 * Slovakian (sk_SK) - Translated by [Marek Chochol]
 * Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
 * Swedish (sv_SE) - Translated by [Benct]
@@ -211,6 +212,7 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Added Serbian (sr_SR) - Translated by [Milan Dinic]
 - Updated Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
 
 = 2.6.3.2 =
