@@ -473,10 +473,8 @@ foreach ($captcha_difficulty_array as $k => $v) {
     }
   ?>
 
-        <h3><a style="cursor:pointer;" title="<?php echo __('Click for Advanced Options', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_advanced');"><?php echo esc_html( __('Click for Advanced Options', 'si-captcha')); ?></a></h3>
-        <div style="text-align:left; display:none" id="si_captcha_advanced">
 
-         <table cellspacing="2" cellpadding="5" class="form-table">
+  <table cellspacing="2" cellpadding="5" class="form-table">
 
       <tr>
          <th scope="row" style="width: 75px;"><?php echo esc_html( __('Inline CSS Style:', 'si-captcha')); ?></th>
@@ -509,7 +507,6 @@ foreach ($captcha_difficulty_array as $k => $v) {
         </td>
     </tr>
       </table>
-  </div>
 
         </fieldset>
 
