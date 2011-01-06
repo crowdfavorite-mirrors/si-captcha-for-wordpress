@@ -183,6 +183,7 @@ The following translations are included in the download zip file:
 * Norwegian (nb_NO) - Translated by [Roger Sylte](http://roger.inro.net/)
 * Polish (pl_PL) - Translated by [Tomasz](http://www.ziolczynski.pl/)
 * Portuguese Brazil (pt_BR) - Translated by [Newton Dan Faoro]
+* Portuguese Portugal (pt_PT) - Translated by [PL Monteiro](http://thepatientcapacitor.com/)
 * Romanian (ro_RO) - Translated by [Laszlo SZOKE](http://www.naturaumana.ro)
 * Russian (ru_RU) - Translated by [Neponyatka](http://www.free-lance.ru/users/neponyatka)
 * Serbian (sr_SR) - Translated by [Milan Dinic]
@@ -212,8 +213,10 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Added Portuguese Portugal (pt_PT) - Translated by [PL Monteiro](http://thepatientcapacitor.com/)
 - Added Serbian (sr_SR) - Translated by [Milan Dinic]
 - Updated Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
+- Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro/)
 
 = 2.6.3.2 =
 - (17 Dec 2010) - Rename CAPTCHA font files all lower case.

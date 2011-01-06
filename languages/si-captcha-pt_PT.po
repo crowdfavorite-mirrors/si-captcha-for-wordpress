@@ -1,25 +1,31 @@
+# Translation of the WordPress plugin   by .
+# Copyright (C) 2010
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: Si Captcha\n"
+"Project-Id-Version: SI Captcha v2.6.3.2 pt_PT\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2010-12-18 21:25+0000\n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: Jibo <contact@jibo.ro>\n"
+"PO-Revision-Date: 2011-01-05 02:21-0000\n"
+"Last-Translator: Catch 22 <webmaster@cascoserolhas.net>\n"
+"Language-Team: The Patient Capacitor <admin@thepatientcapacitor.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Country: ROMANIA\n"
+"Plural-Forms: s\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
-"X-Poedit-Language: Romanian\n"
 
 #: si-captcha-admin.php:14
 msgid "You do not have permissions for managing this option"
-msgstr "Nu aveți permisiunea să modificați această opțiune"
+msgstr "Não tem permissões para utilizar esta opção."
 
 #: si-captcha-admin.php:81
 msgid "Options saved."
-msgstr "Opțiunile au fost salvate."
+msgstr "Configurações guardadas."
 
 #: si-captcha-admin.php:84
 #: si-captcha.php:45
@@ -28,93 +34,93 @@ msgstr "Opțiunile au fost salvate."
 #: si-captcha.php:50
 #: si-captcha.php:53
 msgid "SI Captcha Options"
-msgstr "Opțiuni SI CAPTCHA"
+msgstr "Opções do SI Captcha"
 
 #: si-captcha-admin.php:97
 msgid "Changelog"
-msgstr "Jurnal de modificări"
+msgstr "Registo de Alterações"
 
 #: si-captcha-admin.php:98
 msgid "FAQ"
-msgstr "Întrebări frecvente"
+msgstr "Perguntas Frequentes"
 
 #: si-captcha-admin.php:99
 #: si-captcha-admin.php:196
 msgid "Rate This"
-msgstr "Dați un calificativ"
+msgstr "Avalie isto:"
 
 #: si-captcha-admin.php:100
 msgid "Support"
-msgstr "Suport"
+msgstr "Apoio"
 
 #: si-captcha-admin.php:101
 #: si-captcha-admin.php:164
 msgid "Donate"
-msgstr "Donați"
+msgstr "Donativos"
 
 #: si-captcha-admin.php:102
 msgid "Free PHP Scripts"
-msgstr "Scripturi PHP gratuite"
+msgstr "PHP Scripts gratuitos"
 
 #: si-captcha-admin.php:103
 msgid "Contact"
-msgstr "Contact"
+msgstr "Contacto"
 
 #: si-captcha-admin.php:135
 #, php-format
 msgid "Downloaded %s times"
-msgstr "Descărcat de %s ori"
+msgstr "Downloaded %s vezes."
 
 #: si-captcha-admin.php:140
 #: si-captcha-admin.php:148
 #, php-format
 msgid "(Average rating based on %s ratings)"
-msgstr "Evaluare medie bazată pe %s evaluari"
+msgstr "(Avaliação média baseada em %s votos)"
 
 #: si-captcha-admin.php:142
 msgid "5 stars"
-msgstr "5 stele"
+msgstr "5 estrelas"
 
 #: si-captcha-admin.php:143
 msgid "4 stars"
-msgstr "4 stele"
+msgstr "4 estrelas"
 
 #: si-captcha-admin.php:144
 msgid "3 stars"
-msgstr "3 stele"
+msgstr "3 estrelas"
 
 #: si-captcha-admin.php:145
 msgid "2 stars"
-msgstr "2 stele"
+msgstr "2 estrelas"
 
 #: si-captcha-admin.php:146
 msgid "1 star"
-msgstr "1 stea"
+msgstr "1 estrela"
 
 #: si-captcha-admin.php:148
 msgid "rate"
-msgstr "evaluează"
+msgstr "avalie"
 
 #: si-captcha-admin.php:167
 msgid "Please donate to keep this plugin FREE"
-msgstr "Te rog să donezi pentru a menţine acest modul GRATUIT"
+msgstr "Por favor faça um donativo para manter este plugin GRATUITO"
 
 #: si-captcha-admin.php:168
 msgid "If you find this plugin useful to you, please consider making a small donation to help contribute to my time invested and to further development. Thanks for your kind support!"
-msgstr "Dacă acest plugin v-a fost util, vă rog să vă gândiți să faceți o mică donație pentru a contribui la alte dezvoltari. Vă mulțumesc pentru susținere!"
+msgstr "Se considera este plugin útil para si, por favor pondere fazer um pequeno donativo para ajudar no tempo que investi nele e contribuir para futuro desenvolvimento. Obrigado pelo seu apoio generoso."
 
 #: si-captcha-admin.php:168
 msgid "More from Mike Challis"
-msgstr "Alte pluginuri WordPress de la Mike Challis:"
+msgstr "Mais sobre Mike Challis"
 
 #: si-captcha-admin.php:181
 msgid "ThemeFuse Original WP Themes"
-msgstr "ThemeFuse Tema originală WP"
+msgstr "Temas WP originais ThemeFuse"
 
 #: si-captcha-admin.php:182
 #, php-format
 msgid "Try <a href=\"%s\" target=\"_blank\">ThemeFuse</a>, they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services. Check out some of their themes!"
-msgstr "Încearcă <a href=\"%s\" target=\"_blank\">ThemeFuse</a>, dezvoltatorul crează o serie de teme minunate pentru Wordpress ce pot fi instalate cu un singur click şi oferă asistenţă tehnică excelentă. Încearcă temele lor!"
+msgstr "Tente <a href=\"%s\" target=\"_blank\">ThemeFuse</a>, que faz alguns temas extraordinários e originais para WP, com funcionalidade de instalação com um único clique e excelente serviço de apoio pós-instalação. Dê uma olhada nos seus temas!"
 
 #: si-captcha-admin.php:184
 msgid "ThemeFuse"
@@ -122,68 +128,68 @@ msgstr "ThemeFuse"
 
 #: si-captcha-admin.php:194
 msgid "Mike Challis says: \"Hello, I have spend hundreds of hours coding this plugin just for you. If you are satisfied with my programs and support please consider making a small donation. If you are not able to, that is OK."
-msgstr "Mike Challis spune: \"Bună, Am muncit sute de ore pentru a programa acest modul special pentru tine. Dacă eşti mulţumit de programele mele şi de asistenţa tehnică oferită, te rog sa te gandeşti la o mică donaţie. Dacă nu îţi permiti, te înţeleg."
+msgstr "Mike Challis diz: \"Hello, passei centenas de horas com o código deste plugin especialmente para si. Se está satisfeito com os meus programas e apoio técnico pondere fazer uma pequena doação. Se tal lhe fôr impossível, não há azar."
 
 #: si-captcha-admin.php:195
 msgid "Most people donate $3, $5, $10, $20, or more. Though no amount is too small. Donations can be made with your PayPal account, or securely using any of the major credit cards. Please also rate my plugin.\""
-msgstr "Majoritatea persoanelor donează  $3, $5, $10, $20, sau mai mult. Totuşi, nicio sumă nu este prea mică. Donaţiile pot fi făcute prin PayPal sau securizat, folosind orice carte de credit. Te rog să evaluezi de asemenea acest modul.\""
+msgstr "A maioria das pessoas fazem um donativo de $3, $5, $10, $20, ou mais. Nenhuma quantia é demasiado pequena. Os donativos podem ser feitos com PayPal, ou com segurança com os cartões de crédito mais importantes. Por favor atribua também uma classificação aou meu plugin.\""
 
 #: si-captcha-admin.php:198
 msgid "Close this message"
-msgstr "Închide acest mesaj"
+msgstr "Fechar esta mensagem"
 
 #: si-captcha-admin.php:221
 msgid "I have donated to help contribute for the development of this plugin."
-msgstr "Am făcut o donație ca să contribui la dezvoltarea acestui plugin."
+msgstr "Eu fiz um donativo para contribuir para o desenvolvimento deste plugin."
 
 #: si-captcha-admin.php:226
 msgid "Usage"
-msgstr "Utilizare"
+msgstr "Utilização"
 
 #: si-captcha-admin.php:229
 msgid "Your theme must have a"
-msgstr "Trebuie să existe linia "
+msgstr "O seu tema deve ter uma"
 
 #: si-captcha-admin.php:229
 msgid "tag inside your comments.php form. Most themes do."
-msgstr "în fișierul comments.php al temei dumneavoastră. Majoritatea temelor au această linie."
+msgstr "tag dentro do formulário no seu comments.php. A maioria dos temas tem."
 
 #: si-captcha-admin.php:230
 msgid "The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea, or the captcha image and captcha code entry might display after the submit button."
-msgstr "De obicei această linie este inaintea zonei de text al comentariului. Il puteți muta dacă este sub zona de text, altfel imaginea cu codul de securitate va apare după butonul de trimitere."
+msgstr "O melhor lugar para localizar a tag é antes da àrea de texto dos comentários: pode querer movê-la se estiver abaixo, pois a imagem captcha e o campo para o código captcha pode ficar a aparecer abaixo do botão para enviar."
 
 #: si-captcha-admin.php:235
 msgid "Options"
-msgstr "Opțiuni"
+msgstr "Opções"
 
 #: si-captcha-admin.php:238
 #: si-captcha-admin.php:517
 msgid "Update Options"
-msgstr "Salvează modificări"
+msgstr "Actualizar Configuração"
 
 #: si-captcha-admin.php:246
 msgid "CAPTCHA:"
-msgstr "Cod de securitate:"
+msgstr "CAPTCHA:"
 
 #: si-captcha-admin.php:248
 msgid "Test if your PHP installation will support the CAPTCHA"
-msgstr "Testează dacă versiunea PHP instalată suportă CAPTCHA"
+msgstr "Teste se o PHP da sua instalação suporta o CAPTCHA"
 
 #: si-captcha-admin.php:251
 msgid "CAPTCHA difficulty level:"
-msgstr "Nivel de dificultate al codului de siguranţă:"
+msgstr "Nível de dificuldade do CAPTCHA"
 
 #: si-captcha-admin.php:255
 msgid "Low"
-msgstr "Slab"
+msgstr "Baixo"
 
 #: si-captcha-admin.php:256
 msgid "Medium"
-msgstr "Mediu"
+msgstr "Médio"
 
 #: si-captcha-admin.php:257
 msgid "High"
-msgstr "Ridicat"
+msgstr "Alto"
 
 #: si-captcha-admin.php:267
 #: si-captcha-admin.php:275
@@ -200,7 +206,7 @@ msgstr "Ridicat"
 #: si-captcha-admin.php:416
 #: si-captcha-admin.php:499
 msgid "Click for Help!"
-msgstr "Clic pentru ajutor!"
+msgstr "Click para Ajuda!"
 
 #: si-captcha-admin.php:267
 #: si-captcha-admin.php:275
@@ -217,173 +223,173 @@ msgstr "Clic pentru ajutor!"
 #: si-captcha-admin.php:416
 #: si-captcha-admin.php:499
 msgid "help"
-msgstr "ajutor"
+msgstr "ajuda"
 
 #: si-captcha-admin.php:269
 msgid "Changes level of distortion of the CAPTCHA image text."
-msgstr "Modifică nivelul distorsiunii textului din imaginea de securitate"
+msgstr "Modifica o nível de distorção da imagem de texto CAPTCHA"
 
 #: si-captcha-admin.php:274
 msgid "Enable CAPTCHA on the login form."
-msgstr "Activează CAPTCHA în formularul de autentificare."
+msgstr "Activar o CAPTCHA para o login."
 
 #: si-captcha-admin.php:277
 msgid "The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in."
-msgstr "CAPTCHA pentru formularul de autentificare nu este activat implicit pentru că poate deranja utilizatorii. Activați-l numai dacă aveți probleme de spam generate de boți care se autentifică automat."
+msgstr "O CAPTCHA no login está desactivado por defeito porque poderia ser irritante para os utilizadores. Active-o apenas se estiver com problemas de spam relacionados com bots fazendo login automático."
 
 #: si-captcha-admin.php:282
 msgid "Enable CAPTCHA on the register form."
-msgstr "Activează CAPTCHA și în formularul de înregistrare"
+msgstr "Activar o CAPTCHA no impresso de registo de novos utlizadores."
 
 #: si-captcha-admin.php:285
 msgid "Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering."
-msgstr "Împiedică roboţii automaţi de SPAM cerind utilizatorului sa treacă de un cod de securitate înainte de înregistrare."
+msgstr "Previne o registo automático de bots, exigindo que o utilizador passe um teste CAPTCHA antes de efectivar o registo."
 
 #: si-captcha-admin.php:290
 msgid "Enable CAPTCHA on the comment form."
-msgstr "Activează CAPTCHA pentru formularul de comentarii."
+msgstr "Activar o CAPTCHA nos comentários."
 
 #: si-captcha-admin.php:293
 msgid "Prevents automated spam bots by requiring that the user pass a CAPTCHA test before posting comments."
-msgstr "Împiedică roboţii automaţi de SPAM cerind utilizatorului sa treacă de un cod de securitate înainte de a comenta un articol."
+msgstr "Previne o comentário automático de bots, exigindo que o utilizador passe um teste CAPTCHA antes de efectivar o comentário."
 
 #: si-captcha-admin.php:299
 msgid "Hide CAPTCHA for"
-msgstr "Ascunde CAPTCHA pentru utilizatorii"
+msgstr "Não mostrar o CAPTCHA a"
 
 #: si-captcha-admin.php:300
 msgid "registered"
-msgstr "înregistrați"
+msgstr "registado"
 
 #: si-captcha-admin.php:301
 msgid "users who can:"
-msgstr "care au dreptul să:"
+msgstr "utilizadores que possam:"
 
 #: si-captcha-admin.php:304
 msgid "CSS class name for CAPTCHA input field on the comment form"
-msgstr "Numele clasei CSS pentru câmpul CAPTCHA din formularul de comentarii"
+msgstr "nome da classe CSS para o campo de introdução do código CAPTCHA no formulário dos comentários"
 
 #: si-captcha-admin.php:307
 msgid "Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none."
-msgstr "Introduceți numele clasei CSS numai dacă tema dumneavoastră folosește o clasă pentru câmpurile text din formularul de comentarii. Implicit este gol daca nu există"
+msgstr "Escreva um nome de classe CSS apenas se o seu tema usa um para a introdução de texto nos comentários. Por defeito, é vazio, para nenhum."
 
 #: si-captcha-admin.php:312
 msgid "Change the display order of the catpcha input field on the comment form."
-msgstr "Schimbă ordinea afișării codului de securitate în formularul de comentarii."
+msgstr "Mudar a ordem em que é mostrado o campo de introdução do código CAPTCHA nos comentários."
 
 #: si-captcha-admin.php:315
 msgid "Problem:"
-msgstr "Problemă:"
+msgstr "Problema:"
 
 #: si-captcha-admin.php:316
 msgid "Sometimes the captcha image and captcha input field are displayed AFTER the submit button on the comment form."
-msgstr "Uneori imaginea codului de securitate și câmpul unde trebuie introdus este afișat DUPĂ butonul „Trimite” al formularului de comentarii."
+msgstr "Por vezes a imagem captcha e o campo de inserção do código são mostrados ABAIXO do butão enviar."
 
 #: si-captcha-admin.php:317
 msgid "Fix:"
-msgstr "Rezolvare:"
+msgstr "Solução:"
 
 #: si-captcha-admin.php:318
 msgid "Edit your current theme comments.php file and locate this line:"
-msgstr "Editați comments.php din tema dumneavoastră și identificați următoarea linie:"
+msgstr "Edite o ficheiro comments.php do tema que está a usar e localize esta linha:"
 
 #: si-captcha-admin.php:320
 msgid "This tag is exactly where the captcha image and captcha code entry will display on the form, so move the line to BEFORE the comment textarea, uncheck the option box above, and the problem should be fixed."
-msgstr "Această linie este locul unde imaginea codului de securitate și câmpul unde trebuie introdus va apare în formular. Mutați linia ÎNAINTE de zona textului comentariului, debifați opțiunea de mai sus și problema se rezolvă."
+msgstr "Esta tag está exactamente onde o CAPTCHA será mostrado no formulário dos comentários, portanto mude-a para ficar ANTES da àrea de texto dos comentários, retire a marcação na opção acima, e o problema deverá ficar resolvido."
 
 #: si-captcha-admin.php:321
 msgid "Alernately you can just check the box above and javascript will attempt to rearrange it for you, but editing the comments.php, moving the tag, and unchecking this box is the best solution."
-msgstr "Ca alternativă puteți doar bifa opțiunea de mai sus și un script Java va încerca să rearanjeze formularul. Totuși, editarea fișierului comments.php, mutarea liniei și debifarea acestei opțiuni este cea mai bună soluție."
+msgstr "Alternativamente, pode marcar a opção acima e o Java Script tentará rearranjar a ordem, mas editar o comments.php, movendo a tag e desmarcando esta opção é melhor."
 
 #: si-captcha-admin.php:322
 msgid "Why is it better to uncheck this and move the tag? because the XHTML will no longer validate on the comment page if it is checked."
-msgstr "De ce este mai bine să debifați opțiunea și să mutați linia? Pentru că XHTML nu se va mai valida dacă opțiunea este bifată."
+msgstr "Porque é melhor desmarcar esta opção e mover a tag? Porque uma validação do XHTML da página falhará se a opção estiver marcada."
 
 #: si-captcha-admin.php:328
 msgid "Use CAPTCHA without PHP session."
-msgstr "Foloseşte codul de securitate fără sesiune PHP."
+msgstr "Usar o CAPTCHA sem sessão PHP."
 
 #: si-captcha-admin.php:331
 msgid "Sometimes the CAPTCHA code never validates because of a server problem with PHP session handling. If the CAPTCHA code never validates and does not work, you can enable this setting to use files for session."
-msgstr "Uneori, codul de securitate nu este validat datorită unor probleme la sesiunile PHP de pe server. Dacă codul de securitate nu poate fi validat şi nu funcţionează, poţi folosi în schimb opţiunea de fişiere pentru sesiuni."
+msgstr "Por vezes o código CAPTCHA nunca valida por causa de um erro no servidor com o manuseamento da sessão PHP. Se o código CAPTCHA nuca valida e não funciona, pode activar esta opção para usar ficheiros por sessão."
 
 #: si-captcha-admin.php:342
 #: si-captcha-admin.php:350
 #: si-captcha.php:543
 #: si-captcha.php:550
 msgid "There is a problem with the directory"
-msgstr "A apărut o problemă la dosar"
+msgstr "Existe um problema com a pasta"
 
 #: si-captcha-admin.php:344
 #: si-captcha.php:545
 msgid "The directory is not found, a <a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">permissions</a> problem may have prevented this directory from being created."
-msgstr "Dosarul nu a fost găsit , p problemă de <a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">permisiune</a> putea împiedica crearea dosarului."
+msgstr "A pasta não foi encontrada. Um problema de <a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">autorização</a> pode ter impedido a pasta de ser criada."
 
 #: si-captcha-admin.php:346
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
-msgstr "Este recomandată rezolvarea acestei probleme dar, poţi debifa aceasta setare în opţiunile formularului de contact: \"Foloseşte codul de securitate fară sesiune PHP\" şi codul de securitate va funcţiona foarte bine (dacă sesiunile PHP funcţionează)."
+msgstr "Resolver o problema directamente é recomendado, mas pode desmarcar esta configuração na página de opções do formulário de contacto: \"Usar o CAPTCHA sem sessão PHP\" e o captcha funcionará bem desta forma (desde que as sessões de PHP estejam a funcionar)."
 
 #: si-captcha-admin.php:351
 msgid "The directory Unwritable (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">fix permissions</a>)"
-msgstr "Nu se poate scrie în dosar, (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">rezolvă permisiunile</a>)"
+msgstr "A pasta Unwritable (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">modificar autorizações</a>)"
 
 #: si-captcha-admin.php:352
 #: si-captcha.php:552
 msgid "Permissions are: "
-msgstr "Permisiunile sunt:"
+msgstr "As autorizações são:"
 
 #: si-captcha-admin.php:356
 #: si-captcha.php:556
 msgid "Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)"
-msgstr "Rezolvarea acestei probleme poate necesita permisiuni 0755 sau mai mari (ex. 0777 pe unele servere. Încearca prima dată 0755 , deoarece 0777 este uneori prea mult si nu va funcţiona.)"
+msgstr "Resolver isto pode necessitar de atribuir permissões 0755 ou mais altas (e.g. 0777 nalguns servidores. É melhor tentar 0755 primeiro, porque 0777 é por vezes demasiado e não funciona.)"
 
 #: si-captcha-admin.php:358
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the SI CAPTCHA options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
-msgstr "Este recomandată rezolvarea acestei probleme dar, poţi debifa aceasta setare în opţiunile formularului de contact: \"Foloseşte codul de securitate fară sesiune PHP\" şi codul de securitate va funcţiona foarte bine (dacă sesiunile PHP funcţionează)."
+msgstr "Resolver o problema directamente é recomendado, mas pode desmarcar esta configuração na página de opções do SI CAPTCHA: \"Usar o CAPTCHA sem sessão PHP\" e o captcha funcionará bem desta forma (desde que as sessões de PHP estejam a funcionar)."
 
 #: si-captcha-admin.php:366
 msgid "Enable Audio for the CAPTCHA."
-msgstr "Activează Audio pentru codul de securitate."
+msgstr "Activar o áudio para o CAPTCHA."
 
 #: si-captcha-admin.php:369
 msgid "Enables an icon so the user can listen to an audio sound of the CAPTCHA."
-msgstr "Activează un icon pentru ca utilizatorul să poată asculta un fişier audio al codului de securitate."
+msgstr "Activa um icon de forma que o utilizador pode ouvir o código CAPTCHA em som."
 
 #: si-captcha-admin.php:374
 msgid "Enable Flash Audio for the CAPTCHA."
-msgstr "Activează Flash Audio pentru codul de securitate."
+msgstr "Activar o áudio em Flash para o CAPTCHA."
 
 #: si-captcha-admin.php:377
 msgid "Enables a flash object so the user can listen to an audio sound of the CAPTCHA without having to download the sound file."
-msgstr "Activează un obiect Flash pentru ca utilizatorul să poată asculta codul de securitate fara a descarca un fisier audio pe calculator."
+msgstr "Activa um objecto em Flash de forma que o utilizador pode ouvir o código CAPTCHA em som sem ter de fazer o download do ficheiro audio."
 
 #: si-captcha-admin.php:382
 msgid "Enable smaller size CAPTCHA image."
-msgstr "Activează imaginea mai mică a codului de securitate."
+msgstr "Permitir uma imagem CAPTCHA mais pequena."
 
 #: si-captcha-admin.php:385
 msgid "Makes the CAPTCHA image smaller."
-msgstr "Micsorează imaginea codului de securitate."
+msgstr "Faz a imagem do CAPTCHA mais pequena."
 
 #: si-captcha-admin.php:390
 msgid "Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix)."
-msgstr "Dezactivează textul transparent al codului de securitate (foloseşte aceasta rezolvare doar dacă lipseşte textul din imaginea de securitate)"
+msgstr "Desactivar texto transparente do CAPTCHA (apenas se o texto captcha falta na imagem, tente esta correcção)."
 
 #: si-captcha-admin.php:393
 msgid "Sometimes fixes missing text on the CAPTCHA image. If this does not fix missing text, your PHP server is not compatible with the CAPTCHA functions. You should have your web server fixed."
-msgstr "Uneori rezolvă lipsa codului de securitate. Dacă problema nu este rezolvată, serverul PHP nu este compatibil cu funcţiile acestui Cod de securitate. Ar trebui sa rezolvi problema cu serverul PHP."
+msgstr "Por vezes corrige texto que falta na imagem CAPTCHA. Se isto não corrige texto em falta, o PHP do seu servidor não é compatível com as funções do CAPTCHA. O seu servidor precisa de correcção."
 
 #: si-captcha-admin.php:400
 msgid "Accessibility:"
-msgstr "Acces facil:"
+msgstr "Accessibilidade:"
 
 #: si-captcha-admin.php:403
 msgid "Enable aria-required tags for screen readers"
-msgstr "Activează eticheta „zonă obligatorie” pentru cititoarele de ecran"
+msgstr "Activar aria-required tags para leitores de ecran"
 
 #: si-captcha-admin.php:406
 msgid "aria-required is a form input WAI ARIA tag. Screen readers use it to determine which fields are required. Enabling this is good for accessability, but will cause the HTML to fail the W3C Validation (there is no attribute \"aria-required\"). WAI ARIA attributes are soon to be accepted by the HTML validator, so you can safely ignore the validation error it will cause."
-msgstr "Atributul zonă-obligatorie (aria-required) este o etichetă WAI ARIA pentru formulare. Cititoarele de ecran vor folosi acestă etichetă pentru a determina care câmp este obligatoriu. Activarea acestei opțiuni este bună pentru acces facil dar codul HTML nu va trece de validarea W3C (nu există atribut \"aria-required\").  Atributele WAI ARIAvor fi acceptate în curând de validatorii HTML, puteția deci ignora eroarea de validare."
+msgstr "aria-required é uma tag de formulário de inserção WAI ARIA. Os leitores de ecran usam-na para determinar que campos são necessários. Activar isto é bom para accessibilidade, mas pode fazer com que o HTML falhe a validação W3C (não existe atributo \"aria-required\"). Os atributos WAI ARIA em breve serão aceites pelo validador HTML, portanto pode em segurança ignorar o erro de validação que cause."
 
 #: si-captcha-admin.php:412
 msgid "Akismet:"
@@ -391,87 +397,87 @@ msgstr "Akismet:"
 
 #: si-captcha-admin.php:414
 msgid "Akismet spam prevention status:"
-msgstr "Starea prevenirii SPAM-ului cu Akismet:"
+msgstr "Estado de prevenção de spam do Akismet:"
 
 #: si-captcha-admin.php:418
 msgid "Akismet is a WordPress plugin. Akismet will greatly reduce or even completely eliminate the comment and trackback spam you get on your site. If one does happen to get through, simply mark it as \"spam\" on the moderation screen and Akismet will learn from the mistakes. When Akismet is installed and active, all comment posts will be checked with Akismet to help prevent spam."
-msgstr "Akismet este un modul WordPress. Akismet va reduce in mod dramatic sau chiar va elimina SPAM-ul in comentarii sau trackback de pe site-ul tau. Dacă se întamplă să treacă unul, îl poţi marca  \"spam\" în ecranul de moderare şi Akismet va învăţa din greşeli. Cand  Akismet este instalat şi activ, toate comentariile vor fi verificate prin Akismet pentru a preveni SPAM-ul."
+msgstr "Akismet é um plugin do WordPress. O Akismet reduzirá grandemente ou até eliminará o spam nos comentários e links de retorno que tem no seu site. Se um por acaso conseguir passar, simplesmente marque-o como \"spam\" no painel de moderação e o Akismet aprenderá com os erros. Quando o Akismet está instalado e activo, todos os comentários são verificados para ajudar a reduzir a spam."
 
 #: si-captcha-admin.php:426
 msgid "Akismet is installed."
-msgstr "Akismet este instalat."
+msgstr "O Akismet está instalado."
 
 #: si-captcha-admin.php:430
 msgid "Check this and click \"Update Options\" to determine if Akismet key is active."
-msgstr "Bifează aici şi apasă  \"Actualizează opţiuni\" pentru a determina dacă cheia Akismet este activă."
+msgstr "Marque isto e click \"Actualizar Configuração\" para se assegurar que a chave do Akismet está activa."
 
 #: si-captcha-admin.php:443
 msgid "Akismet is installed and the key is valid. Comment posts will be checked with Akismet to help prevent spam."
-msgstr "Akismet este instalat si cheia este validă. Comentariile vor fi verificate cu Akismet pentru a preveni SPAM-ul."
+msgstr "O Akismet está instalado e a chave é válida. Os comentários serão verificados pelo Akismet para ajudar a reduzir o spam."
 
 #: si-captcha-admin.php:446
 msgid "Akismet plugin is installed but key needs to be activated."
-msgstr "Modulul Akismet este instalat dar cheia trebuie activată."
+msgstr "O plugin Akismet está instalado mas a chave precisa de ser activada."
 
 #: si-captcha-admin.php:449
 msgid "Akismet plugin is installed but key failed to verify."
-msgstr "Modulul Akismet este instalat însă verificarea cheii a eşuat."
+msgstr "O plugin Akismet está instalado mas a chave falhoe na verificação."
 
 #: si-captcha-admin.php:452
 msgid "Configure Akismet"
-msgstr "Configurează Akismet"
+msgstr "Configurar Akismet"
 
 #: si-captcha-admin.php:455
 msgid "Akismet plugin is not installed or is deactivated."
-msgstr "Modulul Akismet nu este instalat sau este dezactivat."
+msgstr "O plugin Akismet não está instalado ou está desactivado."
 
 #: si-captcha-admin.php:469
 msgid "Warning: Your web host has not upgraded from PHP4 to PHP5."
-msgstr "Avertisment: Furnizorul de gazduire web nu a actualizat PHP4 la PHP5."
+msgstr "Aviso: o seu serviço de hospedagem web não fez o upgrade de PHP4 para PHP5."
 
 #: si-captcha-admin.php:471
 msgid "PHP4 was officially discontinued August 8, 2008 and is no longer considered safe."
-msgstr "PHP4 a fost scos din uz in August 2008 si nu mai este considerat sigur."
+msgstr "O PHP4 foi oficialmente descontinuado em 8 de Agosto 2008, e já não é considerado seguro."
 
 #: si-captcha-admin.php:472
 msgid "PHP5 is faster, has more features, and is and safer. Using PHP4 might still work, but is highly discouraged. Contact your web host for support."
-msgstr "PHP5 este mai rapid, are mai multe facilităţi si este mai sigur. Folosind PHP4 este posibil să funcţioneze insă nu este recomandat. Contactează furnizorul WEB pentru suport."
+msgstr "O PHP5 é mais rápido, tem mais funcionalidades, e é seguro. Usar o PHP4 pode ainda funcionar, mas é grandemente desencorajado. Contacte o seu serviço de hospedagem web para apoio técnico."
 
 #: si-captcha-admin.php:476
 msgid "Click for Advanced Options"
-msgstr "Clic pentru Opțiuni Avansate"
+msgstr "Clique para Opções Avançadas"
 
 #: si-captcha-admin.php:482
 msgid "Inline CSS Style:"
-msgstr "Stil Inline CSS:"
+msgstr "Estilo CSS em linha:"
 
 #: si-captcha-admin.php:486
 msgid "Reset the styles to default."
-msgstr "Resetează stilurile la valoarea implicită."
+msgstr "Reset dos estilos para valores por defeito."
 
 #: si-captcha-admin.php:488
 msgid "CSS style for CAPTCHA div:"
-msgstr "Stil CSS pentru CAPTCHA div:"
+msgstr "Estilo CSS para a div do CAPTCHA:"
 
 #: si-captcha-admin.php:489
 msgid "CSS style for CAPTCHA image:"
-msgstr "Stil CSS pentru imaginea CAPTCHA:"
+msgstr "Estilo CSS para a imagem CAPTCHA:"
 
 #: si-captcha-admin.php:490
 msgid "CSS style for Audio image:"
-msgstr "Stil CSS pentru imaginea Audio:"
+msgstr "Estilo CSS para a imagem icon do Audio:"
 
 #: si-captcha-admin.php:491
 msgid "CSS style for Refresh image:"
-msgstr "Stil CSS pentru Refresh al imaginii:"
+msgstr "Estilo CSS para a imagem do icon Renovar:"
 
 #: si-captcha-admin.php:497
 msgid "Text Labels:"
-msgstr "Etichete text:"
+msgstr "Legendas em Texto:"
 
 #: si-captcha-admin.php:501
 msgid "Some people wanted to change the text labels. These fields can be filled in to override the standard text labels."
-msgstr "Unii vor să schimbe etichetele text. Aceste câmpuri pot fi completate pentru a suprascrie etichetele text standard."
+msgstr "Algumas pessoas queriam alterar as legendas em texto. Estes campos podem ser preenchidos para serem mostrados por vez das legendas standard."
 
 #: si-captcha-admin.php:504
 #: si-captcha.php:222
@@ -484,33 +490,33 @@ msgstr "Unii vor să schimbe etichetele text. Aceste câmpuri pot fi completate 
 #: si-captcha.php:489
 #: si-captcha.php:521
 msgid "CAPTCHA Code"
-msgstr "Codul de securitate"
+msgstr "Código CAPTCHA"
 
 #: si-captcha-admin.php:505
 #: si-captcha.php:973
 #: si-captcha.php:975
 msgid "CAPTCHA Image"
-msgstr "Imagine cod de securitate"
+msgstr "Imagem CAPTCHA"
 
 #: si-captcha-admin.php:506
 #: si-captcha.php:1009
 #: si-captcha.php:1012
 msgid "CAPTCHA Audio"
-msgstr "Cod de securitate audio"
+msgstr "Audio CAPTCHA"
 
 #: si-captcha-admin.php:507
 #: si-captcha.php:1021
 #: si-captcha.php:1028
 msgid "Refresh Image"
-msgstr "Reîmprospătează imaginea"
+msgstr "Renovar Imagem"
 
 #: si-captcha-admin.php:525
 msgid "More WordPress plugins by Mike Challis:"
-msgstr "Alte pluginuri WordPress de Mike Challis:"
+msgstr "Mais plugins WordPress de Mike Challis:"
 
 #: si-captcha-admin.php:527
 msgid "Fast Secure Contact Form"
-msgstr "Formular de contact rapid şi sigur"
+msgstr "Formulário de Contacto Rápido e Seguro"
 
 #: si-captcha-admin.php:528
 msgid "SI CAPTCHA Anti-Spam"
@@ -518,69 +524,69 @@ msgstr "SI CAPTCHA Anti-Spam"
 
 #: si-captcha-admin.php:529
 msgid "Visitor Maps and Who's Online"
-msgstr "Visitor Maps and Who's Online"
+msgstr "Mapas de visitantes e quem está Online"
 
 #: si-captcha-admin.php:534
 #, php-format
 msgid "\"I recommend <a href=\"%s\" target=\"_blank\">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features.\" - Mike Challis"
-msgstr "\"Recomand <a href=\"%s\" target=\"_blank\">HostGator Web Hosting</a>. Toate site-urile mele sunt gazduite acolo. Preţurile sunt bune şi oferă cele mai multe facilităţi.\" - Mike Challis"
+msgstr "\"Recomendo a hospedagem Web <a href=\"%s\" target=\"_blank\">HostGator</a>. Todos os meus sites estão aí hospedados. Os preços são óptimos e são quem oferece mais funcionalidades.\" - Mike Challis"
 
 #: si-captcha-admin.php:536
 msgid "Web Site Hosting"
-msgstr "Găzduire Web"
+msgstr "Hospedagem de Sites na Web"
 
 #: si-captcha.php:153
 msgid "All registered users"
-msgstr "Toți utilizatorii înregistrați"
+msgstr "Todos os utlizadores registados"
 
 #: si-captcha.php:154
 msgid "Edit posts"
-msgstr "Editeze articole"
+msgstr "Editar posts"
 
 #: si-captcha.php:155
 msgid "Publish Posts"
-msgstr "Publice articole"
+msgstr "Publicar posts"
 
 #: si-captcha.php:156
 msgid "Moderate Comments"
-msgstr "Modereze comentarii"
+msgstr "Moderar comentários"
 
 #: si-captcha.php:157
 msgid "Administer site"
-msgstr "Administreze site"
+msgstr "Administrar site"
 
 #: si-captcha.php:175
 msgid "ERROR: si-captcha.php plugin says GD image support not detected in PHP!"
-msgstr "EROARE: pluginul si-captcha.php raportează că nu a detectat suport GD pentru imagini în PHP!"
+msgstr "ERRO: plugin si-captcha.php diz que o suporte de imagens GD não foi detectado no PHP!"
 
 #: si-captcha.php:176
 msgid "Contact your web host and ask them why GD image support is not enabled for PHP."
-msgstr "Luați legătura cu furnizorul de web hosting și întrebați-i de ce nu este suport GD pentru imagini în PHP."
+msgstr "Contacte o seu serviço de hospedagem web e pergunte porque é que o suporte para imagens GD não foi activado no PHP."
 
 #: si-captcha.php:180
 msgid "ERROR: si-captcha.php plugin says imagepng function not detected in PHP!"
-msgstr "EROARE: pluginul si-captcha.php raportează că nu a detectat funcția imagepng în PHP!"
+msgstr "ERRO: plugin si-captcha.php diz que a função imagepng não foi detectado no PHP!"
 
 #: si-captcha.php:181
 msgid "Contact your web host and ask them why imagepng function is not enabled for PHP."
-msgstr "Luați legătura cu furnizorul de web hosting și întrebați-i de ce nu este activată funcția imagepng în PHP."
+msgstr "Contacte o seu serviço de hospedagem web e pergunte porque é que a função imagepng não foi activada no PHP."
 
 #: si-captcha.php:185
 msgid "ERROR: si-captcha.php plugin says captcha_library not found."
-msgstr "EROARE: pluginul si-captcha.php a raportat că nu găsește captcha_library."
+msgstr "ERRO: plugin si-captcha.php diz que captcha_library não foi encontrada."
 
 #: si-captcha.php:265
 msgid "Submit Comment"
-msgstr "Tirmite comentariul"
+msgstr "Enviar Comentário"
 
 #: si-captcha.php:547
 #: si-captcha.php:558
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the si captcha options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
-msgstr "Este recomandată rezolvarea acestei probleme dar, poţi debifa aceasta setare în pagina de opţiuni a codului de securitate: \"Foloseşte codul de securitate fară sesiune PHP\" şi codul de securitate va funcţiona foarte bine (dacă sesiunile PHP funcţionează)."
+msgstr "Resolver o problema directamente é recomendado, mas pode desmarcar esta configuração na página de opções do SI CAPTCHA: \"Usar o CAPTCHA sem sessão PHP\" e o captcha funcionará bem desta forma (desde que as sessões de PHP estejam a funcionar)."
 
 #: si-captcha.php:551
 msgid "Directory Unwritable (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">fix permissions</a>)"
-msgstr "Nu se poate scrie în dosar, (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">rezolvă permisiunile</a>)"
+msgstr "A pasta Unwritable (<a href=\"http://codex.wordpress.org/Changing_File_Permissions\" target=\"_blank\">modificar autorizações</a>)"
 
 #: si-captcha.php:571
 #: si-captcha.php:603
@@ -591,7 +597,7 @@ msgstr "Nu se poate scrie în dosar, (<a href=\"http://codex.wordpress.org/Chang
 #: si-captcha.php:847
 #: si-captcha.php:856
 msgid "Please complete the CAPTCHA."
-msgstr "Vă rog să completați codul de securitate"
+msgstr "Por favor complete o CAPTCHA"
 
 #: si-captcha.php:574
 #: si-captcha.php:635
@@ -599,14 +605,14 @@ msgstr "Vă rog să completați codul de securitate"
 #: si-captcha.php:787
 #: si-captcha.php:859
 msgid "Could not find CAPTCHA token."
-msgstr "Nu am putut găsi codul de securitate."
+msgstr "Token do CAPTCHA não encontrado."
 
 #: si-captcha.php:587
 #: si-captcha.php:648
 #: si-captcha.php:710
 #: si-captcha.php:872
 msgid "That CAPTCHA was incorrect."
-msgstr "Acel cod de securitate a fost incorect."
+msgstr "Esse CAPTCHA estava incorrecto."
 
 #: si-captcha.php:591
 #: si-captcha.php:652
@@ -614,7 +620,7 @@ msgstr "Acel cod de securitate a fost incorect."
 #: si-captcha.php:803
 #: si-captcha.php:876
 msgid "Could not read CAPTCHA token file."
-msgstr "Nu am putut citi fişierul codului de securitate."
+msgstr "Leitura do ficheiro do token do CAPTCHA não conseguida."
 
 #: si-captcha.php:599
 #: si-captcha.php:661
@@ -622,14 +628,14 @@ msgstr "Nu am putut citi fişierul codului de securitate."
 #: si-captcha.php:810
 #: si-captcha.php:884
 msgid "Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ."
-msgstr "Nu se poate citi cookie-ul CAPTCHA. Asurați-vă că aveți cookie-urile autorizate și nu le blocați din setările browserului. Poate fi și un conflict cu alt plugin. Consultați „Intrebările frecvente” ale pluginului."
+msgstr "Não foi possível ler o cookie do CAPTCHA. Assegure-se que o browser permite cookies e não os está a bloquear. Ou outro plugin está a interferir. Ver Perguntas Frequentes do plugin."
 
 #: si-captcha.php:616
 #: si-captcha.php:678
 #: si-captcha.php:741
 #: si-captcha.php:898
 msgid "That CAPTCHA was incorrect. Make sure you have not disabled cookies."
-msgstr "Codul de securitate a fost incorect. Verificați dacă nu ați dezactivat cookie."
+msgstr "Esse CAPTCHA estava incorrecto. Assegure-se que o browser permite cookies e não os está a bloquear."
 
 #: si-captcha.php:632
 #: si-captcha.php:635
@@ -656,62 +662,45 @@ msgstr "Codul de securitate a fost incorect. Verificați dacă nu ați dezactiva
 #: si-captcha.php:884
 #: si-captcha.php:898
 msgid "ERROR"
-msgstr "Eroare"
+msgstr "ERRO"
 
 #: si-captcha.php:785
 #: si-captcha.php:813
 msgid "Error: You did not enter a Captcha phrase. Press your browsers back button and try again."
-msgstr "EROARE: Nu ați introdus codul de securitate. Apăsați butonul „Înapoi” al browserului."
+msgstr "Erro: não preencheu o código Captcha. Clique o botão Voltar no seu browser e tente novamente."
 
 #: si-captcha.php:800
 #: si-captcha.php:825
 msgid "Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again."
-msgstr "Eroare: Ați introdus eronat codul de securitate. Apăsați butonul „Înapoi” al browserului și încercați din nou."
+msgstr "Erro: o código Captcha que inseriu está errado. Clique o botão Voltar no seu browser e tente novamente."
 
 #: si-captcha.php:840
 msgid "<strong>ERROR</strong>: The username field is empty."
-msgstr "<strong>EROARE</strong>: Numele de utilizator este necompletat."
+msgstr "<strong>ERRO</strong>: o nome de utilizador não foi preenchido."
 
 #: si-captcha.php:843
 msgid "<strong>ERROR</strong>: The password field is empty."
-msgstr "<strong>EROARE</strong>: Parola nu a fost completată."
+msgstr "<strong>ERRO</strong>: a password não foi preenchida."
 
 #: si-captcha.php:908
 #, php-format
 msgid "<strong>ERROR</strong>: Invalid username. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
-msgstr "<strong>EROARE</strong>: Nume de utilizator invalid. <a href=\"%s\" title=\"Password Lost and Found\">Ați uitat parola</a>?"
+msgstr "<strong>ERRO</strong>: nome de utilizador inválido. <a href=\"%s\" title=\"Password Lost and Found\">Perdeu a sua password</a>?"
 
 #: si-captcha.php:916
 msgid "<strong>ERROR</strong>: Your account has been marked as a spammer."
-msgstr "<strong>EROARE</strong>: Contul tau a fost marcat ca SPAMMER."
+msgstr "<strong>ERRO</strong>: a sua conta foi marcada como spammer."
 
 #: si-captcha.php:922
 msgid "Site Suspended."
-msgstr "Site suspendat."
+msgstr "Site Suspenso"
 
 #: si-captcha.php:932
 #, php-format
 msgid "<strong>ERROR</strong>: Incorrect password. <a href=\"%s\" title=\"Password Lost and Found\">Lost your password</a>?"
-msgstr "<strong>EROARE</strong>: Parolă incorectă. <a href=\"%s\" title=\"Parola pierdută şi găsită\">Ați uitat parola</a>?"
+msgstr "<strong>ERRO</strong>: password incorrecta. <a href=\"%s\" title=\"Password Lost and Found\">Perdeu a sua password</a>?"
 
 #: si-captcha.php:1043
 msgid "Settings"
-msgstr "Setări"
+msgstr "Configurações"
 
-#~ msgid "CAPTCHA Support Test:"
-#~ msgstr "Test pentru suport CAPTCHA"
-
-#~ msgid "CAPTCHA on Login Form:"
-#~ msgstr "CAPTCHA în formularul de autentificare:"
-
-#~ msgid "CAPTCHA on Register Form:"
-#~ msgstr "CAPTCHA în formularul de înregistrare:"
-
-#~ msgid "CAPTCHA on Comment Form:"
-#~ msgstr "CAPTCHA pentru formularul de comentarii:"
-
-#~ msgid "Comment Form Rearrange:"
-#~ msgstr "Rearanjarea formularului de comentarii:"
-
-#~ msgid "CAPTCHA Options:"
-#~ msgstr "Opțiuni CAPTCHA"
