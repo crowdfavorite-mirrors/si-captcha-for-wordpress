@@ -21,7 +21,7 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_perm' =>               (isset( $_POST['si_captcha_perm'] ) ) ? 'true' : 'false',
          'si_captcha_perm_level' =>           (trim($_POST['si_captcha_perm_level']) != '' ) ? trim($_POST['si_captcha_perm_level']) : $si_captcha_option_defaults['si_captcha_perm_level'], // use default if empty
          'si_captcha_comment' =>            (isset( $_POST['si_captcha_comment'] ) ) ? 'true' : 'false',
-         'si_captcha_comment_class' =>         trim($_POST['si_captcha_comment_class']),  // can be empty
+         'si_captcha_comment_label_position' => (trim($_POST['si_captcha_comment_label_position']) != '' ) ? trim($_POST['si_captcha_comment_label_position'])   : $si_captcha_option_defaults['si_captcha_comment_label_position'], // use default if empty
          'si_captcha_login' =>              (isset( $_POST['si_captcha_login'] ) ) ? 'true' : 'false',
          'si_captcha_register' =>           (isset( $_POST['si_captcha_register'] ) ) ? 'true' : 'false',
          'si_captcha_rearrange' =>          (isset( $_POST['si_captcha_rearrange'] ) ) ? 'true' : 'false',
@@ -31,7 +31,11 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_captcha_small' =>      (isset( $_POST['si_captcha_captcha_small'] ) ) ? 'true' : 'false',
          'si_captcha_no_trans' =>           (isset( $_POST['si_captcha_no_trans'] ) ) ? 'true' : 'false',
          'si_captcha_aria_required' =>      (isset( $_POST['si_captcha_aria_required'] ) ) ? 'true' : 'false',
+         'si_captcha_comment_label_style' =>  (trim($_POST['si_captcha_comment_label_style']) != '' ) ? trim($_POST['si_captcha_comment_label_style']) : $si_captcha_option_defaults['si_captcha_comment_label_style'], // use default if empty
+         'si_captcha_comment_field_style' =>  (trim($_POST['si_captcha_comment_field_style']) != '' ) ? trim($_POST['si_captcha_comment_field_style']) : $si_captcha_option_defaults['si_captcha_comment_field_style'], // use default if empty
          'si_captcha_captcha_div_style' =>    (trim($_POST['si_captcha_captcha_div_style']) != '' )   ? trim($_POST['si_captcha_captcha_div_style'])   : $si_captcha_option_defaults['si_captcha_captcha_div_style'], // use default if empty
+         'si_captcha_captcha_div_style_sm' => (trim($_POST['si_captcha_captcha_div_style_sm']) != '' ) ? trim($_POST['si_captcha_captcha_div_style_sm']) : $si_captcha_option_defaults['si_captcha_captcha_div_style_sm'], // use default if empty
+         'si_captcha_captcha_div_style_m' =>    (trim($_POST['si_captcha_captcha_div_style_m']) != '' )   ? trim($_POST['si_captcha_captcha_div_style_m'])   : $si_captcha_option_defaults['si_captcha_captcha_div_style_m'], // use default if empty
          'si_captcha_captcha_image_style' =>  (trim($_POST['si_captcha_captcha_image_style']) != '' ) ? trim($_POST['si_captcha_captcha_image_style']) : $si_captcha_option_defaults['si_captcha_captcha_image_style'],
          'si_captcha_audio_image_style' =>    (trim($_POST['si_captcha_audio_image_style']) != '' )   ? trim($_POST['si_captcha_audio_image_style'])   : $si_captcha_option_defaults['si_captcha_audio_image_style'],
          'si_captcha_refresh_image_style' =>  (trim($_POST['si_captcha_refresh_image_style']) != '' ) ? trim($_POST['si_captcha_refresh_image_style']) : $si_captcha_option_defaults['si_captcha_refresh_image_style'],
@@ -48,7 +52,7 @@ http://www.642weather.com/weather/scripts.php
 
     if (isset($_POST['si_captcha_reset_styles'])) {
          // reset styles feature
-         $style_resets_arr= array('si_captcha_captcha_div_style','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
+         $style_resets_arr= array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
          foreach($style_resets_arr as $style_reset) {
            $optionarray_update[$style_reset] = $si_captcha_option_defaults[$style_reset];
          }
@@ -94,13 +98,13 @@ http://www.642weather.com/weather/scripts.php
 </script>
 
 <p>
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/changelog/" target="_blank"><?php echo esc_html( __('Changelog', 'si-captcha')); ?></a> |
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo esc_html( __('FAQ', 'si-captcha')); ?></a> |
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo esc_html( __('Rate This', 'si-captcha')); ?></a> |
-<a href="http://wordpress.org/tags/si-captcha-for-wordpress?forum_id=10" target="_blank"><?php echo esc_html( __('Support', 'si-captcha')); ?></a> |
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441" target="_blank"><?php echo esc_html( __('Donate', 'si-captcha')); ?></a> |
-<a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo esc_html( __('Free PHP Scripts', 'si-captcha')); ?></a> |
-<a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo esc_html( __('Contact', 'si-captcha')); ?> Mike Challis</a>
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/changelog/" target="_blank"><?php echo __('Changelog', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo __('FAQ', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('Rate This', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/tags/si-captcha-for-wordpress?forum_id=10" target="_blank"><?php echo __('Support', 'si-captcha'); ?></a> |
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
+<a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo __('Free PHP Scripts', 'si-captcha'); ?></a> |
+<a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo __('Contact', 'si-captcha'); ?> Mike Challis</a>
 </p>
 
 <?php
@@ -218,7 +222,7 @@ else
         <?php wp_nonce_field('si-captcha-options_update'); ?>
 
       <input name="si_captcha_donated" id="si_captcha_donated" type="checkbox" <?php if( $si_captcha_opt['si_captcha_donated'] == 'true' ) echo 'checked="checked"'; ?> />
-      <label name="si_captcha_donated" for="si_captcha_donated"><?php echo esc_html( __('I have donated to help contribute for the development of this plugin.', 'si-captcha')); ?></label>
+      <label name="si_captcha_donated" for="si_captcha_donated"><?php echo __('I have donated to help contribute for the development of this plugin.', 'si-captcha'); ?></label>
       <br />
 <?php
     if( $wp_version[0] == 2 ) { // wp 2 series
@@ -248,7 +252,7 @@ else
         <a href="<?php echo "$si_captcha_url/test/index.php"; ?>" target="_new"><?php _e('Test if your PHP installation will support the CAPTCHA', 'si-captcha') ?></a>
         <br />
 
-        <label for="si_captcha_captcha_difficulty"><?php echo esc_html(__('CAPTCHA difficulty level:', 'si-captcha')); ?></label>
+        <label for="si_captcha_captcha_difficulty"><?php echo __('CAPTCHA difficulty level:', 'si-captcha'); ?></label>
       <select id="si_captcha_captcha_difficulty" name="si_captcha_captcha_difficulty">
 <?php
 $captcha_difficulty_array = array(
@@ -264,8 +268,8 @@ foreach ($captcha_difficulty_array as $k => $v) {
 }
 ?>
 </select>
-        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_contact_captcha_difficulty_tip');"><?php _e('help', 'si-captcha'); ?></a>
-        <div style="text-align:left; display:none" id="si_contact_captcha_difficulty_tip">
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_captcha_difficulty_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_captcha_difficulty_tip">
         <?php _e('Changes level of distortion of the CAPTCHA image text.', 'si-captcha') ?>
         </div>
         <br />
@@ -299,14 +303,30 @@ foreach ($captcha_difficulty_array as $k => $v) {
     <label name="si_captcha_perm" for="si_captcha_perm"><?php _e('Hide CAPTCHA for', 'si-captcha') ?>
     <strong><?php _e('registered', 'si-captcha') ?></strong>
     <?php _e('users who can:', 'si-captcha') ?></label>
-    <?php $this->si_captcha_perm_dropdown('si_captcha_perm_level', $si_captcha_opt['si_captcha_perm_level']);  ?><br />
-
-    <?php _e('CSS class name for CAPTCHA input field on the comment form', 'si-captcha') ?>:<input name="si_captcha_comment_class" id="si_captcha_comment_class" type="text" value="<?php echo $si_captcha_opt['si_captcha_comment_class'];  ?>" />
-    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_comment_class_tip');"><?php _e('help', 'si-captcha'); ?></a>
-    <div style="text-align:left; display:none" id="si_captcha_comment_class_tip">
-    <?php _e('Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.', 'si-captcha') ?>
-    </div>
+    <?php $this->si_captcha_perm_dropdown('si_captcha_perm_level', $si_captcha_opt['si_captcha_perm_level']);  ?>
     <br />
+
+    <label for="si_captcha_comment_label_position"><?php echo __('CAPTCHA input label position on the comment form:', 'si-captcha'); ?></label>
+      <select id="si_captcha_comment_label_position" name="si_captcha_comment_label_position">
+<?php
+$captcha_pos_array = array(
+'left' => esc_attr(__('Left', 'si-captcha')),
+'top' => esc_attr(__('Top', 'si-captcha')),
+'right' => esc_attr(__('Right', 'si-captcha')),
+);
+$selected = '';
+foreach ($captcha_pos_array as $k => $v) {
+ if ($si_captcha_opt['si_captcha_comment_label_position'] == "$k")  $selected = ' selected="selected"';
+ echo '<option value="'.$k.'"'.$selected.'>'.$v.'</option>'."\n";
+ $selected = '';
+}
+?>
+</select>
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_comment_label_position_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_comment_label_position_tip">
+        <?php _e('Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form.', 'si-captcha') ?>
+        </div>
+        <br />
 
     <input name="si_captcha_rearrange" id="si_captcha_rearrange" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_rearrange'] == 'true' ) echo ' checked="checked" '; ?> />
     <label for="si_captcha_rearrange"><?php _e('Change the display order of the catpcha input field on the comment form.', 'si-captcha') ?></label>
@@ -379,7 +399,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
         <br />
 
        <input name="si_captcha_captcha_small" id="si_captcha_captcha_small" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_captcha_small'] == 'true' ) echo ' checked="checked" '; ?> />
-       <label for="si_captcha_captcha_small"><?php echo esc_html( __('Enable smaller size CAPTCHA image.', 'si-captcha')); ?></label>
+       <label for="si_captcha_captcha_small"><?php echo __('Enable smaller size CAPTCHA image.', 'si-captcha'); ?></label>
        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_captcha_small_tip');"><?php _e('help', 'si-captcha'); ?></a>
         <div style="text-align:left; display:none" id="si_captcha_captcha_small_tip">
         <?php _e('Makes the CAPTCHA image smaller.', 'si-captcha') ?>
@@ -387,7 +407,7 @@ foreach ($captcha_difficulty_array as $k => $v) {
         <br />
 
        <input name="si_captcha_no_trans" id="si_captcha_no_trans" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_no_trans'] == 'true' ) echo ' checked="checked" '; ?> />
-       <label for="si_captcha_no_trans"><?php echo esc_html( __('Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix).', 'si-captcha')); ?></label>
+       <label for="si_captcha_no_trans"><?php echo __('Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix).', 'si-captcha'); ?></label>
        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_captcha_no_trans_tip');"><?php _e('help', 'si-captcha'); ?></a>
         <div style="text-align:left; display:none" id="si_captcha_captcha_no_trans_tip">
         <?php _e('Sometimes fixes missing text on the CAPTCHA image. If this does not fix missing text, your PHP server is not compatible with the CAPTCHA functions. You should have your web server fixed.', 'si-captcha') ?>
@@ -413,23 +433,23 @@ foreach ($captcha_difficulty_array as $k => $v) {
       <td>
      <strong><?php _e('Akismet spam prevention status:', 'si-captcha'); ?></strong>
 
-    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_contact_akismet_tip');"><?php _e('help', 'si-captcha'); ?></a>
-    <div style="text-align:left; display:none" id="si_contact_akismet_tip">
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_akismet_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_akismet_tip">
     <?php _e('Akismet is a WordPress plugin. Akismet will greatly reduce or even completely eliminate the comment and trackback spam you get on your site. If one does happen to get through, simply mark it as "spam" on the moderation screen and Akismet will learn from the mistakes. When Akismet is installed and active, all comment posts will be checked with Akismet to help prevent spam.', 'si-captcha') ?>
     </div>
     <br />
 
   <?php
    if (function_exists('akismet_verify_key')) {
-     if (!isset($_POST['si_contact_akismet_check'])){
+     if (!isset($_POST['si_captcha_akismet_check'])){
        echo '<span style="background-color:#99CC99; padding:4px;">'.
              __('Akismet is installed.', 'si-captcha'). '</strong></span>';
      }
   ?>
-  <input name="si_contact_akismet_check" id="si_contact_akismet_check" type="checkbox" value="1" />
-  <label for="si_contact_akismet_check"><?php _e('Check this and click "Update Options" to determine if Akismet key is active.', 'si-captcha'); ?></label>
+  <input name="si_captcha_akismet_check" id="si_captcha_akismet_check" type="checkbox" value="1" />
+  <label for="si_captcha_akismet_check"><?php _e('Check this and click "Update Options" to determine if Akismet key is active.', 'si-captcha'); ?></label>
    <?php
-    if (isset($_POST['si_contact_akismet_check'])){
+    if (isset($_POST['si_captcha_akismet_check'])){
       echo '<br/>';
       $key_status = 'failed';
 	  $key = get_option('wordpress_api_key');
@@ -477,32 +497,52 @@ foreach ($captcha_difficulty_array as $k => $v) {
   <table cellspacing="2" cellpadding="5" class="form-table">
 
       <tr>
-         <th scope="row" style="width: 75px;"><?php echo esc_html( __('Inline CSS Style:', 'si-captcha')); ?></th>
+         <th scope="row" style="width: 75px;"><?php echo __('Inline CSS Style:', 'si-captcha'); ?></th>
         <td>
 
         <input name="si_captcha_reset_styles" id="si_captcha_reset_styles" type="checkbox" />
-        <label for="si_captcha_reset_styles"><strong><?php echo esc_html( __('Reset the styles to default.', 'si-captcha')) ?></strong></label><br />
+        <label for="si_captcha_reset_styles"><strong><?php echo __('Reset the comment form CAPTCHA styles to default.', 'si-captcha') ?></strong></label><br />
+        <br />
 
-        <label for="si_captcha_captcha_div_style"><?php echo esc_html( __('CSS style for CAPTCHA div:', 'si-captcha')); ?></label><input name="si_captcha_captcha_div_style" id="si_captcha_captcha_div_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style']);  ?>" size="50" /><br />
-        <label for="si_captcha_captcha_image_style"><?php echo esc_html( __('CSS style for CAPTCHA image:', 'si-captcha')); ?></label><input name="si_captcha_captcha_image_style" id="si_captcha_captcha_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_image_style']);  ?>" size="50" /><br />
-        <label for="si_captcha_audio_image_style"><?php echo esc_html( __('CSS style for Audio image:', 'si-captcha')); ?></label><input name="si_captcha_audio_image_style" id="si_captcha_audio_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_audio_image_style']);  ?>" size="50" /><br />
-        <label for="si_captcha_refresh_image_style"><?php echo esc_html( __('CSS style for Refresh image:', 'si-captcha')); ?></label><input name="si_captcha_refresh_image_style" id="si_captcha_refresh_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_refresh_image_style']);  ?>" size="50" />
+        <strong><?php _e('Modifiable Comment Form CSS Style Feature:', 'si-captcha'); ?></strong>
+        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_css_tip');"><?php _e('help', 'si-captcha'); ?></a>
+        <div style="text-align:left; display:none" id="si_captcha_css_tip">
+        <?php _e('Use to adjust the font colors or other CSS styling of the CAPTCHA on the comment form.', 'si-captcha'); ?><br />
+        <?php _e('You can use inline css, or add a class property to be used by your own stylsheet.', 'si-captcha'); ?><br />
+        <?php _e('Acceptable Examples:', 'si-captcha'); ?><br />
+        color:#000000; background-color:#CCCCCC;<br />
+        style="color:#000000; background-color:#CCCCCC;"<br />
+        class="input"
+        </div>
+<br />
+
+        <label for="si_captcha_comment_label_style"><?php echo __('CSS style for CAPTCHA input label:', 'si-captcha'); ?></label><input name="si_captcha_comment_label_style" id="si_captcha_comment_label_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_comment_label_style']);  ?>" size="50" /><br />
+        <label for="si_captcha_comment_field_style"><?php echo __('CSS style for CAPTCHA input field:', 'si-captcha'); ?></label><input name="si_captcha_comment_field_style" id="si_captcha_comment_field_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_comment_field_style']);  ?>" size="50" /><br />
+        <label for="si_captcha_captcha_div_style"><?php echo __('CSS style for CAPTCHA DIV:', 'si-captcha'); ?></label><input name="si_captcha_captcha_div_style" id="si_captcha_captcha_div_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style']);  ?>" size="50" /><br />
+        <label for="si_captcha_captcha_div_style_sm"><?php _e('CSS style for Small CAPTCHA Image DIV:', 'si-captcha'); ?></label><input name="si_captcha_captcha_div_style_sm" id="si_captcha_captcha_div_style_sm" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_sm']);  ?>" size="50" /><br />
+        <label for="si_captcha_captcha_div_style_m"><?php _e('CSS style for Large CAPTCHA Image DIV:', 'si-captcha'); ?></label><input name="si_captcha_captcha_div_style_m" id="si_captcha_captcha_div_style_m" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_m']);  ?>" size="50" /><br />
+        <label for="si_captcha_captcha_image_style"><?php echo __('CSS style for CAPTCHA image:', 'si-captcha'); ?></label><input name="si_captcha_captcha_image_style" id="si_captcha_captcha_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_image_style']);  ?>" size="50" /><br />
+        <label for="si_captcha_audio_image_style"><?php echo __('CSS style for Audio image:', 'si-captcha'); ?></label><input name="si_captcha_audio_image_style" id="si_captcha_audio_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_audio_image_style']);  ?>" size="50" /><br />
+        <label for="si_captcha_refresh_image_style"><?php echo __('CSS style for Refresh image:', 'si-captcha'); ?></label><input name="si_captcha_refresh_image_style" id="si_captcha_refresh_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_refresh_image_style']);  ?>" size="50" />
         </td>
     </tr>
 
 
         <tr>
-          <th scope="row" style="width: 75px;"><?php echo esc_html( __('Text Labels:', 'si-captcha')); ?></th>
+          <th scope="row" style="width: 75px;"><?php echo __('Text Labels:', 'si-captcha'); ?></th>
          <td>
-        <a style="cursor:pointer;" title="<?php echo esc_html( __('Click for Help!', 'si-captcha')); ?>" onclick="toggleVisibility('si_captcha_labels_tip');"><?php echo esc_html( __('help', 'si-captcha')); ?></a>
+
+
+        <strong><?php _e('Change text labels:', 'si-captcha'); ?></strong>
+        <a style="cursor:pointer;" title="<?php echo __('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_labels_tip');"><?php echo __('help', 'si-captcha'); ?></a>
        <div style="text-align:left; display:none" id="si_captcha_labels_tip">
-       <?php echo esc_html( __('Some people wanted to change the text labels. These fields can be filled in to override the standard text labels.', 'si-captcha')); ?>
+       <?php echo __('Some people wanted to change the text labels. These fields can be filled in to override the standard text labels.', 'si-captcha'); ?>
        </div>
        <br />
-        <label for="si_captcha_label_captcha"><?php echo esc_html( __('CAPTCHA Code', 'si-captcha')); ?></label><input name="si_captcha_label_captcha" id="si_captcha_label_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_label_captcha']);  ?>" size="50" /><br />
-        <label for="si_captcha_tooltip_captcha"><?php echo esc_html( __('CAPTCHA Image', 'si-captcha')); ?></label><input name="si_captcha_tooltip_captcha" id="si_captcha_tooltip_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']);  ?>" size="50" /><br />
-        <label for="si_captcha_tooltip_audio"><?php echo esc_html( __('CAPTCHA Audio', 'si-captcha')); ?></label><input name="si_captcha_tooltip_audio" id="si_captcha_tooltip_audio" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_audio']);  ?>" size="50" /><br />
-        <label for="si_captcha_tooltip_refresh"><?php echo esc_html( __('Refresh Image', 'si-captcha')); ?></label><input name="si_captcha_tooltip_refresh" id="si_captcha_tooltip_refresh" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']);  ?>" size="50" />
+        <label for="si_captcha_label_captcha"><?php echo __('CAPTCHA Code', 'si-captcha'); ?></label><input name="si_captcha_label_captcha" id="si_captcha_label_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_label_captcha']);  ?>" size="50" /><br />
+        <label for="si_captcha_tooltip_captcha"><?php echo __('CAPTCHA Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_captcha" id="si_captcha_tooltip_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']);  ?>" size="50" /><br />
+        <label for="si_captcha_tooltip_audio"><?php echo __('CAPTCHA Audio', 'si-captcha'); ?></label><input name="si_captcha_tooltip_audio" id="si_captcha_tooltip_audio" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_audio']);  ?>" size="50" /><br />
+        <label for="si_captcha_tooltip_refresh"><?php echo __('Refresh Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_refresh" id="si_captcha_tooltip_refresh" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']);  ?>" size="50" />
 
         </td>
     </tr>
@@ -521,9 +561,9 @@ foreach ($captcha_difficulty_array as $k => $v) {
   <td width="325">
 <p><strong><?php _e('More WordPress plugins by Mike Challis:', 'si-captcha') ?></strong></p>
 <ul>
-<li><a href="http://www.fastsecurecontactform.com/" target="_blank"><?php echo esc_html( __('Fast Secure Contact Form', 'si-captcha')); ?></a></li>
-<li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo esc_html( __('SI CAPTCHA Anti-Spam', 'si-captcha')); ?></a></li>
-<li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo esc_html( __('Visitor Maps and Who\'s Online', 'si-captcha')); ?></a></li>
+<li><a href="http://www.fastsecurecontactform.com/" target="_blank"><?php echo __('Fast Secure Contact Form', 'si-captcha'); ?></a></li>
+<li><a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('SI CAPTCHA Anti-Spam', 'si-captcha'); ?></a></li>
+<li><a href="http://wordpress.org/extend/plugins/visitor-maps/" target="_blank"><?php echo __('Visitor Maps and Who\'s Online', 'si-captcha'); ?></a></li>
 </ul>
 <?php
   if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
