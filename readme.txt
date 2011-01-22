@@ -213,6 +213,8 @@ If you use PoEdit to translate, it is easy to translate for a new version. You c
 
 == Changelog ==
 
+- Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
+
 = 2.6.4 =
 - (19 Jan 2011) - Added more settings for setting CAPTCHA input field and label CAPTCHA input field CSS. These settings can be used to adjust the CAPTCHA input field to match your theme. [See FAQ Page](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
 - Added new setting: "CAPTCHA input label position on the comment form:" Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form. 
