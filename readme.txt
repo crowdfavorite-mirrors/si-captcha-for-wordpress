@@ -195,21 +195,21 @@ The following translations are included in the download zip file:
 * More are needed... Please help translate.
 
 
+= Can I provide a new translation? =
+
+Yes, It will be very gratefully received. 
+Please read [How to translate SI Captcha Anti-Spam for WordPress](http://www.fastsecurecontactform.com/translate-si-captcha-anti-spam) 
+
+= Can I update a translation? =
+
+Yes, It will be very gratefully received. 
+Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](http://www.fastsecurecontactform.com/update-translation-si-captcha-anti-spam) 
+
+
 = Are the CAPTCHA audio files available in other languages? =
 
 Portuguese brazil (pt_BR) audio files are available. Wait until after you install the plugin. Download the audio files:
 [Portuguese brazil (pt_BR) audio files download](http://www.642weather.com/weather/scripts/captcha-secureimage-pt_BR.zip) and follow instructions in the Readme.txt inside the zip file.
-
-= Can I provide a translation? =
-
-Of course! It will be very gratefully received. Use PoEdit, it makes translation easy. Please read [Translating WordPress](http://codex.wordpress.org/Translating_WordPress "Translating WordPress") first for background information on translating. Then obtain the latest [.pot file](http://svn.wp-plugins.org/si-captcha-for-wordpress/trunk/languages/si-captcha.pot ".pot file") and translate it. 
-* There are some strings with a space in front or end -- please make sure you remember the space!
-* When you have a translation ready, please send the .po and .mo files to wp-translation at 642weather dot com. 
-* If you have any questions, feel free to email me also. Thanks!
-
-= Is it possible to merge the translation files I sent to you with the ones of the newest version? =
-
-If you use PoEdit to translate, it is easy to translate for a new version. You can open your current .po file, then select from the PoEdit menu: "Catalog" > "Update from POT file". Now all you have to change are the new language strings.
 
 == Changelog ==
 
