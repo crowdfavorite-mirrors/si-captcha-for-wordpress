@@ -48,7 +48,7 @@ Requirements/Restrictions:
 
 == Installation ==
 
-1. Upload the `si-captcha-for-wordpress` folder to the `/wp-content/plugins/` directory, or download through the `Plugins` menu in WordPress
+1. Install automatically through the `Plugins`, `Add New` menu in WordPress, or upload the `si-captcha-for-wordpress` folder to the `/wp-content/plugins/` directory.
 
 2. Activate the plugin through the `Plugins` menu in WordPress
 
@@ -132,22 +132,11 @@ and the problem should be fixed. (WP3 with a WP3 theme will not have this proble
 By default, the admin will not see the CAPTCHA. If you click "log out", go look and it will be there.
 
 If the image is broken and you have the CAPTCHA entry box:
-This can happen if a server has too low a default permission level on new folders.
-Check and make sure the permission on all the captcha-secureimage folders are set to permission: 755
 
-all these folders need to be 755:
-- si-captcha-for-wordpress
-  - captcha-secureimage
-     - audio
-     - backgrounds
-     - gdfonts
-     - images
-     - list
-     - test
-     - ttffonts
-     - words
+This can happen if a server has folder permission problem, or the WordPress address (URL)
+or Blog address (URL) are set incorrectly in WP settings: Admin – Settings – General
 
-Here is a [tutorial about file permissions](http://www.stadtaus.com/en/tutorials/chmod-ftp-file-permissions.php)
+[See FAQ page on fixing this problem](http://www.fastsecurecontactform.com/captcha-image-not-showing-si-captcha-anti-spam)
 
 This script can be used to test if your PHP installation will support the CAPTCHA:
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
