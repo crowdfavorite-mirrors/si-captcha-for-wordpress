@@ -93,7 +93,7 @@ Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag insi
   The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
 This tag is exactly where the captcha image and captcha code entry will display on the form, so
 move the line to before the comment textarea, uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page,
-and the problem should be fixed. (WP3 with a WP3 theme will not have this problem)
+and the problem should be fixed. (WP3 with a WP3 proper theme will not have this problem)
 
 = Alternate Fix for the captcha image display order =
 
@@ -120,11 +120,31 @@ Activate the SI CAPTCHA plugin and temporarily change your theme to the "Wordpre
 Does the captcha image show now?
 If it does then the theme you are using is the cause.
 
-Your theme must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside your comments.php form. Most themes do.
-  The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea.
-This tag is exactly where the captcha image and captcha code entry will display on the form, so
-move the line to before the comment textarea, uncheck the 'Comment Form Rearrange' box on the 'Captcha options' page,
-and the problem should be fixed. (WP3 with a WP3 theme will not have this problem)
+Missing CAPTCHA on comment form?
+You may have a theme that has a not properly coded comments.php
+
+When diagnosing missing CAPTCHA field on comment form....
+The version of WP makes a difference...
+
+(WP2 series)
+Your theme must have a
+`<?php do_action('comment_form', $post->ID); ?>`
+tag inside your `/wp-content/themes/[your_theme]/comments.php` file. 
+Most WP2 themes already do. The best place to locate the tag is before the comment textarea, you may want to move it up if it is below the comment textarea.
+
+(WP3 series)
+Since WP3 there is new function comment_form inside
+`/wp-includes/comment-template.php`
+Your is theme probably not up to current code to call that function from inside comments.php.
+WP3 theme does not need the `do_action('comment_form'`... code line inside
+`/wp-content/themes/[your_theme]/comments.php`.
+Instead, it uses a new function call inside comments.php:
+`<?php comment_form(); ?>`
+If you have WP3 and still have the missing captcha, make sure your theme has
+`<?php comment_form(); ?>`
+inside `/wp-content/themes/[your_theme]/comments.php`
+(look inside Twenty Ten theme for proper example of a comments.php)
+
 
 
 = Troubleshooting if the CAPTCHA image itself is not being shown: =
