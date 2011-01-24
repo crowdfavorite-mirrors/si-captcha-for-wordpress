@@ -134,7 +134,7 @@ By default, the admin will not see the CAPTCHA. If you click "log out", go look 
 If the image is broken and you have the CAPTCHA entry box:
 
 This can happen if a server has folder permission problem, or the WordPress address (URL)
-or Blog address (URL) are set incorrectly in WP settings: Admin - Settings - General
+or Blog address (URL) are set incorrectly in WP settings: Admin,  Settings,  General
 
 [See FAQ page on fixing this problem](http://www.fastsecurecontactform.com/captcha-image-not-showing-si-captcha-anti-spam)
 
