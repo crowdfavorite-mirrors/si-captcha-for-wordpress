@@ -116,11 +116,12 @@ or open this URL in your web browser to run the test:
 = Troubleshooting if the CAPTCHA form fields and image is not being shown: =
 
 Do this as a test:
-Activate the SI CAPTCHA plugin and temporarily change your theme to the "Wordpress Default" theme.
-Does the captcha image show now?
-If it does then the theme you are using is the cause.
+Activate the SI CAPTCHA plugin. In Admin, click on Appearance, Themes.
+Temporarily change your theme to the "WordPress Default" theme (default for WP2), or "Twenty Ten" (default for WP3).
+It does not cause any harm to temporarily change the theme and change back. Does it work properly now?
+If it does then the theme you are using is the cause. 
 
-Missing CAPTCHA on comment form?
+Missing CAPTCHA image and input field on comment form?
 You may have a theme that has a not properly coded comments.php
 
 When diagnosing missing CAPTCHA field on comment form....
