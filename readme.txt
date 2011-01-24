@@ -211,6 +211,7 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
+- Fix: one CAPTCHA random position always has to be a number so that a 4 letter swear word could never appear. 
 - Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
 
 = 2.6.4 =
