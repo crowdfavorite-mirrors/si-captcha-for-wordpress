@@ -421,7 +421,6 @@ echo '<input type="text" value="" name="captcha_code" id="captcha_code" class="i
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
 </div>
-</div>
 ';
 }
 
