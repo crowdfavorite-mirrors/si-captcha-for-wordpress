@@ -1327,6 +1327,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   }
 
   if ($si_captcha_opt['si_captcha_register'] == 'true') {
+    add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head' ) ); 
     add_action('register_form', array(&$si_image_captcha, 'si_captcha_register_form'), 10);
     add_filter('registration_errors', array(&$si_image_captcha, 'si_captcha_register_post'), 10);
   }
