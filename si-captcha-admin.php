@@ -2,7 +2,7 @@
 /*
 SI CAPTCHA Anti-Spam
 http://www.642weather.com/weather/scripts-wordpress-captcha.php
-Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441">Donate</a>
+Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
 
 Author: Mike Challis
 http://www.642weather.com/weather/scripts.php
@@ -102,7 +102,7 @@ http://www.642weather.com/weather/scripts.php
 <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo __('FAQ', 'si-captcha'); ?></a> |
 <a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('Rate This', 'si-captcha'); ?></a> |
 <a href="http://wordpress.org/tags/si-captcha-for-wordpress?forum_id=10" target="_blank"><?php echo __('Support', 'si-captcha'); ?></a> |
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6105441" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
 <a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo __('Free PHP Scripts', 'si-captcha'); ?></a> |
 <a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo __('Contact', 'si-captcha'); ?> Mike Challis</a>
 </p>
@@ -174,7 +174,7 @@ _e('If you find this plugin useful to you, please consider making a small donati
    </div>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick" />
-<input type="hidden" name="hosted_button_id" value="6105441" />
+<input type="hidden" name="hosted_button_id" value="KXJWLPPWZG83S" />
 <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" style="border:none;" name="submit" alt="Paypal Donate" />
 <img alt="" style="border:none;" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
 </form>
