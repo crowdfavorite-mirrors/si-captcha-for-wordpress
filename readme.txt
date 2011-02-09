@@ -3,7 +3,7 @@ Contributors: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
-Requires at least: 2.8
+Requires at least: 2.9
 Tested up to: 3.0.5
 Stable tag: trunk
 
@@ -218,6 +218,7 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 - Fix: one CAPTCHA random position always has to be a number so that a 4 letter swear word could never appear. 
 - Improvement: javascript is only loaded on pages when it is conditionally needed.
 - Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
+- Requires at least WordPress: 2.9
 
 = 2.6.4 =
 - (19 Jan 2011) - Added more settings for setting CAPTCHA input field and label CAPTCHA input field CSS. These settings can be used to adjust the CAPTCHA input field to match your theme. [See FAQ Page](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
