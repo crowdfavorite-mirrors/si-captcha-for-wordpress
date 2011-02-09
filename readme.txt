@@ -152,6 +152,9 @@ The Cookie Test can be used to test if your browser is accepting cookies from yo
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
 or open this URL in your web browser to run the test: `/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/test/index.php`
 
+= How han I change the color of the CAPTCHA input field on the comment form? =
+If you need to learn how to adjust the captcha input form colors, [See this FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
+
 
 = Is this plugin available in other languages? =
 
@@ -211,7 +214,9 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
+- New feature: New settings for “Internal Style Sheet CSS” or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
 - Fix: one CAPTCHA random position always has to be a number so that a 4 letter swear word could never appear. 
+- Improvement: javascript is only loaded on pages when it is conditionally needed.
 - Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
 
 = 2.6.4 =

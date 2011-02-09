@@ -36,6 +36,7 @@ function si_captcha_unset_options() {
 if (!class_exists('siCaptcha')) {
 
  class siCaptcha {
+    var $si_captcha_add_script;
 
 function si_captcha_add_tabs() {
    global $wpmu, $wp_version;
@@ -75,14 +76,16 @@ function si_captcha_get_options() {
          'si_captcha_captcha_small' => 'false',
          'si_captcha_no_trans' => 'false',
          'si_captcha_aria_required' => 'false',
-         'si_captcha_comment_label_style' => 'margin:0;',
-         'si_captcha_comment_field_style' => 'width:65px;',
+         'si_captcha_external_style' => 'false',
          'si_captcha_captcha_div_style' =>   'display:block;',
          'si_captcha_captcha_div_style_sm' => 'width:175px; height:45px; padding-top:10px;',
          'si_captcha_captcha_div_style_m'  => 'width:250px; height:60px; padding-top:10px;',
          'si_captcha_captcha_image_style' => 'border-style:none; margin:0; padding-right:5px; float:left;',
          'si_captcha_audio_image_style' =>   'border-style:none; margin:0; vertical-align:top;',
          'si_captcha_refresh_image_style' => 'border-style:none; margin:0; vertical-align:bottom;',
+         'si_captcha_captcha_input_div_style'  => 'display:block; padding-top:15px; padding-bottom:5px;',
+         'si_captcha_comment_label_style' => 'margin:0;',
+         'si_captcha_comment_field_style' => 'width:65px;',
          'si_captcha_label_captcha' =>    '',
          'si_captcha_tooltip_captcha' =>  '',
          'si_captcha_tooltip_audio' =>    '',
@@ -120,7 +123,7 @@ function si_captcha_get_options() {
 
   if ($si_captcha_opt['si_captcha_captcha_image_style'] == '' && $si_captcha_opt['si_captcha_audio_image_style'] == '') {
      // if default styles are missing, reset styles
-     $style_resets_arr = array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
+     $style_resets_arr = array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_input_div_style','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
      foreach($style_resets_arr as $style_reset) {
            $si_captcha_opt[$style_reset] = $si_captcha_option_defaults[$style_reset];
      }
@@ -173,7 +176,7 @@ function si_captcha_perm_dropdown($select_name, $checked_value='') {
  } // end function si_captcha_perm_dropdown
 
 function si_captcha_check_requires() {
-  global $si_captcha_dir;
+  global $si_captcha_dir, $si_captcha_add_script;
 
   $ok = 'ok';
   // Test for some required things, print error message if not OK.
@@ -192,6 +195,7 @@ function si_captcha_check_requires() {
        $ok = 'no';
   }
   if ($ok == 'no')  return false;
+  $si_captcha_add_script = true;
   return true;
 } // end function si_captcha_check_requires
 
@@ -208,36 +212,32 @@ function si_captcha_comment_form() {
        }
     }
 
-// the captch html
+// the captcha html
 echo '
-<div '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style']).' id="captchaImgDiv">
+<div id="captchaImgDiv">
 ';
 
 // Test for some required things, print error message right here if not OK.
 if ($this->si_captcha_check_requires()) {
-
- $this->captcha_div_style_sm = $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm']);
- $this->captcha_div_style_m = $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m']);
 
   $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
 
 // the captcha html - comment form
 echo '
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? $this->captcha_div_style_sm : $this->captcha_div_style_m;
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
 <div style="display:block; padding-top:15px; padding-bottom:5px; " id="captchaInputDiv">';
 
-$label_string = ' <label for="captcha_code" '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style']).'><small>';
+$label_string = ' <label id="captcha_code_label" for="captcha_code" ><small>';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
 $label_string .= '</small></label>';
 
-$input_string = '<input '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style']).' type="text" value="" name="captcha_code" id="captcha_code" tabindex="4" '.$si_aria_required.' />
+$input_string = '<input id="captcha_code" name="captcha_code" type="text" value="" tabindex="4" '.$si_aria_required.' />
 ';
 
-// if ( function_exists('bp_loaded') ) { // buddypress (label left)
 if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'left' ) { // buddypress (label left)
 
 echo $label_string; //left
@@ -301,8 +301,6 @@ function si_captcha_comment_form_wp3() {
 // Test for some required things, print error message right here if not OK.
 if ($this->si_captcha_check_requires()) {
 
-   $this->captcha_div_style_sm = $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm']);
-   $this->captcha_div_style_m = $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m']);
 
   $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
 
@@ -313,7 +311,7 @@ if (is_user_logged_in()) {
 
 echo '
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? $this->captcha_div_style_sm : $this->captcha_div_style_m;
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
@@ -321,13 +319,13 @@ echo '</div>
 ';
 echo '<p>';
 
-$label_string = '<label for="captcha_code"  '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style']).'>';
+$label_string = '<label id="captcha_code_label" for="captcha_code" >';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
 $label_string .= '</label><span class="required">*</span>
 ';
-$input_string = '<input '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style']).' id="captcha_code" name="captcha_code" type="text" size="6" ' . $si_aria_required . ' />
+$input_string = '<input id="captcha_code" name="captcha_code" type="text" size="6" ' . $si_aria_required . ' />
 ';
-// if ( function_exists('bp_loaded') ) { // buddypress (label left)
+
 if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'left' ) { // buddypress (label left)
 
 echo $label_string; //left
@@ -372,14 +370,16 @@ if ($this->si_captcha_check_requires()) {
 // the captcha html - login form
 echo '
 <br />
-<div style="width:250px; height:55px;">';
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo '>';
 $this->si_captcha_captcha_html('si_image_log','log');
 echo '</div>
 <p>
  <label>';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '<br />
-<input type="text" name="captcha_code" id="captcha_code" class="input" value="" size="12" tabindex="30" '.$si_aria_required.'
+<input id="captcha_code" name="captcha_code" class="input" type="text" value="" size="12" tabindex="30" '.$si_aria_required.'
     style="font-size: 24px;
 	width: 97%;
 	padding: 3px;
@@ -416,10 +416,11 @@ if ($this->si_captcha_check_requires()) {
 echo '
 <div style="width:440px; height:45px">';
 $this->si_captcha_captcha_html('si_image_log','log');
-echo '<input type="text" value="" name="captcha_code" id="captcha_code" class="input" '.$si_aria_required.' style="width:65px;" />
+echo '<input id="captcha_code" name="captcha_code" class="input" type="text" value="" '.$si_aria_required.' />
          <label for="captcha_code">';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
+</div>
 </div>
 ';
 }
@@ -448,11 +449,11 @@ echo '
     <label for="captcha_code">';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
-<input type="text" value="" name="captcha_code" id="captcha_code" class="input" '.$si_aria_required.' style="width:65px;" />
+<input id="captcha_code" name="captcha_code" class="input" type="text" value="" '.$si_aria_required.' />
 <br />
 ';
   $this->si_captcha_captcha_html('si_image_side_login','log');
-echo '</div>
+echo '
 </div>
 ';
 }
@@ -478,14 +479,16 @@ if ($this->si_captcha_check_requires()) {
 // the captcha html - register form
 echo '
 <br />
-<div style="width: 250px;  height: 55px">';
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo '>';
 $this->si_captcha_captcha_html('si_image_reg','reg');
 echo '</div>
 <p>
  <label>';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '<br />
-<input type="text" value="" name="captcha_code" id="captcha_code" class="input" tabindex="30" '.$si_aria_required.'
+<input id="captcha_code" name="captcha_code" class="input" type="text" value="" tabindex="30" '.$si_aria_required.'
 style="font-size: 24px;
 	width: 97%;
 	padding: 3px;
@@ -525,9 +528,11 @@ echo '
 <label for="captcha_code">';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
-<input type="text" value="" name="captcha_code" id="captcha_code" '.$si_aria_required.' style="width:65px;" />
+<input id="captcha_code" name="captcha_code" type="text" value="" '.$si_aria_required.' />
 
-<div style="width: 250px;  height: 55px">';
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo '>';
 $this->si_captcha_captcha_html('si_image_reg','reg');
 echo '</div>
 
@@ -557,9 +562,11 @@ echo '
   do_action( 'bp_captcha_code_errors' );
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
-<input type="text" value="" name="captcha_code" id="captcha_code" '.$si_aria_required.' style="width:65px;" />
+<input id="captcha_code" name="captcha_code" type="text" value="" '.$si_aria_required.' />
 
-<div style="width: 250px;  height: 55px">';
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo '>';
 $this->si_captcha_captcha_html('si_image_reg','reg');
 echo '</div>
 </div>
@@ -819,7 +826,7 @@ function si_captcha_comment_post($comment) {
    if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
       if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
-         wp_die( __('Error: You did not enter a Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+         wp_die( __('Error: You did not enter a CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
       }else if (!isset($_POST['si_code_com']) || empty($_POST['si_code_com'])) {
          wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
       }else{
@@ -834,7 +841,7 @@ function si_captcha_comment_post($comment) {
               return($comment);
               @unlink ($si_captcha_dir_ns . $prefix . '.php');
 			} else {
-               wp_die( __('Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+               wp_die( __('Error: You entered in the wrong CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
             }
 	     } else {
             wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
@@ -847,7 +854,7 @@ function si_captcha_comment_post($comment) {
           wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
     }else{
        if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
-           wp_die( __('Error: You did not enter a Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+           wp_die( __('Error: You did not enter a CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
        }
        $captcha_code = trim(strip_tags($_POST['captcha_code']));
        require_once "$si_captcha_dir/securimage.php";
@@ -859,7 +866,7 @@ function si_captcha_comment_post($comment) {
            // ok can continue
            return($comment);
        } else {
-           wp_die( __('Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again.', 'si-captcha'));
+           wp_die( __('Error: You entered in the wrong CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
        }
     }
    } // end if captcha use session
@@ -1004,14 +1011,13 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
     $securimage_show_url .= '&amp;prefix='.$prefix;
   }
 
-  echo '<img class="si-captcha" id="'.$label.'" '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'] );
-  echo ' src="'.$securimage_show_url.'" alt="';
+  echo '<img id="'.$label.'" class="si-captcha" src="'.$securimage_show_url.'" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" />'."\n";
   if($capt_disable_sess)
-        echo '    <input id="si_code_'.$form_id.'" type="hidden" name="si_code_'.$form_id.'" value="'.$prefix.'" />'."\n";
+        echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
 
   if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
      $parseUrl = parse_url($si_captcha_url);
@@ -1044,10 +1050,9 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
-     <img src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
+     <img id="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
-        echo  '" '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style']);
-        echo ' onclick="this.blur();" /></a>
+        echo  '" onclick="this.blur();" /></a>
      </div>'."\n";
      }
   }
@@ -1059,10 +1064,9 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   }else{
     echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
   }
-  echo '      <img src="'.$si_captcha_url.'/images/refresh.png" alt="';
+  echo '      <img id="captchaImgRefresh" src="'.$si_captcha_url.'/images/refresh.png" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
-  echo '" '.$this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style']);
-  echo ' onclick="this.blur();" /></a>
+  echo '" onclick="this.blur();" /></a>
   </div>
   ';
 
@@ -1162,25 +1166,17 @@ function si_stripslashes($string) {
         }
 } // end function si_stripslashes
 
-function si_captcha_convert_css($string) {
-
-    if( preg_match("/^style=\"(.*)\"$/i", $string) ){
-      return $string;
+function si_captcha_convert_css($string,$css) {
+    global $si_captcha_option_defaults;
+    if( preg_match("/^style=\"(.*)\"$/i", $string, $matches) ){
+      return $matches[1];
     }
     if( preg_match("/^class=\"(.*)\"$/i", $string) ){
-      return $string;
+      return (isset($si_captcha_option_defaults[$css])) ? $si_captcha_option_defaults[$css] : $string;
     }
-    return 'style="'.$string.'"';
+    return $string;
 
 } // end function si_captcha_convert_css
-
-function si_captcha_enqueue_scripts(){
-   wp_enqueue_script('si_captcha', plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js'));
-}
-
-function si_captcha_login_head(){
-  echo '<script type="text/javascript" src="'.plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js?ver='.time()).'"></script>'."\n";
-}
 
 function si_captcha_admin_head() {
  // only load this header stuff on the admin settings page
@@ -1200,6 +1196,78 @@ div.star img {width:19px; height:19px; border-left:1px solid #fff; border-right:
   } // end if(isset($_GET['page'])
 
 }
+
+function si_captcha_login_head(){
+  global $si_captcha_opt;
+  echo '<script type="text/javascript" src="'.plugins_url('si-captcha-for-wordpress/captcha-secureimage/si_captcha.js?ver='.time()).'"></script>'."\n";
+
+ // only load this css on the blog pages where login/register could be
+if( $si_captcha_opt['si_captcha_external_style'] == 'true' )
+  return;
+
+?>
+<!-- begin SI Captcha Anti-Spam - login/register form style -->
+<style type="text/css">
+div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'],'si_captcha_captcha_div_style'); ?> }
+div#captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }
+div#captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }
+img#si_image_com,#si_image_reg,#si_image_log { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }
+img#captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }
+img#captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }
+div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }
+label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }
+input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'],'si_captcha_comment_field_style'); ?> }
+</style>
+<!-- end SI Captcha Anti-Spam - login/register form style -->
+<?php
+}
+
+function si_captcha_add_css(){
+   global $si_captcha_opt, $si_captcha_add_script;
+
+   if (!$si_captcha_add_script)
+      return;
+
+// only load this css on the blog pages where the captcha could be
+if( $si_captcha_opt['si_captcha_external_style'] != 'true' ) {
+?>
+<script type="text/javascript">
+//<![CDATA[
+var si_captcha_styles = "\
+<!-- begin SI Captcha Anti-Spam - comment form style -->\
+<style type='text/css'>\
+div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'],'si_captcha_captcha_div_style'); ?> }\
+div#captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }\
+div#captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }\
+img#si_image_com,#si_image_reg,#si_image_log { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }\
+img#captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }\
+img#captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }\
+div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }\
+label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }\
+input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'],'si_captcha_comment_field_style'); ?> }\
+</style>\
+<!-- end SI Captcha Anti-Spam - comment form style -->\
+";
+jQuery(document).ready(function($) {
+$('head').append(si_captcha_styles);
+});
+//]]>
+</script>
+<?php
+  }
+}
+
+function si_captcha_add_script(){
+   global $si_captcha_opt, $si_captcha_add_script;
+
+   if (!$si_captcha_add_script)
+      return;
+
+   // only load this javascript on the blog pages where captcha could be
+   wp_register_script('si_captcha', plugins_url('captcha-secureimage/si_captcha.js', __FILE__), array(), '1.0', true);
+   wp_print_scripts('si_captcha');
+}
+
 
 function get_captcha_url_si() {
    global $wpmu;
@@ -1297,8 +1365,9 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   $si_image_captcha->si_captcha_get_options();
 
   if ( isset($si_captcha_opt['si_captcha_disable_session']) && $si_captcha_opt['si_captcha_disable_session'] == 'true') {
-      // add javascript header hooks
-      add_action( 'init', array(&$si_image_captcha,'si_captcha_enqueue_scripts'),2);
+     // add javascript (conditionally to footer)
+     // http://scribu.net/wordpress/optimal-script-loading.html
+     add_action( 'wp_footer', array(&$si_image_captcha,'si_captcha_add_script'));
   }  else {
      // start the PHP session
      // buddypress had session error on member and groups pages, so start session here instead of init
@@ -1308,6 +1377,12 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   // si captcha admin options
   add_action('admin_menu', array(&$si_image_captcha,'si_captcha_add_tabs'),1);
   add_action('admin_head', array(&$si_image_captcha,'si_captcha_admin_head'),1);
+
+  if( $si_captcha_opt['si_captcha_external_style'] != 'true' && !is_admin() ) {
+     // css is added to footer, then jquery appends it to head
+     wp_enqueue_script('jquery');
+     add_action( 'wp_footer', array(&$si_image_captcha,'si_captcha_add_css'));
+  }
 
   // adds "Settings" link to the plugin action page
   add_filter( 'plugin_action_links', array(&$si_image_captcha,'si_captcha_plugin_action_links'),10,2);
@@ -1327,7 +1402,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   }
 
   if ($si_captcha_opt['si_captcha_register'] == 'true') {
-    add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head' ) );
+    add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head') );
     add_action('register_form', array(&$si_image_captcha, 'si_captcha_register_form'), 10);
     add_filter('registration_errors', array(&$si_image_captcha, 'si_captcha_register_post'), 10);
   }
