@@ -40,7 +40,7 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.8+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
+ * Works with Wordpress 2.9+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
  * PHP5 is highly recommended
 
 
@@ -214,7 +214,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
-- New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
+= 2.6.5 =
+- (19 Jan 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
 - Fix: one CAPTCHA random position always has to be a number so that a 4 letter swear word could never appear. 
 - Improvement: javascript is only loaded on pages when it is conditionally needed.
 - Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)
