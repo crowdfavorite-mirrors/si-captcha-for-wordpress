@@ -229,11 +229,11 @@ echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeD
 echo '>';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
-<div style="display:block; padding-top:15px; padding-bottom:5px; " id="captchaInputDiv">';
+<div id="captchaInputDiv">';
 
-$label_string = ' <label id="captcha_code_label" for="captcha_code" ><small>';
+$label_string = ' <label id="captcha_code_label" for="captcha_code">';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
-$label_string .= '</small></label>';
+$label_string .= '</label>';
 
 $input_string = '<input id="captcha_code" name="captcha_code" type="text" value="" tabindex="4" '.$si_aria_required.' />
 ';
