@@ -87,6 +87,7 @@ function si_captcha_get_options() {
          'si_captcha_comment_label_style' => 'margin:0;',
          'si_captcha_comment_field_style' => 'width:65px;',
          'si_captcha_label_captcha' =>    '',
+         'si_captcha_required_indicator' => '*',
          'si_captcha_tooltip_captcha' =>  '',
          'si_captcha_tooltip_audio' =>    '',
          'si_captcha_tooltip_refresh' =>  '',
@@ -321,7 +322,9 @@ echo '<p>';
 
 $label_string = '<label id="captcha_code_label" for="captcha_code" >';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
-$label_string .= '</label><span class="required">*</span>
+$label_string .= '</label><span class="required">';
+$label_string .= $si_captcha_opt['si_captcha_required_indicator'];
+$label_string .= '</span>
 ';
 $input_string = '<input id="captcha_code" name="captcha_code" type="text" size="6" ' . $si_aria_required . ' />
 ';
