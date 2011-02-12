@@ -214,7 +214,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
-- Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is "*", but you can now change it to "(required)" or anything you want. 
+- Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
+- Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is " *", but you can now change it to "(required)" or anything you want. 
 
 = 2.6.5 =
 - (19 Jan 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)

@@ -41,7 +41,7 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_captcha_image_style' =>  (trim($_POST['si_captcha_captcha_image_style']) != '' ) ? trim($_POST['si_captcha_captcha_image_style']) : $si_captcha_option_defaults['si_captcha_captcha_image_style'],
          'si_captcha_audio_image_style' =>    (trim($_POST['si_captcha_audio_image_style']) != '' )   ? trim($_POST['si_captcha_audio_image_style'])   : $si_captcha_option_defaults['si_captcha_audio_image_style'],
          'si_captcha_refresh_image_style' =>  (trim($_POST['si_captcha_refresh_image_style']) != '' ) ? trim($_POST['si_captcha_refresh_image_style']) : $si_captcha_option_defaults['si_captcha_refresh_image_style'],
-         'si_captcha_required_indicator' =>    trim($_POST['si_captcha_required_indicator']), 
+         'si_captcha_required_indicator' =>    $_POST['si_captcha_required_indicator'],
          'si_captcha_label_captcha' =>         trim($_POST['si_captcha_label_captcha']),
          'si_captcha_tooltip_captcha' =>       trim($_POST['si_captcha_tooltip_captcha']),
          'si_captcha_tooltip_audio' =>         trim($_POST['si_captcha_tooltip_audio']),
@@ -50,7 +50,7 @@ http://www.642weather.com/weather/scripts.php
 
    // deal with quotes
    foreach($optionarray_update as $key => $val) {
-          $optionarray_update[$key] = str_replace('&quot;','"',trim($val));
+          $optionarray_update[$key] = str_replace('&quot;','"',$val);
    }
 
     if (isset($_POST['si_captcha_reset_styles'])) {
@@ -100,16 +100,6 @@ http://www.642weather.com/weather/scripts.php
     }
 </script>
 
-<p>
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/changelog/" target="_blank"><?php echo __('Changelog', 'si-captcha'); ?></a> |
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo __('FAQ', 'si-captcha'); ?></a> |
-<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('Rate This', 'si-captcha'); ?></a> |
-<a href="http://wordpress.org/tags/si-captcha-for-wordpress?forum_id=10" target="_blank"><?php echo __('Support', 'si-captcha'); ?></a> |
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
-<a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo __('Free PHP Scripts', 'si-captcha'); ?></a> |
-<a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo __('Contact', 'si-captcha'); ?> Mike Challis</a>
-</p>
-
 <?php
 if (function_exists('get_transient')) {
   require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
@@ -153,13 +143,39 @@ if (function_exists('get_transient')) {
 			<div class="star star1"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('1 star', 'si-captcha') ?>" /></div>
 		</div>
 		<small><?php echo sprintf(__('(Average rating based on %s ratings)', 'si-captcha'),number_format_i18n($api->num_ratings)); ?> <a target="_blank" href="http://wordpress.org/extend/plugins/<?php echo $api->slug ?>/"> <?php _e('rate', 'si-captcha') ?></a></small>
-        <br /> <br />
+        <br /> 
 		<?php endif; ?>
 
 <?php
   } // if ( !is_wp_error($api)
  }// end if (function_exists('get_transient'
 
+$si_captcha_update = '';
+if (isset($api->version)) {
+ if ( version_compare($api->version, $si_captcha_version, '>') ) {
+     $si_captcha_update = ', <a href="'.admin_url( 'plugins.php' ).'">'.sprintf(__('a newer version is available: %s', 'si-captcha'),$api->version).'</a>';
+     echo '<div id="message" class="updated">';
+     echo '<a href="'.admin_url( 'plugins.php' ).'">'.sprintf(__('A newer version of SI Captcha Anti-Spam is available: %s', 'si-captcha'),$api->version).'</a>';
+     echo "</div>\n";
+  }else{
+     $si_captcha_update = ' '. __('(latest version)', 'si-captcha');
+  }
+}
+?>
+
+<p>
+<?php echo __('Version:', 'si-captcha'). ' '.$si_captcha_version.$si_captcha_update; ?> |
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/changelog/" target="_blank"><?php echo __('Changelog', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/" target="_blank"><?php echo __('FAQ', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/extend/plugins/si-captcha-for-wordpress/" target="_blank"><?php echo __('Rate This', 'si-captcha'); ?></a> |
+<a href="http://wordpress.org/tags/si-captcha-for-wordpress?forum_id=10" target="_blank"><?php echo __('Support', 'si-captcha'); ?></a> |
+<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S" target="_blank"><?php echo __('Donate', 'si-captcha'); ?></a> |
+<a href="http://www.642weather.com/weather/scripts.php" target="_blank"><?php echo __('Free PHP Scripts', 'si-captcha'); ?></a> |
+<a href="http://www.642weather.com/weather/wxblog/support/" target="_blank"><?php echo __('Contact', 'si-captcha'); ?> Mike Challis</a>
+</p>
+
+
+<?php
 if ($si_captcha_opt['si_captcha_donated'] != 'true') {
  ?>
 
@@ -212,7 +228,7 @@ _e('If you find this plugin useful to you, please consider making a small donati
 global $wp_version;
 
 // for WP 3.0+ ONLY!
-if( $wpmu == 1 && $wp_version[0] > 2 && is_multisite() && is_super_admin() )  // wp 3.0 +
+if( $wpmu == 1 && version_compare($wp_version,'3','>=') && is_multisite() && is_super_admin() )  // wp 3.0 +
  echo admin_url( 'ms-admin.php?page=si-captcha.php' );
 else if ($wpmu == 1)
  echo admin_url( 'wpmu-admin.php?page=si-captcha.php' );
@@ -228,7 +244,7 @@ else
       <label name="si_captcha_donated" for="si_captcha_donated"><?php echo __('I have donated to help contribute for the development of this plugin.', 'si-captcha'); ?></label>
       <br />
 <?php
-    if( $wp_version[0] == 2 ) { // wp 2 series
+    if( version_compare($wp_version,'3','<')  ) { // wp 2 series
 ?>
 <h3><?php _e('Usage', 'si-captcha') ?></h3>
 
@@ -313,9 +329,11 @@ foreach ($captcha_difficulty_array as $k => $v) {
       <select id="si_captcha_comment_label_position" name="si_captcha_comment_label_position">
 <?php
 $captcha_pos_array = array(
-'left' => esc_attr(__('Left', 'si-captcha')),
-'top' => esc_attr(__('Top', 'si-captcha')),
-'right' => esc_attr(__('Right', 'si-captcha')),
+'input-label-required' => esc_attr(__('input-label-required', 'si-captcha')), // wp
+'label-required-input' => esc_attr(__('label-required-input', 'si-captcha')), // bp
+'label-required-linebreak-input' => esc_attr(__('label-required-linebreak-input', 'si-captcha')), // wp-twenty ten
+'label-input-required' => esc_attr(__('label-input-required', 'si-captcha')), // suffusion theme on wp
+
 );
 $selected = '';
 foreach ($captcha_pos_array as $k => $v) {
@@ -327,7 +345,7 @@ foreach ($captcha_pos_array as $k => $v) {
 </select>
         <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_comment_label_position_tip');"><?php _e('help', 'si-captcha'); ?></a>
         <div style="text-align:left; display:none" id="si_captcha_comment_label_position_tip">
-        <?php _e('Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form.', 'si-captcha') ?>
+        <?php _e('Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form. After changing this setting, be sure to view the comments to verify the setting is correct.', 'si-captcha') ?>
         </div>
         <br />
 

@@ -8,6 +8,8 @@ Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
 
+$si_captcha_version = '2.6.5';
+
 /*  Copyright (C) 2008-2011 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
 
     This program is free software; you can redistribute it and/or modify
@@ -37,6 +39,7 @@ if (!class_exists('siCaptcha')) {
 
  class siCaptcha {
     var $si_captcha_add_script;
+    var $si_captcha_version;
 
 function si_captcha_add_tabs() {
    global $wpmu, $wp_version;
@@ -58,7 +61,7 @@ function si_captcha_add_tabs() {
 function si_captcha_get_options() {
   global $wpmu, $si_captcha_opt, $si_captcha_option_defaults;
 
-  $default_position = ( function_exists('bp_loaded') ) ? 'left' : 'right';
+  $default_position = ( function_exists('bp_loaded') ) ? 'label-required-input' : 'input-label-required';
 
   $si_captcha_option_defaults = array(
          'si_captcha_donated' => 'false',
@@ -87,7 +90,7 @@ function si_captcha_get_options() {
          'si_captcha_comment_label_style' => 'margin:0;',
          'si_captcha_comment_field_style' => 'width:65px;',
          'si_captcha_label_captcha' =>    '',
-         'si_captcha_required_indicator' => '*',
+         'si_captcha_required_indicator' => ' *',
          'si_captcha_tooltip_captcha' =>  '',
          'si_captcha_tooltip_audio' =>    '',
          'si_captcha_tooltip_refresh' =>  '',
@@ -148,7 +151,7 @@ function si_captcha_migrate($si_captcha_option_defaults) {
 } // end function si_captcha_migrate
 
 function si_captcha_options_page() {
-  global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults;
+  global $wpmu, $si_captcha_dir, $si_captcha_url, $si_captcha_url_ns, $si_captcha_dir_ns, $si_captcha_opt, $si_captcha_option_defaults, $si_captcha_version;
 
   $si_captcha_admin_path = str_replace('/captcha-secureimage','',$si_captcha_dir);
   if ($wpmu == 1)
@@ -223,7 +226,7 @@ if ($this->si_captcha_check_requires()) {
 
   $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
 
-// the captcha html - comment form
+// the captcha html - comment form 2.0
 echo '
 <div ';
 echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
@@ -235,27 +238,22 @@ echo '</div>
 $label_string = ' <label id="captcha_code_label" for="captcha_code">';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
 $label_string .= '</label>';
-
+$required_string = '<span class="required">'.$si_captcha_opt['si_captcha_required_indicator']."</span>\n";
 $input_string = '<input id="captcha_code" name="captcha_code" type="text" value="" tabindex="4" '.$si_aria_required.' />
 ';
 
-if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'left' ) { // buddypress (label left)
-
-echo $label_string; //left
-echo $input_string;
-
-} else if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'top' ) { // (label top)
-
-echo $label_string; //top
-echo '<br />';
-echo $input_string;
-
-} else {   // regular WP  (label right)
-
-echo $input_string;
-echo $label_string;  // right
-
+ if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-required-input' || $si_captcha_opt['si_captcha_comment_label_position'] == 'left'  ) { // buddypress (label-required-input)(label left)
+      echo $label_string . $required_string . $input_string; // BP
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-required-linebreak-input' ||  $si_captcha_opt['si_captcha_comment_label_position'] == 'top' ) {
+      echo $label_string . $required_string .'<br />'. $input_string; // regular WP - twenty ten
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-input-required' ||  $si_captcha_opt['si_captcha_comment_label_position'] == 'right' ) {
+      echo $label_string . $input_string . $required_string; // suffusion
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'input-label-required' ) {
+      echo $input_string . $label_string . $required_string; // regular WP
+ } else {
+      echo $input_string . $label_string . $required_string;  // regular WP
  }
+
 echo ' </div>
 </div>
 ';
@@ -282,7 +280,7 @@ EOT;
  echo '</div>';
 }
     return true;
-} // end function si_captcha_comment_form
+} // end function si_captcha_comment_form  2.0
 
 
 // this function adds the captcha to the comment form WP3
@@ -302,10 +300,9 @@ function si_captcha_comment_form_wp3() {
 // Test for some required things, print error message right here if not OK.
 if ($this->si_captcha_check_requires()) {
 
-
   $si_aria_required = ($si_captcha_opt['si_captcha_aria_required'] == 'true') ? ' aria-required="true" ' : '';
 
-// the captcha html - comment form
+// the captcha html - comment form 3.0+
 if (is_user_logged_in()) {
       echo '<br />';
 }
@@ -322,29 +319,21 @@ echo '<p>';
 
 $label_string = '<label id="captcha_code_label" for="captcha_code" >';
 $label_string .= ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
-$label_string .= '</label><span class="required">';
-$label_string .= $si_captcha_opt['si_captcha_required_indicator'];
-$label_string .= '</span>
-';
+$label_string .= '</label>';
+$required_string = '<span class="required">'.$si_captcha_opt['si_captcha_required_indicator']."</span>\n";
 $input_string = '<input id="captcha_code" name="captcha_code" type="text" size="6" ' . $si_aria_required . ' />
 ';
 
-if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'left' ) { // buddypress (label left)
-
-echo $label_string; //left
-echo $input_string;
-
-} else if ( $si_captcha_opt['si_captcha_comment_label_position'] == 'top' ) { // (label top)
-
-echo $label_string; //top
-echo '<br />';
-echo $input_string;
-
-} else {   // regular WP  (label right)
-
-echo $input_string;
-echo $label_string;  // right
-
+ if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-required-input' || $si_captcha_opt['si_captcha_comment_label_position'] == 'left'  ) { // buddypress (label-required-input)(label left)
+      echo $label_string . $required_string . $input_string; // BP
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-required-linebreak-input' ||  $si_captcha_opt['si_captcha_comment_label_position'] == 'top' ) {
+      echo $label_string . $required_string .'<br />'. $input_string; // regular WP - twenty ten
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'label-input-required' ||  $si_captcha_opt['si_captcha_comment_label_position'] == 'right' ) {
+      echo $label_string . $input_string . $required_string; // suffusion
+ } else if ($si_captcha_opt['si_captcha_comment_label_position'] == 'input-label-required' ) {
+      echo $input_string . $label_string . $required_string; // regular WP
+ } else {
+      echo $input_string . $label_string . $required_string;  // regular WP
  }
 echo '</p>';
 
@@ -1333,6 +1322,7 @@ if (class_exists("siCaptcha")) {
 }
 
 if (isset($si_image_captcha)) {
+global $wp_version;
 
 // WordPress MU detection
 //    0  Regular WordPress installation
@@ -1393,7 +1383,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   if ($si_captcha_opt['si_captcha_comment'] == 'true') {
 
      // for WP 3.0+
-     if( $wp_version[0] > 2 ) { // wp 3.0 +
+     if( version_compare($wp_version,'3','>=') ) { // wp 3.0 +
        add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
        add_action( 'comment_form_logged_in_after', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
      }
