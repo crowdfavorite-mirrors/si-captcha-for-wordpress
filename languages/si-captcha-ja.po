@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SI CAPTCHA Anti-Spam 2.6.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2010-05-11 22:58+0000\n"
-"PO-Revision-Date: 2010-12-18 20:06+0900\n"
+"PO-Revision-Date: 2011-01-24 17:47+0900\n"
 "Last-Translator: BNG NET <webmaster@bng.net>\n"
 "Language-Team: BNG NET <webmaster@bng.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,82 @@ msgstr ""
 "X-Poedit-Country: JAPAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Bookmarks: -1,12,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: Added on 2011/01/24
+msgid "Akismet is installed."
+msgstr "Akismetがインストールされています。"
+
+#: Added on 2011/01/24
+msgid "Change text labels:"
+msgstr "テキストラベルの変更"
+
+#: Added on 2011/01/24
+msgid "CSS style for Large CAPTCHA Image DIV:"
+msgstr "キャプチャ画像（大）DIV用CSSスタイル:"
+
+#: Added on 2011/01/24
+msgid "CSS style for Small CAPTCHA Image DIV:"
+msgstr "キャプチャ画像（小）DIV用CSSスタイル:"
+
+#: Added on 2011/01/24
+msgid "CSS style for CAPTCHA DIV:"
+msgstr "キャプチャDIV用CSSスタイル:"
+
+#: Added on 2011/01/24
+msgid "CSS style for CAPTCHA input field:"
+msgstr "キャプチャ入力欄用CSSスタイル:"
+
+#: Added on 2011/01/24
+msgid "CSS style for CAPTCHA input label:"
+msgstr "キャプチャ入力ラベル用CSSスタイル:"
+
+#: Added on 2011/01/24
+msgid "Acceptable Examples:"
+msgstr "利用可能な例:"
+
+#: Added on 2011/01/24
+msgid "You can use inline css, or add a class property to be used by your own stylsheet."
+msgstr "インラインCSSが使えるほか、スタイルシートにクラスプロパティを追加して使用することもできます。"
+
+#: Added on 2011/01/24
+msgid "Use to adjust the font colors or other CSS styling of the CAPTCHA on the comment form."
+msgstr "コメントフォームでのキャプチャのテキスト色やその他CSSスタイルを変更したい時に使用してください。"
+
+#: Added on 2011/01/24
+msgid "Modifiable Comment Form CSS Style Feature:"
+msgstr "変更可能なコメントフォームのCSSスタイル機能:"
+
+#: Added on 2011/01/24
+msgid "Reset the comment form CAPTCHA styles to default."
+msgstr "コメントフォームにおけるキャプチャのスタイルをデフォルトに戻す"
+
+#: Added on 2011/01/24
+msgid "Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form."
+msgstr "コメントフォームでキャプチャの入力ラベルを表示する位置を変更する。テーマによってはコメントフォームにおけるラベルの位置が異なります。"
+
+#: Added on 2011/01/24
+msgid "Left"
+msgstr "左"
+
+#: Added on 2011/01/24
+msgid "Top"
+msgstr "トップ"
+
+#: Added on 2011/01/24
+msgid "Right"
+msgstr "右"
+
+#: Added on 2011/01/24
+msgid "CAPTCHA input label position on the comment form:"
+msgstr "コメントフォームでキャプチャの入力ラベルを表示する位置"
+
+#: Added on 2011/01/24
+msgid "\"I recommend <a href=\"%s\" target=\"_blank\">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features.\" - Mike Challis"
+msgstr "「<a href=\"%s\" target=\"_blank\">HostGator ウェブホスティング</a>をお勧めします。わたしのサイトは全てお任せしています。値段は手頃で機能も充実しています」 - Mike Challis"
+
+#: Added on 2011/01/24
+msgid "Try <a href=\"%s\" target=\"_blank\">ThemeFuse</a>, they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services. Check out some of their themes!"
+msgstr "<a href=\"%s\" target=\"_blank\">ThemeFuse</a>をお試しください。ワンクリックで自動インストール機能や素晴らしいアフターケアサポートなど、驚くべきオリジナル WP テーマがあります。どんなテーマがあるか、見てみてください！"
 
 #: Added on 2010/12/18
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the SI CAPTCHA options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
@@ -36,24 +112,8 @@ msgid "The directory Unwritable (<a href=\"http://codex.wordpress.org/Changing_F
 msgstr "ディレクトリに書き込めません (<a href=\"http://wpdocs.sourceforge.jp/%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%83%BC%E3%83%9F%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E5%A4%89%E6%9B%B4\" target=\"_blank\">ファイルパーミッションの変更</a>)"
 
 #: Added on 2010/12/18
-msgid "\"I recommend <a href=\"http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp\" target=\"_blank\">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features.\" - Mike Challis"
-msgstr "「<a href=\"http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp\" target=\"_blank\">HostGator ウェブホスティング</a>をお勧めします。わたしのサイトは全てお任せしています。値段は手頃で機能も充実しています」 - Mike Challis"
-
-#: Added on 2010/12/18
 msgid "Configure Akismet"
 msgstr "Akismet の設定"
-
-#: Added on 2010/12/18
-msgid "Check out some of their themes!"
-msgstr "どんなテーマがあるか、見てみてください！"
-
-#: Added on 2010/12/18
-msgid "they make some amazing original WP themes that have a cool 1 click auto install feature and excellent after care support services."
-msgstr "ワンクリックで自動インストール機能や素晴らしいアフターケアサポートなど、驚くべきオリジナル WP テーマがあります。"
-
-#: Added on 2010/12/18
-msgid "Try <a href=\"https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937\" target=\"_blank\">ThemeFuse</a>,"
-msgstr "<a href=\"https://www.e-junkie.com/ecom/gb.php?cl=136641&c=ib&aff=148937\" target=\"_blank\">ThemeFuse</a>をお試しください。"
 
 #: Added on 2010/12/18
 msgid "ThemeFuse Original WP Themes"
