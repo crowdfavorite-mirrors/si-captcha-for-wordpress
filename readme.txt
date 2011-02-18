@@ -7,11 +7,11 @@ Requires at least: 2.9
 Tested up to: 3.0.5
 Stable tag: trunk
 
-Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
+Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
 
 == Description ==
 
-Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all.
+Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all.
 In order to post comments or register, users will have to type in the code shown on the image.
 This prevents spam from automated bots. Adds security. Works great with Akismet. Also is fully WP, WPMU, and BuddyPress compatible.
 
@@ -25,10 +25,10 @@ Features:
  * Configure from Admin panel
  * Valid HTML
  * Section 508 and WAI Accessibility Validation.
- * Allows Trackbacks and Pingbacks
+ * Allows Trackbacks and Pingbacks.
  * Setting to hide the CAPTCHA from logged in users and or admins
- * Setting to show the CAPTCHA on the comment form, registration form, login, or all.
- * I18n language translation support (see FAQ)
+ * Setting to show the CAPTCHA on the forms for comments, registration, lost password, login, or all.
+ * I18n language translation support. [See FAQ](http://wordpress.org/extend/plugins/si-captcha-for-wordpress/faq/).
 
 Captcha Image Support:
 ---------------------
@@ -40,7 +40,7 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.9+, WPMU, and BuddyPress 1.1 -> 1.2.3 (Wordpress 3.0+ is highly recommended)
+ * Works with Wordpress 2.9+, WPMU, and BuddyPress (Wordpress 3.0+ is highly recommended)
  * PHP5 is highly recommended
 
 
@@ -216,9 +216,10 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 - Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
 - Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is " *", but you can now change it to "(required)" or anything you want. 
+- Added lost password CAPTCHA
 
 = 2.6.5 =
-- (19 Jan 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
+- (12 Feb 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
 - Fix: one CAPTCHA random position always has to be a number so that a 4 letter swear word could never appear. 
 - Improvement: javascript is only loaded on pages when it is conditionally needed.
 - Updated Romanian (ro_RO) - Translated by [Anunturi Jibo](http://www.jibo.ro)

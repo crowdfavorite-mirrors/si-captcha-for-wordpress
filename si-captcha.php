@@ -2,7 +2,7 @@
 /*
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
-Description: Adds CAPTCHA anti-spam methods to WordPress on the comment form, registration form, login, or all. This prevents spam from automated bots. Also is WPMU and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
+Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
 Version: 2.6.5
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
@@ -45,7 +45,7 @@ function si_captcha_add_tabs() {
    global $wpmu, $wp_version;
 
    // for WP 3.0+ ONLY!
-   if( $wpmu == 1 && $wp_version[0] > 2 && is_multisite() && is_super_admin() ) { // wp 3.0 +
+   if( $wpmu == 1 && version_compare($wp_version,'3','>=') && is_multisite() && is_super_admin() ) { // wp 3.0 +
      add_submenu_page('ms-admin.php', __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
      add_options_page( __('SI Captcha Options', 'si-captcha'), __('SI Captcha Options', 'si-captcha'), 'manage_options', __FILE__,array(&$this,'si_captcha_options_page'));
    }
@@ -72,6 +72,7 @@ function si_captcha_get_options() {
          'si_captcha_comment_label_position' => $default_position,
          'si_captcha_login' => 'false',
          'si_captcha_register' => 'true',
+         'si_captcha_lostpwd'  => 'true',
          'si_captcha_rearrange' => 'false',
          'si_captcha_disable_session' => 'true',
          'si_captcha_enable_audio' => 'true',
@@ -603,7 +604,7 @@ function si_captcha_bp_signup_validate() {
 
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
-         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
          $bp->signup->errors['captcha_code'] = __('Please complete the CAPTCHA.', 'si-captcha');
          return;
       }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
@@ -664,7 +665,7 @@ function si_captcha_wpmu_signup_post($errors) {
  if ($_POST['stage'] == 'validate-user-signup') {
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
-         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
          $errors['errors']->add('captcha', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
          return $errors;
       }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
@@ -726,7 +727,7 @@ function si_captcha_register_post($errors) {
 
  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
-         if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
          $errors->add('captcha_blank', '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Please complete the CAPTCHA.', 'si-captcha'));
          return $errors;
       }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
@@ -780,6 +781,62 @@ function si_captcha_register_post($errors) {
  } // end if captcha use session
    return($errors);
 } // end function si_captcha_register_post
+
+function si_captcha_lostpassword_post() {
+   global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
+
+ if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
+   //captcha without sessions
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+          wp_die( __('Error: You did not enter a CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
+      }else if (!isset($_POST['si_code_reg']) || empty($_POST['si_code_reg'])) {
+         wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
+      }else{
+         $prefix = 'xxxxxx';
+         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+           $prefix = $_POST['si_code_reg'];
+         }
+         if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
+			include( $si_captcha_dir_ns . $prefix . '.php' );
+			if ( 0 == strcasecmp( trim(strip_tags($_POST['captcha_code'])), $captcha_word ) ) {
+              // captcha was matched
+              @unlink ($si_captcha_dir_ns . $prefix . '.php');
+              return;
+			} else {
+              wp_die( __('Error: You entered in the wrong CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
+            }
+	     } else {
+           wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.  __('Could not read CAPTCHA token file.', 'si-captcha') . $this->si_captcha_token_error() );
+	    }
+	  }
+
+  }else{
+   //captcha with PHP sessions
+
+   if (!isset($_SESSION['securimage_code_si_reg']) || empty($_SESSION['securimage_code_si_reg'])) {
+          wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '.__('Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ.', 'si-captcha'));
+   }else{
+      if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
+          wp_die( __('Error: You did not enter a CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
+      } else {
+        $captcha_code = trim(strip_tags($_POST['captcha_code']));
+      }
+
+      require_once "$si_captcha_dir/securimage.php";
+      $img = new Securimage();
+      $img->form_id = 'reg'; // makes compatible with multi-forms on same page
+      $valid = $img->check("$captcha_code");
+      // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
+      if($valid == true) {
+          // ok can continue
+          return;
+      } else {
+          wp_die( __('Error: You entered in the wrong CAPTCHA phrase. Press your browser\'s back button and try again.', 'si-captcha'));
+      }
+   }
+ } // end if captcha use session
+
+} // function si_captcha_lostpassword_post
 
 // this function checks the captcha posted with the comment
 function si_captcha_comment_post($comment) {
@@ -945,7 +1002,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 		}
 
    // for WP 3.0+ ONLY!
-   if( $wp_version[0] > 2 ) { // wp 3.0 +
+   if( version_compare($wp_version,'3','>=') ) { // wp 3.0 +
      if ( is_multisite() ) {
 		// Is user marked as spam?
 		if ( 1 == $userdata->spam)
@@ -1381,16 +1438,13 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
   add_filter( 'plugin_action_links', array(&$si_image_captcha,'si_captcha_plugin_action_links'),10,2);
 
   if ($si_captcha_opt['si_captcha_comment'] == 'true') {
-
      // for WP 3.0+
      if( version_compare($wp_version,'3','>=') ) { // wp 3.0 +
        add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
        add_action( 'comment_form_logged_in_after', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
      }
-
      // for WP before WP 3.0
      add_action('comment_form', array(&$si_image_captcha, 'si_captcha_comment_form'), 1);
-
      add_filter('preprocess_comment', array(&$si_image_captcha, 'si_captcha_comment_post'), 1);
   }
 
@@ -1417,6 +1471,11 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
     add_action('bp_login_bar_logged_out', array( &$si_image_captcha, 'si_captcha_bp_login_form' ) );
     add_action('bp_sidebar_login_form', array( &$si_image_captcha, 'si_captcha_bp_login_sidebar_form' ) );
 	add_filter('authenticate', array( &$si_image_captcha, 'si_wp_authenticate_username_password'), 9, 3);
+  }
+
+  if ($si_captcha_opt['si_captcha_lostpwd'] == 'true') {
+ 	add_action('lostpassword_form', array( &$si_image_captcha, 'si_captcha_register_form'), 10);
+	add_action('lostpassword_post', array( &$si_image_captcha, 'si_captcha_lostpassword_post'), 10);
   }
 
   // options deleted when this plugin is deleted in WP 2.7+

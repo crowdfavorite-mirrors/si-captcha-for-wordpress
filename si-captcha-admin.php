@@ -24,6 +24,7 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_comment_label_position' => (trim($_POST['si_captcha_comment_label_position']) != '' ) ? trim($_POST['si_captcha_comment_label_position'])   : $si_captcha_option_defaults['si_captcha_comment_label_position'], // use default if empty
          'si_captcha_login' =>              (isset( $_POST['si_captcha_login'] ) ) ? 'true' : 'false',
          'si_captcha_register' =>           (isset( $_POST['si_captcha_register'] ) ) ? 'true' : 'false',
+         'si_captcha_lostpwd' =>            (isset( $_POST['si_captcha_lostpwd'] ) ) ? 'true' : 'false',
          'si_captcha_rearrange' =>          (isset( $_POST['si_captcha_rearrange'] ) ) ? 'true' : 'false',
          'si_captcha_disable_session' =>    (isset( $_POST['si_captcha_disable_session'] ) ) ? 'true' : 'false',
          'si_captcha_enable_audio' =>       (isset( $_POST['si_captcha_enable_audio'] ) ) ? 'true' : 'false',
@@ -143,7 +144,7 @@ if (function_exists('get_transient')) {
 			<div class="star star1"><img src="<?php echo admin_url('images/star.gif'); ?>" alt="<?php _e('1 star', 'si-captcha') ?>" /></div>
 		</div>
 		<small><?php echo sprintf(__('(Average rating based on %s ratings)', 'si-captcha'),number_format_i18n($api->num_ratings)); ?> <a target="_blank" href="http://wordpress.org/extend/plugins/<?php echo $api->slug ?>/"> <?php _e('rate', 'si-captcha') ?></a></small>
-        <br /> 
+        <br />
 		<?php endif; ?>
 
 <?php
@@ -306,6 +307,14 @@ foreach ($captcha_difficulty_array as $k => $v) {
     <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_register_tip');"><?php _e('help', 'si-captcha'); ?></a>
     <div style="text-align:left; display:none" id="si_captcha_register_tip">
     <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering.', 'si-captcha') ?>
+    </div>
+    <br />
+
+    <input name="si_captcha_lostpwd" id="si_captcha_lostpwd" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_lostpwd'] == 'true' ) echo ' checked="checked" '; ?> />
+    <label for="si_captcha_lostpwd"><?php _e('Enable CAPTCHA on the lost password form.', 'si-captcha') ?></label>
+    <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_lostpwd_tip');"><?php _e('help', 'si-captcha'); ?></a>
+    <div style="text-align:left; display:none" id="si_captcha_lostpwd_tip">
+    <?php _e('Prevents automated spam bots by requiring that the user pass a CAPTCHA test before lost password request.', 'si-captcha') ?>
     </div>
     <br />
 
