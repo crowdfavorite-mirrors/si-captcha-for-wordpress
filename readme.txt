@@ -7,7 +7,7 @@ Requires at least: 2.9
 Tested up to: 3.0.5
 Stable tag: trunk
 
-Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. Also is fully WP, WPMU, and BuddyPress compatible.
+Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. For WP, WPMU, and BuddyPress.
 
 == Description ==
 
@@ -218,8 +218,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 - (19 Feb 2011) - Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
 - Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is " *", but you can now change it to "(required)" or anything you want. 
 - Added lost password CAPTCHA
-- Fixed Valid HTML for Buddypress
-- Fixed sidebar logon for Buddypress
+- Fixed Valid HTML for BuddyPress
+- Fixed sidebar logon for BuddyPress
 
 = 2.6.5 =
 - (12 Feb 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
