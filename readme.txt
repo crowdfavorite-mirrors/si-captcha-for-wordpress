@@ -214,9 +214,12 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
-- Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
+= 2.7 =
+- (19 Feb 2011) - Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
 - Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is " *", but you can now change it to "(required)" or anything you want. 
 - Added lost password CAPTCHA
+- Fixed Valid HTML for Buddypress
+- Fixed sidebar logon for Buddypress
 
 = 2.6.5 =
 - (12 Feb 2011) - New feature: New settings for "Internal Style Sheet CSS" or "External Style Sheet CSS". If you need to learn how to adjust the captcha form colors, [See FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)

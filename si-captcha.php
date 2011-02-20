@@ -3,12 +3,12 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
-Version: 2.6.5
+Version: 2.7
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
 
-$si_captcha_version = '2.6.5';
+$si_captcha_version = '2.7';
 
 /*  Copyright (C) 2008-2011 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
 
@@ -230,7 +230,7 @@ if ($this->si_captcha_check_requires()) {
 // the captcha html - comment form 2.0
 echo '
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
@@ -310,7 +310,7 @@ if (is_user_logged_in()) {
 
 echo '
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_com','com');
 echo '</div>
@@ -364,7 +364,7 @@ if ($this->si_captcha_check_requires()) {
 echo '
 <br />
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_log','log');
 echo '</div>
@@ -437,17 +437,18 @@ if ($this->si_captcha_check_requires()) {
 
 // the captcha html - buddypress sidebar login form
 echo '
-<div style="width:250px; height:100px">';
-echo '
-    <label for="captcha_code">';
-  echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
-  echo '</label>
-<input id="captcha_code" name="captcha_code" class="input" type="text" value="" '.$si_aria_required.' />
-<br />
+<div class="captchaSizeDivSmall">
 ';
   $this->si_captcha_captcha_html('si_image_side_login','log');
 echo '
 </div>
+
+    <label for="captcha_code_side_login">';
+  echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
+  echo '</label>
+<input style="width=145px;" id="captcha_code_side_login" name="captcha_code" class="input" type="text" value="" '.$si_aria_required.' />
+<br />
+<br />
 ';
 }
 
@@ -473,7 +474,7 @@ if ($this->si_captcha_check_requires()) {
 echo '
 <br />
 <div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
 echo '>';
 $this->si_captcha_captcha_html('si_image_reg','reg');
 echo '</div>
@@ -518,16 +519,16 @@ if ($this->si_captcha_check_requires()) {
 
 // the captcha html - wpmu register form
 echo '
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
+echo '>';
+$this->si_captcha_captcha_html('si_image_reg','reg');
+echo '</div>
+
 <label for="captcha_code">';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
 <input id="captcha_code" name="captcha_code" type="text" value="" '.$si_aria_required.' />
-
-<div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
-echo '>';
-$this->si_captcha_captcha_html('si_image_reg','reg');
-echo '</div>
 
 ';
 }
@@ -551,17 +552,16 @@ if ($this->si_captcha_check_requires()) {
 // the captcha html - buddypress 1.1 register form
 echo '
 <div class="register-section" style="clear:left; margin-top:-10px;">
+<div ';
+echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSizeDivSmall"' : 'class="captchaSizeDivLarge"';
+echo '>';
+$this->si_captcha_captcha_html('si_image_reg','reg');
+echo '</div>
 <label for="captcha_code">';
   do_action( 'bp_captcha_code_errors' );
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '</label>
-<input id="captcha_code" name="captcha_code" type="text" value="" '.$si_aria_required.' />
-
-<div ';
-echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'id="captchaSizeDivSmall"' : 'id="captchaSizeDivLarge"';
-echo '>';
-$this->si_captcha_captcha_html('si_image_reg','reg');
-echo '</div>
+<input style="width:145px;" id="captcha_code" name="captcha_code" type="text" value="" '.$si_aria_required.' />
 </div>
 
 ';
@@ -1039,7 +1039,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
 
   // url for no session captcha image
   $securimage_show_url = $si_captcha_url .'/securimage_show.php?';
-  if($si_captcha_opt['si_captcha_captcha_small'] == 'true') $securimage_show_url .= 'si_sm_captcha=1&amp;';
+  if($si_captcha_opt['si_captcha_captcha_small'] == 'true' || $label == 'si_image_side_login' ) $securimage_show_url .= 'si_sm_captcha=1&amp;';
   if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'low') $securimage_show_url .= 'difficulty=1&amp;';
   if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'high') $securimage_show_url .= 'difficulty=2&amp;';
   if($si_captcha_opt['si_captcha_no_trans'] == 'true') $securimage_show_url .= 'no_trans=1&amp;';
@@ -1099,7 +1099,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
-     <img id="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
+     <img class="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo  '" onclick="this.blur();" /></a>
      </div>'."\n";
@@ -1113,7 +1113,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   }else{
     echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
   }
-  echo '      <img id="captchaImgRefresh" src="'.$si_captcha_url.'/images/refresh.png" alt="';
+  echo '      <img class="captchaImgRefresh" src="'.$si_captcha_url.'/images/refresh.png" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   echo '" onclick="this.blur();" /></a>
   </div>
@@ -1258,11 +1258,11 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' )
 <!-- begin SI CAPTCHA Anti-Spam - login/register form style -->
 <style type="text/css">
 div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'],'si_captcha_captcha_div_style'); ?> }
-div#captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }
-div#captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }
-img#si_image_com,#si_image_reg,#si_image_log { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }
-img#captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }
-img#captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }
+.captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }
+.captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }
+img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }
+.captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }
+.captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }
 div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }
 label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }
 input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'],'si_captcha_comment_field_style'); ?> }
@@ -1286,11 +1286,11 @@ var si_captcha_styles = "\
 <!-- begin SI Captcha Anti-Spam - comment form style -->\
 <style type='text/css'>\
 div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'],'si_captcha_captcha_div_style'); ?> }\
-div#captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }\
-div#captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }\
-img#si_image_com,#si_image_reg,#si_image_log { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }\
-img#captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }\
-img#captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }\
+.captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }\
+.captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }\
+img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }\
+.captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }\
+.captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }\
 div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }\
 label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }\
 input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'],'si_captcha_comment_field_style'); ?> }\
