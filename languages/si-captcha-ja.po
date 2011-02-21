@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SI CAPTCHA Anti-Spam 2.6.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2010-05-11 22:58+0000\n"
-"PO-Revision-Date: 2011-01-24 17:47+0900\n"
+"PO-Revision-Date: 2011-02-21 22:58+0900\n"
 "Last-Translator: BNG NET <webmaster@bng.net>\n"
 "Language-Team: BNG NET <webmaster@bng.net>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,106 @@ msgstr ""
 "X-Poedit-Country: JAPAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-Bookmarks: -1,12,-1,-1,-1,-1,-1,-1,-1,-1\n"
+
+#: Added on 2011/02/21
+msgid "input-label-required'"
+msgstr "入力-ラベル-必須"
+
+#: Added on 2011/02/21
+msgid "label-required-input"
+msgstr "ラベル-必須-入力"
+
+#: Added on 2011/02/21
+msgid "label-required-linebreak-input"
+msgstr "ラベル-必須-インラインブレイク-入力"
+
+#: Added on 2011/02/21
+msgid "label-input-required"
+msgstr "ラベル-入力-必須"
+
+#: Added on 2011/02/21
+msgid "Internal Style Sheet CSS:"
+msgstr "内部スタイルシートCSS:"
+
+#: Added on 2011/02/21
+msgid "External Style Sheet CSS starting point for theme builders:"
+msgstr "テーマ開発者向け外部スタイルシートCSSのスターティングポイント:"
+
+#: Added on 2011/02/21
+msgid "The CAPTCHA CSS will NOT be included in the page &lt;head&gt; section, and it must be included in the style.css of the theme. Be sure to remember this if you switch your theme later on."
+msgstr "キャプチャCSSはページの&lt;head&gt;セクションに含められないため、テーマのstyle.cssに含める必要があります。後日テーマを変更するときはご注意ください。"
+
+#: Added on 2011/02/21
+msgid "Premium themes may have already added support for SI Captcha Anti-Spam style in the theme's style.css. If that is the case, then select \"External Style Sheet CSS\" if instructed by the theme's installation instructions."
+msgstr "プレミアムテーマであれば、テーマのstyle.cssが既にSI Captcha Anti-Spamのスタイルをサポートしている場合があります。これに該当するときは、テーマのインストール方法などの指示に従い、「外部スタイルシートCSS」を選んでください。"
+
+#: Added on 2011/02/21
+msgid "By default, the CAPTCHA form styles are editable below when using \"Internal Style Sheet CSS\". The CAPTCHA CSS will be automatically be included in the page &lt;head&gt; section."
+msgstr "デフォルトでは、「内部スタイルシートCSS」を使ってキャプチャ用フォームスタイルを以下で編集することができます。キャプチャCSSは自動的にページの&lt;head&gt;セクションに含められます。"
+
+#: Added on 2011/02/21
+msgid "External Style Sheet CSS (requires editing style.css)"
+msgstr "外部スタイルシートCSS (style.cssの編集が必要)"
+
+#: Added on 2011/02/21
+msgid "Internal Style Sheet CSS (default, edit below)"
+msgstr "内部スタイルシートCSS (デフォルト、以下で編集)"
+
+#: Added on 2011/02/21
+msgid "Select the method of delivering the CAPTCHA form style:"
+msgstr "キャプチャ用フォームスタイルの適用方法を選択してください:"
+
+#: Added on 2011/02/21
+msgid "Use to adjust the font colors, image positioning, or other CSS styling of the CAPTCHA form."
+msgstr "フォント色や画像の位置、その他キャプチャ用フォームのCSSスタイルを調整するために使用します。"
+
+#: Added on 2011/02/21
+msgid "Modifiable CAPTCHA Form CSS Style Feature:"
+msgstr "変更可能なキャプチャ用フォームのCSSスタイル:"
+
+#: Added on 2011/02/21
+msgid "Reset the CAPTCHA form styles to default."
+msgstr "キャプチャ用フォームのスタイルをデフォルトに戻す。"
+
+#: Added on 2011/02/21
+msgid "CAPTCHA Form CSS Style:"
+msgstr "キャプチャ用フォームのCSSスタイル:"
+
+#: Added on 2011/02/21
+msgid "Changes position of the CAPTCHA input labels on the comment form. Some themes have different label positions on the comment form. After changing this setting, be sure to view the comments to verify the setting is correct."
+msgstr "コメントフォームで表示されるキャプチャ入力ラベルの位置を変更します。テーマによって、コメントフォームで表示するラベルの位置は異なります。この設定を変更したら、コメントを閲覧して設定が正しく行われているかどうかを確認してください。"
+
+#: Added on 2011/02/21
+msgid "Version:"
+msgstr "バージョン:"
+
+#: Added on 2011/02/21
+msgid "(latest version)"
+msgstr "(最新版)"
+
+#: Added on 2011/02/21
+msgid "A newer version of SI Captcha Anti-Spam is available: %s"
+msgstr "SI Captcha Ant-Spam の新しいバージョンが入手可能です: %s"
+
+#: Added on 2011/02/21
+msgid "a newer version is available: %s"
+msgstr "新しいバージョンが入手可能です: %s"
+
+#: Added on 2011/02/20
+msgid "Error: You did not enter a CAPTCHA phrase. Press your browser's back button and try again."
+msgstr "エラー: キャプチャコードを入力していません。ブラウザの戻るボタンで戻り、もう一度お試しください。"
+
+#: Added on 2011/02/20
+msgid "Prevents automated spam bots by requiring that the user pass a CAPTCHA test before lost password request."
+msgstr "キャプチャテストを通過しないと新しいパスワードの取得を要求できなくすることで、自動スパムボットを防ぐ。"
+
+#: Added on 2011/02/20
+msgid "Enable CAPTCHA on the lost password form."
+msgstr "「パスワード紛失」フォームでキャプチャを有効にする。"
+
+#: Added on 2011/02/20
+msgid "Required"
+msgstr "必須"
 
 #: Added on 2011/01/24
 msgid "Akismet is installed."
@@ -72,18 +172,6 @@ msgid "Changes position of the CAPTCHA input labels on the comment form. Some th
 msgstr "コメントフォームでキャプチャの入力ラベルを表示する位置を変更する。テーマによってはコメントフォームにおけるラベルの位置が異なります。"
 
 #: Added on 2011/01/24
-msgid "Left"
-msgstr "左"
-
-#: Added on 2011/01/24
-msgid "Top"
-msgstr "トップ"
-
-#: Added on 2011/01/24
-msgid "Right"
-msgstr "右"
-
-#: Added on 2011/01/24
 msgid "CAPTCHA input label position on the comment form:"
 msgstr "コメントフォームでキャプチャの入力ラベルを表示する位置"
 
@@ -97,7 +185,7 @@ msgstr "<a href=\"%s\" target=\"_blank\">ThemeFuse</a>をお試しください�
 
 #: Added on 2010/12/18
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the SI CAPTCHA options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
-msgstr "実際に問題を解決することが望ましいのですが、この「CAPTCHAをPHPセッションなしで使う」という SI CAPTCHA の設定からチェックを外すと、（PHP セッションが動作している限り）キャプチャを正常に動かせるようにできます: "
+msgstr "実際に問題を解決することが望ましいのですが、この「キャプチャをPHPセッションなしで使う」という SI CAPTCHA の設定からチェックを外すと、（PHP セッションが動作している限り）キャプチャを正常に動かせるようにできます: "
 
 #: Added on 2010/12/18
 msgid "Fixing this may require assigning 0755 permissions or higher (e.g. 0777 on some hosts. Try 0755 first, because 0777 is sometimes too much and will not work.)"
@@ -181,35 +269,35 @@ msgstr "ディレクトリが見つかりません。<a href=\"http://codex.word
 
 #: Added on 2010/08/11
 msgid "Fixing the actual problem is recommended, but you can uncheck this setting on the contact form options page: \"Use CAPTCHA without PHP session\" and the captcha will work this way just fine (as long as PHP sessions are working)."
-msgstr "根本的な問題の修正が望ましいところですが、「CAPTCHAをPHPセッションなしで使う」設定をチェックしなければ、(PHPセッションが正常に動作している限り)問題なく動作します。"
+msgstr "根本的な問題の修正が望ましいところですが、「キャプチャをPHPセッションなしで使う」設定をチェックしなければ、(PHPセッションが正常に動作している限り)問題なく動作します。"
 
 #: Added on 2010/08/11
 msgid "Changes level of distortion of the CAPTCHA image text."
-msgstr "CAPTCHA用画像テキストの湾曲度を変更する"
+msgstr "キャプチャ用画像テキストの湾曲度を変更する"
 
 #: Added on 2010/08/11
 msgid "Prevents automated spam bots by requiring that the user pass a CAPTCHA test before registering."
-msgstr "登録時にCAPTCHAテストを行うことで、自動化したスパムボットから保護する。"
+msgstr "登録時にキャプチャテストを行うことで、自動化したスパムボットから保護する。"
 
 #: Added on 2010/08/11
 msgid "Prevents automated spam bots by requiring that the user pass a CAPTCHA test before posting comments."
-msgstr "コメント投稿時にCAPTCHAテストを行うことで、自動化したスパムボットから保護する。"
+msgstr "コメント投稿時にキャプチャテストを行うことで、自動化したスパムボットから保護する。"
 
 #: Added on 2010/08/11
 msgid "Enables an icon so the user can listen to an audio sound of the CAPTCHA."
-msgstr "CAPTCHAの音声が聞けるアイコンを有効にする。"
+msgstr "キャプチャの音声が聞けるアイコンを有効にする。"
 
 #: Added on 2010/08/11
 msgid "Enables a flash object so the user can listen to an audio sound of the CAPTCHA without having to download the sound file."
-msgstr "音声ファイルをダウンロードすることなく、CAPTCHAの音声が聞けるフラッシュを有効にする。"
+msgstr "音声ファイルをダウンロードすることなく、キャプチャの音声が聞けるフラッシュを有効にする。"
 
 #: Added on 2010/08/11
 msgid "Makes the CAPTCHA image smaller."
-msgstr "CAPTCHA画像を小型化する。"
+msgstr "キャプチャ画像を小型化する。"
 
 #: Added on 2010/08/11
 msgid "Sometimes fixes missing text on the CAPTCHA image. If this does not fix missing text, your PHP server is not compatible with the CAPTCHA functions. You should have your web server fixed."
-msgstr "CAPTCHA画像からテキストが見えなくなることがあります。このオプションを使っても直らない場合は、PHPサーバがCAPTCHA機能に適合していません。ご使用のウェブサーバを修正してください。"
+msgstr "キャプチャ画像からテキストが見えなくなることがあります。このオプションを使っても直らない場合は、PHPサーバがキャプチャ機能に適合していません。ご使用のウェブサーバを修正してください。"
 
 #: Added on 2010/08/11
 msgid "There is a problem with the directory"
@@ -217,11 +305,11 @@ msgstr "次のディレクトリに関する問題があります:"
 
 #: Added on 2010/08/11
 msgid "Sometimes the CAPTCHA code never validates because of a server problem with PHP session handling. If the CAPTCHA code never validates and does not work, you can enable this setting to use files for session."
-msgstr "サーバがPHPセッションを扱う際の問題で、CAPTCHAが確認できない場合があります。CAPTCHAが確認されなかったり正常に動作しなかったら、この設定を有効にしてセッションの代わりにファイルを使うようにしてください。"
+msgstr "サーバがPHPセッションを扱う際の問題で、キャプチャが確認できない場合があります。キャプチャが確認されなかったり正常に動作しなかったら、この設定を有効にしてセッションの代わりにファイルを使うようにしてください。"
 
 #: Added on 2010/08/11
 msgid "Use CAPTCHA without PHP session."
-msgstr "CAPTCHAをPHPセッションなしで使う。"
+msgstr "キャプチャをPHPセッションなしで使う。"
 
 #: si-captcha-admin.php:14
 msgid "You do not have permissions for managing this option"
