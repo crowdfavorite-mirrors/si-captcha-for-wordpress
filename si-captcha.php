@@ -995,7 +995,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
   } // end if captcha use session
    // end si captcha check
 
-		$userdata = get_userdatabylogin($username);
+		$userdata = get_user_by('login', $username);
 
 		if ( !$userdata ) {
 			return new WP_Error('invalid_username', sprintf(__('<strong>ERROR</strong>: Invalid username. <a href="%s" title="Password Lost and Found">Lost your password</a>?'), site_url('wp-login.php?action=lostpassword', 'login')));
