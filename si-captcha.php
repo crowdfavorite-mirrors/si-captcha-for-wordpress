@@ -1319,7 +1319,7 @@ function si_captcha_add_script(){
 
 
 function get_captcha_url_si() {
-   global $wpmu;
+   global $wpmu, $current_blog;
   // The captcha URL cannot be on a different domain as the site rewrites to or the cookie won't work
   // also the path has to be correct or the image won't load.
   // WP_PLUGIN_URL was not getting the job done! this code should fix it.
@@ -1346,6 +1346,9 @@ function get_captcha_url_si() {
       if ($wpmu == 1)
           $url = get_option( 'home' ) . '/' . MUPLUGINDIR . $si_dir;
   }
+  // "MU domain mapping" plugin compatabilty
+  if ( isset( $current_blog ) && !empty( $current_blog->domain ) && !empty( $current_blog->path ) )
+    $url = (is_ssl() ? 'https://' : 'http://') . $current_blog->domain . $current_blog->path . ($wpmu == 1 ? MUPLUGINDIR : PLUGINDIR) . $si_dir;
 
   // set the type of request (SSL or not)
   if ( getenv('HTTPS') == 'on' ) {
@@ -1477,6 +1480,8 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
  	add_action('lostpassword_form', array( &$si_image_captcha, 'si_captcha_register_form'), 10);
 	add_action('lostpassword_post', array( &$si_image_captcha, 'si_captcha_lostpassword_post'), 10);
   }
+
+ // add_action('bbp_template_notices', array( &$si_image_captcha, 'si_captcha_register_form'), 10);
 
   // options deleted when this plugin is deleted in WP 2.7+
   if ( function_exists('register_uninstall_hook') )

@@ -214,6 +214,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
+- Fix for users of the MU domain mapping plugin
+
 = 2.7 =
 - (19 Feb 2011) - Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
 - Added new setting in the "Text Labels:" to allow you to change the required field indicator. The default is " *", but you can now change it to "(required)" or anything you want. 
