@@ -655,9 +655,9 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
 <?php
   if ($si_captcha_opt['si_captcha_donated'] != 'true') { ?>
    </td><td width="350">
-   <?php echo sprintf(__('"I recommend <a href="%s" target="_blank">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features." - Mike Challis', 'si-captcha'), 'http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp'); ?>
+   <?php echo sprintf(__('"I recommend <a href="%s" target="_blank">HostGator Web Hosting</a>. All my sites are hosted there. The prices are great and they offer the most features." - Mike Challis', 'si-captcha'), 'http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp&amp;page=http://www.hostgator.com/apps/wordpress-hosting.shtml'); ?>
    </td><td width="100">
-     <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp" target="_blank"><img title="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" alt="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
+     <a href="http://secure.hostgator.com/~affiliat/cgi-bin/affiliates/clickthru.cgi?id=mchallis-sicaptchawp&amp;page=http://www.hostgator.com/apps/wordpress-hosting.shtml" target="_blank"><img title="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" alt="<?php echo esc_attr(__('Web Site Hosting', 'si-captcha')); ?>" src="<?php echo WP_PLUGIN_URL; ?>/si-captcha-for-wordpress/hostgator-blog.gif" width="100" height="100" /></a>
 <?php
   }
  ?>
