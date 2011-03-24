@@ -152,6 +152,14 @@ The Cookie Test can be used to test if your browser is accepting cookies from yo
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
 or open this URL in your web browser to run the test: `/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/test/index.php`
 
+= Spammers have been able to bypass my CAPTCHA, what can I do? =
+
+First check this: make sure the only other security plugins you have are Akismet or WP-spamFree. 
+Akismet and WP-spamFree are the only other anti-spam plugins approved for use with SI CAPTCHA Anti-Spam, others can simply break the CAPTCHA validation so that the CAPTCHA is never checked.
+If another security plugin is combined(not Akismet or WP-spamFree), the captcha may not work. Be sure to always test the CAPTCHA after installing new plugins. 
+
+Sometimes your site becomes targeted by a spammer that uses a combination of a bot and human captcha solver. [See this help forum for a solution](http://wordpress.org/support/topic/plugin-si-captcha-for-wordpress-spammers-bypassed-captcha-registration-system?replies=13#post-2023124)
+
 = How han I change the color of the CAPTCHA input field on the comment form? =
 If you need to learn how to adjust the captcha input form colors, [See this FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
 
