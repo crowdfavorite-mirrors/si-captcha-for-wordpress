@@ -152,6 +152,12 @@ The Cookie Test can be used to test if your browser is accepting cookies from yo
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
 or open this URL in your web browser to run the test: `/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/test/index.php`
 
+= The CAPTCHA refresh button does not work =
+
+Your theme could be missing the wp_footer PHP tag. Your theme should be considered broken if the wp_footer PHP tag is missing.
+
+All WordPress themes should always have `<?php wp_footer(); ?>` PHP tag in the just before the closing `</body>` tag of your theme's footer.php, or you will break many plugins which generally use this hook to reference JavaScript files. The solution – edit your theme's footer.php and make sure this tag is there. If it is missing, add it. Next, be sure to test that the CAPTCHA refresh button works, if it does not work and you have performed this step incorrectly, or you could have some other cause.
+
 = Spammers have been able to bypass my CAPTCHA, what can I do? =
 
 First check this: make sure the only other security plugins you have are Akismet or WP-spamFree. 
