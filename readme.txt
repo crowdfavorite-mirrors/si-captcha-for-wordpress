@@ -4,7 +4,7 @@ Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
 Requires at least: 2.9
-Tested up to: 3.1.1
+Tested up to: 3.1.2
 Stable tag: trunk
 
 Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. For WP, WPMU, and BuddyPress.
@@ -228,7 +228,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
-- Fix for users of the MU domain mapping plugin
+= 2.7.1 =
+- (26 Apr 2011) - Fix for users of the MU domain mapping plugin.
 
 = 2.7 =
 - (19 Feb 2011) - Modified the setting "CAPTCHA input label position on the comment form:" with more options for input and label positions for matching themes.
