@@ -26,8 +26,9 @@ function si_captcha_refresh(img_id,form_id,type,securimage_url,securimage_show_u
   	    si_flash += '</object>';
        document.getElementById('si_flash_' + form_id).innerHTML = si_flash;
        return false;
-  } else {
+  }
+  if(type == 'wav') {
    var si_aud = securimage_url+'/securimage_play.php?prefix='+prefix;
     document.getElementById('si_aud_' + form_id).href = si_aud;
-   }
+  }
 }

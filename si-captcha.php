@@ -1039,7 +1039,11 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
 
   // url for no session captcha image
   $securimage_show_url = $si_captcha_url .'/securimage_show.php?';
-  if($si_captcha_opt['si_captcha_captcha_small'] == 'true' || $label == 'si_image_side_login' ) $securimage_show_url .= 'si_sm_captcha=1&amp;';
+  $securimage_size = 'width="175" height="60"';
+  if($si_captcha_opt['si_captcha_captcha_small'] == 'true' || $label == 'si_image_side_login' ) {
+    $securimage_show_url .= 'si_sm_captcha=1&amp;';
+    $securimage_size = 'width="132" height="45"';
+  }
   if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'low') $securimage_show_url .= 'difficulty=1&amp;';
   if($si_captcha_opt['si_captcha_captcha_difficulty'] == 'high') $securimage_show_url .= 'difficulty=2&amp;';
   if($si_captcha_opt['si_captcha_no_trans'] == 'true') $securimage_show_url .= 'no_trans=1&amp;';
@@ -1060,7 +1064,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
     $securimage_show_url .= '&amp;prefix='.$prefix;
   }
 
-  echo '<img id="'.$label.'" class="si-captcha" src="'.$securimage_show_url.'" alt="';
+  echo '<img id="'.$label.'" class="si-captcha" src="'.$securimage_show_url.'" '.$securimage_size.' alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
@@ -1068,10 +1072,11 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   if($capt_disable_sess)
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
 
+  $si_audio_type = 'noaudio';
   if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
      $parseUrl = parse_url($si_captcha_url);
      $securimage_url = $parseUrl['path'];
-     $si_audio_type = 'mp3';
+     $si_audio_type = 'wav';
      if($si_captcha_opt['si_captcha_enable_audio_flash'] == 'true') {
           $si_audio_type = 'flash';
           $securimage_play_url = $securimage_url.'/securimage_play.swf?si_form_id='.$form_id;
@@ -1099,7 +1104,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo '">
-     <img class="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" alt="';
+     <img class="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" width="22" height="20" alt="';
         echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
         echo  '" onclick="this.blur();" /></a>
      </div>'."\n";
@@ -1113,7 +1118,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   }else{
     echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
   }
-  echo '      <img class="captchaImgRefresh" src="'.$si_captcha_url.'/images/refresh.png" alt="';
+  echo '      <img class="captchaImgRefresh" src="'.$si_captcha_url.'/images/refresh.png" width="22" height="20" alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   echo '" onclick="this.blur();" /></a>
   </div>

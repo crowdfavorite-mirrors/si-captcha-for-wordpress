@@ -4,7 +4,7 @@ Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
 Requires at least: 2.9
-Tested up to: 3.1.2
+Tested up to: 3.1.3
 Stable tag: trunk
 
 Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. For WP, WPMU, and BuddyPress.
@@ -227,6 +227,9 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 [Portuguese brazil (pt_BR) audio files download](http://www.642weather.com/weather/scripts/captcha-secureimage-pt_BR.zip) and follow instructions in the Readme.txt inside the zip file.
 
 == Changelog ==
+
+- Fix javascript error when CAPTCHA audio is disabled.
+- Fixed missing width/height attributes for CAPTCHA images.
 
 = 2.7.1 =
 - (26 Apr 2011) - Fix for users of the MU domain mapping plugin.
