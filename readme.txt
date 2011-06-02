@@ -228,6 +228,8 @@ Portuguese brazil (pt_BR) audio files are available. Wait until after you instal
 
 == Changelog ==
 
+- Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+
 = 2.7.2 =
 - (02 Jun 2011) - CAPTCHA Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007. CAPTCHA image is not involved.
 - Fix javascript error when CAPTCHA audio is disabled.
