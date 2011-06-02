@@ -3,12 +3,12 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
-Version: 2.7.1
+Version: 2.7.2
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
 
-$si_captcha_version = '2.7.1';
+$si_captcha_version = '2.7.2';
 
 /*  Copyright (C) 2008-2011 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
 
@@ -1073,6 +1073,9 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
 
   $si_audio_type = 'noaudio';
+  //Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007.
+  $si_captcha_opt['si_captcha_enable_audio'] = 'false';
+
   if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
      $parseUrl = parse_url($si_captcha_url);
      $securimage_url = $parseUrl['path'];
@@ -1244,6 +1247,7 @@ div.star {height: 100%; position:absolute; top:0px; left:0px; background-color: 
 .star.star-rating {background-color: #fc0;}
 .star img{display:block; position:absolute; right:0px; border:none; text-decoration:none;}
 div.star img {width:19px; height:19px; border-left:1px solid #fff; border-right:1px solid #fff;}
+.si-notice{background-color:#ffffe0;border-color:#e6db55;border-width:1px;border-style:solid;padding:5px;margin:5px 5px 20px;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 </style>
 <!-- end SI CAPTCHA Anti-Spam - admin settings page header code -->
 <?php

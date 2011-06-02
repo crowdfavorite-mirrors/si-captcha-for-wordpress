@@ -86,7 +86,7 @@ http://www.642weather.com/weather/scripts.php
   } // end if (isset($_POST['submit']))
 ?>
 <?php if ( !empty($_POST ) ) : ?>
-<div id="message" class="updated fade"><p><strong><?php _e('Options saved.', 'si-captcha') ?></strong></p></div>
+<div id="message" class="updated"><p><strong><?php _e('Options saved.', 'si-captcha') ?></strong></p></div>
 <?php endif; ?>
 <div class="wrap">
 <h2><?php _e('SI Captcha Options', 'si-captcha') ?></h2>
@@ -420,6 +420,10 @@ foreach ($captcha_pos_array as $k => $v) {
         </div>
         <br />
 
+        <?php
+        echo '<div style="background-color:#FFFFE0; padding:4px;">'.__('Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007.', 'si-contact-form'). '</div>';
+        ?>
+
        <input name="si_captcha_enable_audio_flash" id="si_captcha_enable_audio_flash" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio_flash'] == 'true' ) echo 'checked="checked"'; ?> />
        <label name="si_captcha_enable_audio_flash" for="si_captcha_enable_audio_flash"><?php _e('Enable Flash Audio for the CAPTCHA.', 'si-captcha') ?></label>
        <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_enable_audio_flash_tip');"><?php _e('help', 'si-captcha'); ?></a>
@@ -594,9 +598,9 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
   echo __('Caution: "External Style Sheet CSS" is enabled. This setting requires your theme\'s style.css to include the CAPTCHA CSS. Check the CAPTCHA images and input field on your comment form, make sure they are aligned properly. Be sure your theme includes the CAPTCHA style for this plugin, if it does not, then change the setting back to "Internal Style Sheet CSS".', 'si-contact-form');
   echo "</div><br />\n";
 
-  echo '<span class="updated">';
+  echo '<div class="si-notice">';
   echo __('Note: "Internal Style Sheet CSS" fields below are not editable while "External Style Sheet CSS" is enabled.', 'si-contact-form');
-  echo "</span><br /><br />\n";
+  echo "</div><br />\n";
 }
 ?>
 
