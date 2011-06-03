@@ -421,7 +421,7 @@ foreach ($captcha_pos_array as $k => $v) {
         <br />
 
         <?php
-        echo '<div style="background-color:#FFFFE0; padding:4px;">'.__('Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007.', 'si-contact-form'). '</div>';
+        echo '<div style="background-color:#FFFFE0; padding:4px;">'.__('Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007.', 'si-captcha'). '</div>';
         ?>
 
        <input name="si_captcha_enable_audio_flash" id="si_captcha_enable_audio_flash" type="checkbox" <?php if( $si_captcha_opt['si_captcha_enable_audio_flash'] == 'true' ) echo 'checked="checked"'; ?> />
@@ -595,11 +595,11 @@ $readonly = '';
 if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
   $readonly = 'readonly="readonly"';
   echo '<div class="updated">';
-  echo __('Caution: "External Style Sheet CSS" is enabled. This setting requires your theme\'s style.css to include the CAPTCHA CSS. Check the CAPTCHA images and input field on your comment form, make sure they are aligned properly. Be sure your theme includes the CAPTCHA style for this plugin, if it does not, then change the setting back to "Internal Style Sheet CSS".', 'si-contact-form');
+  echo __('Caution: "External Style Sheet CSS" is enabled. This setting requires your theme\'s style.css to include the CAPTCHA CSS. Check the CAPTCHA images and input field on your comment form, make sure they are aligned properly. Be sure your theme includes the CAPTCHA style for this plugin, if it does not, then change the setting back to "Internal Style Sheet CSS".', 'si-captcha');
   echo "</div><br />\n";
 
   echo '<div class="si-notice">';
-  echo __('Note: "Internal Style Sheet CSS" fields below are not editable while "External Style Sheet CSS" is enabled.', 'si-contact-form');
+  echo __('Note: "Internal Style Sheet CSS" fields below are not editable while "External Style Sheet CSS" is enabled.', 'si-captcha');
   echo "</div><br />\n";
 }
 ?>
