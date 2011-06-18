@@ -32,10 +32,9 @@ Features:
 
 Captcha Image Support:
 ---------------------
- * Open-source free PHP CAPTCHA library by www.phpcaptcha.org is included
+ * Open-source free PHP CAPTCHA library by www.phpcaptcha.org is included (customized version)
  * Abstract background with multi colored, angled, and transparent text
  * Arched lines through text
- * Generates audible CAPTCHA files in WAV format
  * Refresh button to reload captcha if you cannot read it
 
 Requirements/Restrictions:
@@ -126,7 +125,7 @@ or Blog address (URL) are set incorrectly in WP settings: Admin,  Settings,  Gen
 This script can be used to test if your PHP installation will support the CAPTCHA:
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
 or open this URL in your web browser to run the test:
-`/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/test/index.php`
+`/wp-content/plugins/si-captcha-for-wordpress/captcha/test/index.php`
 
 = Sometimes the captcha image and captcha input field are displayed AFTER the submit button on the WP2 comment form. =
 
@@ -150,7 +149,7 @@ Check your web browser settings and make sure you are not blocking cookies for y
 
 The Cookie Test can be used to test if your browser is accepting cookies from your site:
 Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
-or open this URL in your web browser to run the test: `/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/test/index.php`
+or open this URL in your web browser to run the test: `/wp-content/plugins/si-captcha-for-wordpress/captcha/test/index.php`
 
 = The CAPTCHA refresh button does not work =
 
@@ -221,13 +220,12 @@ Yes, It will be very gratefully received.
 Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](http://www.fastsecurecontactform.com/update-translation-si-captcha-anti-spam) 
 
 
-= Are the CAPTCHA audio files available in other languages? =
-
-Portuguese brazil (pt_BR) audio files are available. Wait until after you install the plugin. Download the audio files:
-[Portuguese brazil (pt_BR) audio files download](http://www.642weather.com/weather/scripts/captcha-secureimage-pt_BR.zip) and follow instructions in the Readme.txt inside the zip file.
-
 == Changelog ==
 
+- Fix to be compatible with WP 3.2 RC1
+- Fixed to be compatible with SFC Comments plugin.
+- Fixed error: Undefined variable: securimage_url 
+- CAPTCHA audio feature removed.
 - Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
 
 = 2.7.2 =
