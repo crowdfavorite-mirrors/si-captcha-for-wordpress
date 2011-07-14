@@ -222,6 +222,8 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
+- Fix CAPTCHA position on some themes like Suffusion.
+
 = 2.7.3 =
 - (05 Jul 2011) - Tested / fixed to be compatible with WP 3.2
 - Fixed to be compatible with SFC Comments plugin.

@@ -1454,10 +1454,10 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
 
   if ($si_captcha_opt['si_captcha_comment'] == 'true') {
      // for WP 3.0+
-     if( version_compare($wp_version,'3','>=') ) { // wp 3.0 +
-      // disabled because SFC Comment plugin was removing the captcha when logged into facebook
-      // add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
-      // add_action( 'comment_form_logged_in_after', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
+     if( version_compare($wp_version,'3','>=') && !function_exists('sfc_commentform_submit')  ) { // wp 3.0 +
+        // SFC Comment plugin was removing the captcha when logged into facebook
+        add_action( 'comment_form_after_fields', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
+        add_action( 'comment_form_logged_in_after', array(&$si_image_captcha, 'si_captcha_comment_form_wp3'), 1);
      }
      // for WP before WP 3.0
      add_action('comment_form', array(&$si_image_captcha, 'si_captcha_comment_form'), 1);
