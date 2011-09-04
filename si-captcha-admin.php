@@ -27,8 +27,6 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_lostpwd' =>            (isset( $_POST['si_captcha_lostpwd'] ) ) ? 'true' : 'false',
          'si_captcha_rearrange' =>          (isset( $_POST['si_captcha_rearrange'] ) ) ? 'true' : 'false',
          'si_captcha_disable_session' =>    (isset( $_POST['si_captcha_disable_session'] ) ) ? 'true' : 'false',
-         'si_captcha_enable_audio' =>       (isset( $_POST['si_captcha_enable_audio'] ) ) ? 'true' : 'false',
-         'si_captcha_enable_audio_flash' => (isset( $_POST['si_captcha_enable_audio_flash'] ) ) ? 'true' : 'false',
          'si_captcha_captcha_small' =>      (isset( $_POST['si_captcha_captcha_small'] ) ) ? 'true' : 'false',
          'si_captcha_no_trans' =>           (isset( $_POST['si_captcha_no_trans'] ) ) ? 'true' : 'false',
          'si_captcha_aria_required' =>      (isset( $_POST['si_captcha_aria_required'] ) ) ? 'true' : 'false',
@@ -40,12 +38,10 @@ http://www.642weather.com/weather/scripts.php
          'si_captcha_captcha_div_style_m' =>    (trim($_POST['si_captcha_captcha_div_style_m']) != '' )   ? trim($_POST['si_captcha_captcha_div_style_m'])   : $si_captcha_option_defaults['si_captcha_captcha_div_style_m'], // use default if empty
          'si_captcha_captcha_input_div_style' => (trim($_POST['si_captcha_captcha_input_div_style']) != '' )   ? trim($_POST['si_captcha_captcha_input_div_style'])   : $si_captcha_option_defaults['si_captcha_captcha_input_div_style'], // use default if empty
          'si_captcha_captcha_image_style' =>  (trim($_POST['si_captcha_captcha_image_style']) != '' ) ? trim($_POST['si_captcha_captcha_image_style']) : $si_captcha_option_defaults['si_captcha_captcha_image_style'],
-         'si_captcha_audio_image_style' =>    (trim($_POST['si_captcha_audio_image_style']) != '' )   ? trim($_POST['si_captcha_audio_image_style'])   : $si_captcha_option_defaults['si_captcha_audio_image_style'],
          'si_captcha_refresh_image_style' =>  (trim($_POST['si_captcha_refresh_image_style']) != '' ) ? trim($_POST['si_captcha_refresh_image_style']) : $si_captcha_option_defaults['si_captcha_refresh_image_style'],
          'si_captcha_required_indicator' =>    $_POST['si_captcha_required_indicator'],
          'si_captcha_label_captcha' =>         trim($_POST['si_captcha_label_captcha']),
          'si_captcha_tooltip_captcha' =>       trim($_POST['si_captcha_tooltip_captcha']),
-         'si_captcha_tooltip_audio' =>         trim($_POST['si_captcha_tooltip_audio']),
          'si_captcha_tooltip_refresh' =>       trim($_POST['si_captcha_tooltip_refresh']),
                    );
 
@@ -56,7 +52,7 @@ http://www.642weather.com/weather/scripts.php
 
     if (isset($_POST['si_captcha_reset_styles'])) {
          // reset styles feature
-         $style_resets_arr= array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_input_div_style','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
+         $style_resets_arr= array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_input_div_style','si_captcha_captcha_image_style','si_captcha_refresh_image_style');
          foreach($style_resets_arr as $style_reset) {
            $optionarray_update[$style_reset] = $si_captcha_option_defaults[$style_reset];
          }
@@ -359,10 +355,10 @@ foreach ($captcha_pos_array as $k => $v) {
         <br />
 
     <input name="si_captcha_rearrange" id="si_captcha_rearrange" type="checkbox" <?php if ( $si_captcha_opt['si_captcha_rearrange'] == 'true' ) echo ' checked="checked" '; ?> />
-    <label for="si_captcha_rearrange"><?php _e('Change the display order of the catpcha input field on the comment form.', 'si-captcha') ?></label>
+    <label for="si_captcha_rearrange"><?php _e('Change the display order of the CAPTCHA input field on the comment form.', 'si-captcha') ?></label>
     <a style="cursor:pointer;" title="<?php _e('Click for Help!', 'si-captcha'); ?>" onclick="toggleVisibility('si_captcha_rearrange_tip');"><?php _e('help', 'si-captcha'); ?></a>
     <div style="text-align:left; display:none" id="si_captcha_rearrange_tip">
-     <?php _e('Sometimes the captcha image and input field are displayed AFTER the submit button on the comment form.', 'si-captcha'); ?>
+     <?php _e('Sometimes the CAPTCHA image and input field are displayed AFTER the submit button on the comment form.', 'si-captcha'); ?>
      <?php echo ' '; _e('Enable this setting and javascript will relocate the button.', 'si-captcha'); ?>
     </div>
     <br />
@@ -555,7 +551,6 @@ div#captchaImgDiv { <?php echo $si_captcha_option_defaults['si_captcha_captcha_d
 .captchaSizeDivSmall { <?php echo $si_captcha_option_defaults['si_captcha_captcha_div_style_sm']; ?> }<br />
 .captchaSizeDivLarge { <?php echo $si_captcha_option_defaults['si_captcha_captcha_div_style_m']; ?> }<br />
 img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $si_captcha_option_defaults['si_captcha_captcha_image_style']; ?> }<br />
-.captchaImgAudio { <?php echo $si_captcha_option_defaults['si_captcha_audio_image_style']; ?> }<br />
 .captchaImgRefresh { <?php echo $si_captcha_option_defaults['si_captcha_refresh_image_style']; ?> }<br />
 div#captchaInputDiv { <?php echo $si_captcha_option_defaults['si_captcha_captcha_input_div_style']; ?> }<br />
 label#captcha_code_label { <?php echo $si_captcha_option_defaults['si_captcha_comment_label_style']; ?> }<br />
@@ -583,7 +578,6 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
       <label for="si_captcha_captcha_div_style_sm"><?php _e('CSS style for Small CAPTCHA Image DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_div_style_sm" id="si_captcha_captcha_div_style_sm" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_sm']);  ?>" size="50" /> .captchaSizeDivSmall<br />
       <label for="si_captcha_captcha_div_style_m"><?php _e('CSS style for Large CAPTCHA Image DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_div_style_m" id="si_captcha_captcha_div_style_m" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_div_style_m']);  ?>" size="50" /> .captchaSizeDivLarge<br />
       <label for="si_captcha_captcha_image_style"><?php echo __('CSS style for CAPTCHA image:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_image_style" id="si_captcha_captcha_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_image_style']);  ?>" size="50" /> img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login<br />
-      <label for="si_captcha_audio_image_style"><?php echo __('CSS style for Audio image:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_audio_image_style" id="si_captcha_audio_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_audio_image_style']);  ?>" size="50" /> .captchaImgAudio<br />
       <label for="si_captcha_refresh_image_style"><?php echo __('CSS style for Refresh image:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_refresh_image_style" id="si_captcha_refresh_image_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_refresh_image_style']);  ?>" size="50" /> .captchaImgRefresh <br />
       <label for="si_captcha_captcha_input_div_style"><?php echo __('CSS style for CAPTCHA input DIV:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_captcha_input_div_style" id="si_captcha_captcha_input_div_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_captcha_input_div_style']);  ?>" size="50" />div#captchaInputDiv<br />
       <label for="si_captcha_comment_label_style"><?php echo __('CSS style for CAPTCHA input label:', 'si-captcha'); ?></label><input <?php echo $readonly ?> name="si_captcha_comment_label_style" id="si_captcha_comment_label_style" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_comment_label_style']);  ?>" size="50" />label#captcha_code_label<br />
@@ -606,7 +600,6 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
         <label for="si_captcha_required_indicator"><?php echo __('Required', 'si-captcha'); ?></label><input name="si_captcha_required_indicator" id="si_captcha_required_indicator" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_required_indicator']);  ?>" size="50" /><br />
         <label for="si_captcha_label_captcha"><?php echo __('CAPTCHA Code', 'si-captcha'); ?></label><input name="si_captcha_label_captcha" id="si_captcha_label_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_label_captcha']);  ?>" size="50" /><br />
         <label for="si_captcha_tooltip_captcha"><?php echo __('CAPTCHA Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_captcha" id="si_captcha_tooltip_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']);  ?>" size="50" /><br />
-        <label for="si_captcha_tooltip_audio"><?php echo __('CAPTCHA Audio', 'si-captcha'); ?></label><input name="si_captcha_tooltip_audio" id="si_captcha_tooltip_audio" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_audio']);  ?>" size="50" /><br />
         <label for="si_captcha_tooltip_refresh"><?php echo __('Refresh Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_refresh" id="si_captcha_tooltip_refresh" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']);  ?>" size="50" />
 
         </td>

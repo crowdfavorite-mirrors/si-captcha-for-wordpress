@@ -75,8 +75,6 @@ function si_captcha_get_options() {
          'si_captcha_lostpwd'  => 'true',
          'si_captcha_rearrange' => 'true',
          'si_captcha_disable_session' => 'true',
-         'si_captcha_enable_audio' => 'true',
-         'si_captcha_enable_audio_flash' => 'false',
          'si_captcha_captcha_small' => 'false',
          'si_captcha_no_trans' => 'false',
          'si_captcha_aria_required' => 'false',
@@ -85,7 +83,6 @@ function si_captcha_get_options() {
          'si_captcha_captcha_div_style_sm' => 'width:175px; height:45px; padding-top:10px;',
          'si_captcha_captcha_div_style_m'  => 'width:250px; height:60px; padding-top:10px;',
          'si_captcha_captcha_image_style' => 'border-style:none; margin:0; padding-right:5px; float:left;',
-         'si_captcha_audio_image_style' =>   'border-style:none; margin:0; vertical-align:top;',
          'si_captcha_refresh_image_style' => 'border-style:none; margin:0; vertical-align:bottom;',
          'si_captcha_captcha_input_div_style'  => 'display:block; padding-top:15px; padding-bottom:5px;',
          'si_captcha_comment_label_style' => 'margin:0;',
@@ -93,7 +90,6 @@ function si_captcha_get_options() {
          'si_captcha_label_captcha' =>    '',
          'si_captcha_required_indicator' => ' *',
          'si_captcha_tooltip_captcha' =>  '',
-         'si_captcha_tooltip_audio' =>    '',
          'si_captcha_tooltip_refresh' =>  '',
   );
 
@@ -126,9 +122,9 @@ function si_captcha_get_options() {
            $si_captcha_opt[$key] = $this->si_stripslashes($val);
   }
 
-  if ($si_captcha_opt['si_captcha_captcha_image_style'] == '' && $si_captcha_opt['si_captcha_audio_image_style'] == '') {
+  if ($si_captcha_opt['si_captcha_captcha_image_style'] == '') {
      // if default styles are missing, reset styles
-     $style_resets_arr = array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_input_div_style','si_captcha_captcha_image_style','si_captcha_audio_image_style','si_captcha_refresh_image_style');
+     $style_resets_arr = array('si_captcha_comment_label_style','si_captcha_comment_field_style','si_captcha_captcha_div_style','si_captcha_captcha_div_style_sm','si_captcha_captcha_div_style_m','si_captcha_captcha_input_div_style','si_captcha_captcha_image_style','si_captcha_refresh_image_style');
      foreach($style_resets_arr as $style_reset) {
            $si_captcha_opt[$style_reset] = $si_captcha_option_defaults[$style_reset];
      }
@@ -1076,50 +1072,11 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   if($capt_disable_sess)
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
 
-  $si_audio_type = 'noaudio';
-  //Audio feature is disabled by Mike Challis until further notice because a proof of concept code CAPTCHA solving exploit was released - Security Advisory - SOS-11-007.
-  $si_captcha_opt['si_captcha_enable_audio'] = 'false';
-
-  if($si_captcha_opt['si_captcha_enable_audio'] == 'true') {
-     $si_audio_type = 'wav';
-     if($si_captcha_opt['si_captcha_enable_audio_flash'] == 'true') {
-          $si_audio_type = 'flash';
-          $securimage_play_url = $securimage_url.'/securimage_play.swf?si_form_id='.$form_id;
-          $securimage_play_url2 = $securimage_url.'/securimage_play.php?si_form_id='.$form_id;
-          if($capt_disable_sess){
-             $securimage_play_url = $securimage_url.'/securimage_play.swf?prefix='.$prefix;
-             $securimage_play_url2 = $securimage_url.'/securimage_play.php?prefix='.$prefix;
-          }
-          echo '<div id="si_flash_'.$form_id.'">
-        <object type="application/x-shockwave-flash"
-                data="'.$securimage_play_url.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$securimage_play_url2.'"
-                id="SecurImage_as3_'.$form_id.'" width="19" height="19" align="middle">
-			    <param name="allowScriptAccess" value="sameDomain" />
-			    <param name="allowFullScreen" value="false" />
-			    <param name="movie" value="'.$securimage_play_url.'&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio='.$securimage_play_url2.'" />
-			    <param name="quality" value="high" />
-			    <param name="bgcolor" value="#ffffff" />
-		</object></div>
-        ';
-     }else{
-                 $securimage_play_url = $si_captcha_url.'/securimage_play.php?si_form_id='.$form_id;
-         if($capt_disable_sess)
-                $securimage_play_url .= '&amp;prefix='.$prefix;
-        echo '    <div id="si_audio_'.$form_id.'">'."\n";
-        echo '      <a id="si_aud_'.$form_id.'" href="'.$securimage_play_url.'" rel="nofollow" title="';
-        echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
-        echo '">
-     <img class="captchaImgAudio" src="'.$si_captcha_url.'/images/audio_icon.png" width="22" height="20" alt="';
-        echo ($si_captcha_opt['si_captcha_tooltip_audio'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_audio'] ) : esc_attr(__('CAPTCHA Audio', 'si-captcha'));
-        echo  '" onclick="this.blur();" /></a>
-     </div>'."\n";
-     }
-  }
   echo '    <div id="si_refresh_'.$form_id.'">'."\n";
   echo '<a href="#" rel="nofollow" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_refresh'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_refresh'] ) : esc_attr(__('Refresh Image', 'si-captcha'));
   if($capt_disable_sess) {
-    echo '" onclick="si_captcha_refresh(\''.$label.'\',\''.$form_id.'\',\''.$si_audio_type.'\',\''.$securimage_url.'\',\''.$securimage_show_rf_url.'\'); return false;">'."\n";
+    echo '" onclick="si_captcha_refresh(\''.$label.'\',\''.$form_id.'\',\''.$securimage_url.'\',\''.$securimage_show_rf_url.'\'); return false;">'."\n";
   }else{
     echo '" onclick="document.getElementById(\''.$label.'\').src = \''.$securimage_show_url.'&amp;sid=\''.' + Math.random(); return false;">'."\n";
   }
@@ -1273,7 +1230,6 @@ div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si
 .captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }
 .captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }
 img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }
-.captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }
 .captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }
 div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }
 label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }
@@ -1295,19 +1251,18 @@ if( $si_captcha_opt['si_captcha_external_style'] != 'true' ) {
 <script type="text/javascript">
 //<![CDATA[
 var si_captcha_styles = "\
-<!-- begin SI Captcha Anti-Spam - comment form style -->\
+<!-- begin SI CAPTCHA Anti-Spam - comment form style -->\
 <style type='text/css'>\
 div#captchaImgDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style'],'si_captcha_captcha_div_style'); ?> }\
 .captchaSizeDivSmall { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_sm'],'si_captcha_captcha_div_style_sm'); ?> }\
 .captchaSizeDivLarge { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_div_style_m'],'si_captcha_captcha_div_style_m'); ?> }\
 img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_image_style'],'si_captcha_captcha_image_style'); ?> }\
-.captchaImgAudio { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_audio_image_style'],'si_captcha_audio_image_style'); ?> }\
 .captchaImgRefresh { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_refresh_image_style'],'si_captcha_refresh_image_style'); ?> }\
 div#captchaInputDiv { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_captcha_input_div_style'],'si_captcha_captcha_input_div_style'); ?> }\
 label#captcha_code_label { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_label_style'],'si_captcha_comment_label_style'); ?> }\
 input#captcha_code { <?php echo $this->si_captcha_convert_css($si_captcha_opt['si_captcha_comment_field_style'],'si_captcha_comment_field_style'); ?> }\
 </style>\
-<!-- end SI Captcha Anti-Spam - comment form style -->\
+<!-- end SI CAPTCHA Anti-Spam - comment form style -->\
 ";
 jQuery(document).ready(function($) {
 $('head').append(si_captcha_styles);
