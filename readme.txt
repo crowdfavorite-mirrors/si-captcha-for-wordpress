@@ -222,7 +222,10 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
+= 2.7.5 =
+- (07 Dec 2011) - WP 3.3 compatibility fix for wp_enqueue_script was called incorrectly.
 - Remove more leftover audio code.
+- CAPTCHA code cache file performance improvement.
 
 = 2.7.4 =
 - (18 Jul 2011) - Fixed bug in CAPTCHA code reset reported by USSliberty, please update now for better spam protection.
