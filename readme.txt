@@ -222,6 +222,9 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
+- Updated Dutch language (nl_NL)  - Translated by [Paul Backus](http://backups.nl/)
+- Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+
 = 2.7.5 =
 - (07 Dec 2011) - WP 3.3 compatibility fix for wp_enqueue_script was called incorrectly.
 - Remove more leftover audio code.

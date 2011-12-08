@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: 2.2.7\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/si-captcha-for-wordpress\n"
 "POT-Creation-Date: 2008-12-14 17:48+0000\n"
-"PO-Revision-Date: 2010-01-07 23:04+0100\n"
-"Last-Translator: R J Lamers <rjlamers@hotmail.com>\n"
+"PO-Revision-Date: 2011-12-08 18:44+0100\n"
+"Last-Translator: Paul Backus <info@pbackus.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -29,7 +29,7 @@ msgstr "SI Captcha Options"
 
 #: si-captcha.php:136
 msgid "You do not have permissions for managing this option"
-msgstr "U heeft geen permissie om deze optie te wijzigen"
+msgstr "U heeft geen rechten om deze optie te wijzigen"
 
 #: si-captcha.php:200
 msgid "Options saved."
@@ -37,7 +37,7 @@ msgstr "Opties opgeslagen."
 
 #: si-captcha.php:216
 msgid "Changelog"
-msgstr "Changelog"
+msgstr "Wijzigings-overzicht"
 
 #: si-captcha.php:217
 msgid "FAQ"
@@ -74,19 +74,19 @@ msgstr "Ik heb gedoneerd om toekomstige ontwikkelingen van deze plugin te onders
 
 #: si-captcha.php:263
 msgid "Usage"
-msgstr "gebruik"
+msgstr "Gebruik"
 
 #: si-captcha.php:266
 msgid "Your theme must have a"
-msgstr "Uw thema moet een"
+msgstr "In uw thema ontbreekt"
 
 #: si-captcha.php:266
 msgid "tag inside your comments.php form. Most themes do."
-msgstr "tag bevatten in uw comments.php formulier. De meeste thema's hebben dat."
+msgstr "tag bevinden zich in uw comments.php formulier. De meeste thema's hebben dit."
 
 #: si-captcha.php:267
 msgid "The best place to locate the tag is before the comment textarea, you may want to move it if it is below the comment textarea, or the captcha image and captcha code entry might display after the submit button."
-msgstr "De beste plek om de tag te lokaliseren is voor het commentaar tekstveld, u zou het kunnen verplaatsen indien het zich onder het commentaar tekstveld bevindt, anders zou de captcha afbeelding en captcha code achter de Verstuurknop kunnen verschijnen."
+msgstr "De beste plek om de tag te vinden is voor het commentaar tekstveld, u zou het kunnen verplaatsen indien het zich onder het commentaar tekstveld bevindt, anders zou de captcha afbeelding en captcha code achter de Verstuurknop kunnen verschijnen."
 
 #: si-captcha.php:270
 msgid "Options"
@@ -95,7 +95,7 @@ msgstr "Opties"
 #: si-captcha.php:273
 #: si-captcha.php:432
 msgid "Update Options"
-msgstr "Opties updaten"
+msgstr "Opties bijwerken"
 
 #: si-captcha.php:280
 msgid "CAPTCHA Support Test:"
@@ -127,11 +127,11 @@ msgstr "Hoog"
 
 #: si-captcha.php:309
 msgid "CAPTCHA on Login Form:"
-msgstr "CAPTHA op login formulier:"
+msgstr "CAPTHA op loginscherm:"
 
 #: si-captcha.php:312
 msgid "Enable CAPTCHA on the login form."
-msgstr "Activeer CAPTCHA op het login formulier."
+msgstr "Activeer CAPTCHA op het loginscherm."
 
 #: si-captcha.php:313
 #: si-captcha.php:350
@@ -149,11 +149,11 @@ msgstr "help"
 
 #: si-captcha.php:315
 msgid "The Login form captcha is not enabled by default because it might be annoying to users. Only enable it if you are having spam problems related to bots automatically logging in."
-msgstr "De captcha op het Login formulier is niet geactiveerd omdat dit vervelend kan zijn voor gebruikers. Activeer dit alleen indien u spam problemen heeft gerelateerd aan bots die automatisch proberen in te loggen."
+msgstr "De captcha op het Loginscherm is niet geactiveerd omdat dit vervelend kan zijn voor gebruikers. Activeer dit alleen indien u spam problemen heeft gerelateerd aan bots die automatisch proberen in te loggen."
 
 #: si-captcha.php:321
 msgid "CAPTCHA on Register Form:"
-msgstr "CAPTCHA op Registreer formulier:"
+msgstr "CAPTCHA op Registratie formulier:"
 
 #: si-captcha.php:324
 msgid "Enable CAPTCHA on the register form."
@@ -185,7 +185,7 @@ msgstr "CSS class naam voor CAPTCHA invoerveld op het commentaar formulier"
 
 #: si-captcha.php:341
 msgid "(Enter a CSS class name only if your theme uses one for comment text inputs. Default is blank for none.)"
-msgstr "(Voer een CSS class naam in alleen indien uw theme deze gebruikt voor het commentaar invoer. Standaard instelling is blank.)"
+msgstr "(Voer een CSS class naam in alleen indien uw theme deze gebruikt voor het commentaar invoer. Standaard instelling is leeg.)"
 
 #: si-captcha.php:346
 msgid "Comment Form Rearrange:"
@@ -233,7 +233,7 @@ msgstr "Activeer Flash audio voor de CAPTCHA"
 
 #: si-captcha.php:372
 msgid "Disable CAPTCHA transparent text (only if captcha text is missing on the image, try this fix)."
-msgstr "Schakel CAPTCHA transparante tekst uit (alleen als captcha tekst niet verschijnt op de afbeelding, probeer deze fix)."
+msgstr "Schakel CAPTCHA transparante tekst uit (alleen als captcha tekst niet verschijnt op de afbeelding, probeer deze nood-oplossing)."
 
 #: si-captcha.php:378
 msgid "Accessibility:"
@@ -257,7 +257,7 @@ msgstr "Inline CSS stijl:"
 
 #: si-captcha.php:401
 msgid "Reset the styles to default."
-msgstr "Reset de stijlen naar standaard"
+msgstr "Herstel de stijlen naar standaard"
 
 #: si-captcha.php:403
 msgid "CSS style for CAPTCHA div:"
@@ -303,7 +303,7 @@ msgstr "CAPTCHA afbeelding"
 #: si-captcha.php:907
 #: si-captcha.php:910
 msgid "CAPTCHA Audio"
-msgstr "CAPTCHA audio"
+msgstr "CAPTCHA geluid"
 
 #: si-captcha.php:422
 #: si-captcha.php:917
@@ -337,7 +337,7 @@ msgstr "Bewerk posts"
 
 #: si-captcha.php:453
 msgid "Publish Posts"
-msgstr "Publiceer posts"
+msgstr "Publiceer bericht"
 
 #: si-captcha.php:454
 msgid "Moderate Comments"
@@ -377,7 +377,7 @@ msgstr "Verstuur commentaar"
 #: si-captcha.php:849
 #: si-captcha.php:989
 msgid "Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting. See plugin FAQ."
-msgstr "Kon de CAPTCHA cookie niet lezen. Verzeker u ervan dat u cookies heeft ingeschakeld en deze niet worden geblokkeerd door uw browser instellingen. Of een andere plugin zorgt voor een conflict. Zie plugin FAQ."
+msgstr "Kon het CAPTCHA cookie niet lezen. Verzeker u ervan dat u cookies heeft ingeschakeld en dat deze niet worden geblokkeerd door uw browser instellingen. Of een andere plugin zorgt voor een conflict. Zie plugin FAQ."
 
 #: si-captcha.php:745
 #: si-captcha.php:774
@@ -406,12 +406,18 @@ msgstr "Die CAPTCHA was niet correct. Zorg er voor dat u cookies niet uitgeschak
 msgid "ERROR"
 msgstr "FOUT"
 
-#: si-captcha.php:852
-msgid "Error: You did not enter a Captcha phrase. Press your browsers back button and try again."
+#: si-captcha.php:791
+#: si-captcha.php:820
+#: si-captcha.php:878
+#: si-captcha.php:906
+msgid "Error: You did not enter a CAPTCHA phrase. Press your browser's back button and try again."
 msgstr "Fout: U heeft geen CAPTCHA ingevoerd. Klik op uw browser's terugknop en probeer het opnieuw."
 
-#: si-captcha.php:863
-msgid "Error: You entered in the wrong Captcha phrase. Press your browsers back button and try again."
+#: si-captcha.php:806
+#: si-captcha.php:834
+#: si-captcha.php:893
+#: si-captcha.php:918
+msgid "Error: You entered in the wrong CAPTCHA phrase. Press your browser's back button and try again."
 msgstr "Fout: U heeft de verkeerde CAPTCHA ingevoerd. Klik op uw browser's terugknop en probeer het opnieuw."
 
 #: si-captcha.php:935
@@ -420,11 +426,11 @@ msgstr "Instellingen"
 
 #: si-captcha.php:976
 msgid "<strong>ERROR</strong>: The username field is empty."
-msgstr "<strong>FOUT</strong>: Het veld met gebruikersnaam is leeg."
+msgstr "<strong>FOUT</strong>: De gebruikersnaam is niet ingevuld."
 
 #: si-captcha.php:979
 msgid "<strong>ERROR</strong>: The password field is empty."
-msgstr "<strong>FOUT</strong>: Het veld met wachtwoord is leeg."
+msgstr "<strong>FOUT</strong>: Het wachtwoord is niet ingevuld."
 
 #: si-captcha.php:1009
 #, php-format
