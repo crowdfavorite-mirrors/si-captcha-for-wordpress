@@ -608,7 +608,7 @@ function si_captcha_bp_signup_validate() {
          return;
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+         if ( isset($_POST['si_code_reg']) && is_string($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
            $prefix = $_POST['si_code_reg'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -669,7 +669,7 @@ function si_captcha_wpmu_signup_post($errors) {
          return $errors;
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+         if ( isset($_POST['si_code_reg']) && is_string($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
            $prefix = $_POST['si_code_reg'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -731,7 +731,7 @@ function si_captcha_register_post($errors) {
          return $errors;
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+         if ( isset($_POST['si_code_reg']) && is_string($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
            $prefix = $_POST['si_code_reg'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -789,7 +789,7 @@ function si_captcha_lostpassword_post() {
          wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
+         if ( isset($_POST['si_code_reg']) && is_string($_POST['si_code_reg']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_reg']) ){
            $prefix = $_POST['si_code_reg'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -876,7 +876,7 @@ function si_captcha_comment_post($comment) {
          wp_die( '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_com']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_com']) ){
+         if ( isset($_POST['si_code_com']) && is_string($_POST['si_code_com']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_com']) ){
            $prefix = $_POST['si_code_com'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -948,7 +948,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
          return new WP_Error('captcha_error',  '<strong>'.__('ERROR', 'si-captcha').'</strong>: '. __('Could not find CAPTCHA token.', 'si-captcha'));
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['si_code_log']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_log']) ){
+         if ( isset($_POST['si_code_log']) && is_string($_POST['si_code_log']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['si_code_log']) ){
            $prefix = $_POST['si_code_log'];
          }
          if ( is_readable( $si_captcha_dir_ns . $prefix . '.php' ) ) {
@@ -1197,7 +1197,7 @@ function si_captcha_convert_css($string,$css) {
 
 function si_captcha_admin_head() {
  // only load this header stuff on the admin settings page
-if(isset($_GET['page']) && preg_match('/si-captcha.php$/',$_GET['page']) ) {
+if(isset($_GET['page']) && is_string($_GET['page']) && preg_match('/si-captcha.php$/',$_GET['page']) ) {
 ?>
 <!-- begin SI CAPTCHA Anti-Spam - admin settings page header code -->
 <style type="text/css">
@@ -1319,7 +1319,7 @@ function get_captcha_url_si() {
     $url = (is_ssl() ? 'https://' : 'http://') . $current_blog->domain . $current_blog->path . ($wpmu == 1 ? MUPLUGINDIR : PLUGINDIR) . $si_dir;
 
   // set the type of request (SSL or not)
-  if ( getenv('HTTPS') == 'on' ) {
+  if ( is_ssl() ) {
       $url = preg_replace('|http://|', 'https://', $url);
   }
 

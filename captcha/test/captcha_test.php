@@ -153,7 +153,7 @@ if (isset($_POST['action']) && ($_POST['action'] == 'check')) {
          $error_captcha = 'Could not find CAPTCHA token.';
       }else{
          $prefix = 'xxxxxx';
-         if ( isset($_POST['token']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['token'])  ){
+         if ( isset($_POST['token']) && is_string($_POST['token']) && preg_match('/^[a-zA-Z0-9]{15,17}$/',$_POST['token'])  ){
            $prefix = $_POST['token'];
          }
          $ctf_captcha_dir = '../temp/';
