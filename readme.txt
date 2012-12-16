@@ -4,7 +4,7 @@ Author URI: http://www.642weather.com/weather/scripts.php
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S
 Tags: akismet, captcha, comment, comments, login, anti-spam, spam, security, multilingual, buddypress, wpmu, wordpressmu
 Requires at least: 2.9
-Tested up to: 3.3.2
+Tested up to: 3.5
 Stable tag: trunk
 
 Adds CAPTCHA anti-spam methods to WordPress on the forms for comments, registration, lost password, login, or all. For WP, WPMU, and BuddyPress.
@@ -194,6 +194,7 @@ The following translations are included in the download zip file:
 * Indonesian (id_ID) - Translated by [Masino Sinaga](http://www.openscriptsolution.com)
 * Italian (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
 * Japanese (ja) - Translated by [Chestnut](http://staff.blog.bng.net/)
+* Lithuanian (lt_LT) - Translated by [Vincent G](http://www.Host1Free.com)
 * Norwegian (nb_NO) - Translated by [Roger Sylte](http://roger.inro.net/)
 * Polish (pl_PL) - Translated by [Tomasz](http://www.ziolczynski.pl/)
 * Portuguese Brazil (pt_BR) - Translated by [Newton Dan Faoro]
@@ -222,9 +223,15 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
-- Fix possible error: preg_match() expects parameter to be string. 
+= 2.7.6 =
+- (15 Dec 2012) - Tested compatible with WP 3.5
+- improved spam bot detection.
+- Removed CAPTCHA test pages.
+- Fix possible error: preg_match() expects parameter to be string.
+- Other optimizations. 
 - Updated Dutch language (nl_NL)  - Translated by [Paul Backus](http://backups.nl/)
 - Updated Italian language (it_IT) - Translated by [Gianni Diurno](http://gidibao.net/ "Gianni Diurno")
+- Added Lithuanian (lt_LT) - Translated by [Vincent G](http://www.Host1Free.com)
 
 = 2.7.5 =
 - (07 Dec 2011) - WP 3.3 compatibility fix for wp_enqueue_script was called incorrectly.

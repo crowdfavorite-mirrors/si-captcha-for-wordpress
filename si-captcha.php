@@ -3,14 +3,14 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
-Version: 2.7.5
+Version: 2.7.6
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
 
-$si_captcha_version = '2.7.5';
+$si_captcha_version = '2.7.6';
 
-/*  Copyright (C) 2008-2011 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
+/*  Copyright (C) 2008-2013 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -593,10 +593,42 @@ function si_captcha_token_error(){
   return $si_cec;
 }
 
+function si_captcha_validate_tokens($form_id = 'com') {
+// some honeypot traps for spam bots
+      $si_tok = 'not-ok';
+
+      // hidden honeypot field
+      if( isset($_POST["email_$form_id"]) && trim($_POST["email_$form_id"]) != '')
+         return 'failed honeypot';
+
+      // server-side timestamp forgery token.
+      if (!isset($_POST["si_tok_$form_id"]) || empty($_POST["si_tok_$form_id"])  )
+         return 'no timestamp';
+
+      if ( ! preg_match("/^[0-9]+$/",$_POST["si_tok_$form_id"]) )
+         return 'bad timestamp';
+
+      $comment_timestamp    = trim($_POST["si_tok_$form_id"]);
+      $submitted_timestamp  = time();
+      if ( $submitted_timestamp - $comment_timestamp < 5 )
+	     return 'too fast less than 5 sec';
+      if ( $submitted_timestamp - $comment_timestamp > 1800 )
+	     return 'over 30 min';
+
+      return 'ok';
+
+}
+
 // this function checks the captcha posted with registration on BuddyPress 1.1+
 // hooks into bp-core-signup.php do_action( 'bp_signup_validate' );
 function si_captcha_bp_signup_validate() {
    global $bp, $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
+
+    // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('reg');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
+
 
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
@@ -657,6 +689,11 @@ function si_captcha_bp_signup_validate() {
 // this function checks the captcha posted with registration on wpmu and buddypress before 1.1
 function si_captcha_wpmu_signup_post($errors) {
    global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
+
+      // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('reg');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
 
  if ($_POST['stage'] == 'validate-user-signup') {
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
@@ -721,6 +758,11 @@ function si_captcha_wpmu_signup_post($errors) {
 function si_captcha_register_post($errors) {
    global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
 
+       // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('reg');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
+
  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
       if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
@@ -780,6 +822,11 @@ function si_captcha_register_post($errors) {
 
 function si_captcha_lostpassword_post() {
    global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
+
+   // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('reg');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
 
  if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
@@ -868,6 +915,11 @@ function si_captcha_comment_post($comment) {
                return $comment;
     }
 
+       // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('com');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
+
    if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
       if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
@@ -938,6 +990,12 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 			return $error;
 		}
   // begin si captcha check
+
+      // some honyepot traps for spam bots
+    $si_tok = $this->si_captcha_validate_tokens('log');
+    if($si_tok != 'ok')
+       wp_die( __('Hello, spam bot!') );
+
   if($si_captcha_opt['si_captcha_disable_session'] == 'true') {
    //captcha without sessions
       if (empty($_POST['captcha_code']) || $_POST['captcha_code'] == '') {
@@ -1069,8 +1127,13 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   echo '" title="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" />'."\n";
-  if($capt_disable_sess)
+  if($capt_disable_sess) {
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
+  }
+  // server-side timestamp forgery token.
+  echo '    <input name="si_tok_'.$form_id.'" type="hidden"  value="'. time() .'" />'."\n";
+  // hidden honeypot field
+  echo '    <input name="email_'.$form_id.'" type="hidden"  value=""  autofill="off" style="display:none;" />'."\n";
 
   echo '    <div id="si_refresh_'.$form_id.'">'."\n";
   echo '<a href="#" rel="nofollow" title="';
@@ -1201,13 +1264,16 @@ if(isset($_GET['page']) && is_string($_GET['page']) && preg_match('/si-captcha.p
 ?>
 <!-- begin SI CAPTCHA Anti-Spam - admin settings page header code -->
 <style type="text/css">
-div.star-holder { position: relative; height:19px; width:100px; font-size:19px;}
-div.star {height: 100%; position:absolute; top:0px; left:0px; background-color: transparent; letter-spacing:1ex; border:none;}
-.star1 {width:20%;} .star2 {width:40%;} .star3 {width:60%;} .star4 {width:80%;} .star5 {width:100%;}
-.star.star-rating {background-color: #fc0;}
-.star img{display:block; position:absolute; right:0px; border:none; text-decoration:none;}
-div.star img {width:19px; height:19px; border-left:1px solid #fff; border-right:1px solid #fff;}
+div.si-star-holder { position: relative; height:19px; width:100px; font-size:19px;}
+div.si-star {height: 100%; position:absolute; top:0px; left:0px; background-color: transparent; letter-spacing:1ex; border:none;}
+.si-star1 {width:20%;} .si-star2 {width:40%;} .si-star3 {width:60%;} .si-star4 {width:80%;} .si-star5 {width:100%;}
+.si-star.si-star-rating {background-color: #fc0;}
+.si-star img{display:block; position:absolute; right:0px; border:none; text-decoration:none;}
+div.si-star img {width:19px; height:19px; border-left:1px solid #fff; border-right:1px solid #fff;}
 .si-notice{background-color:#ffffe0;border-color:#e6db55;border-width:1px;border-style:solid;padding:5px;margin:5px 5px 20px;-moz-border-radius:3px;-khtml-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+.fscf_left {clear:left; float:left;}
+.fscf_img {margin:0 10px 10px 0;}
+.fscf_tip {text-align:left; display:none;color:#006B00;padding:5px;}
 </style>
 <!-- end SI CAPTCHA Anti-Spam - admin settings page header code -->
 <?php
