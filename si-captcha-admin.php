@@ -46,6 +46,11 @@ if ( strpos(strtolower($_SERVER['SCRIPT_NAME']),strtolower(basename(__FILE__))) 
          'si_captcha_captcha_image_style' =>  (trim($_POST['si_captcha_captcha_image_style']) != '' ) ? trim($_POST['si_captcha_captcha_image_style']) : $si_captcha_option_defaults['si_captcha_captcha_image_style'],
          'si_captcha_refresh_image_style' =>  (trim($_POST['si_captcha_refresh_image_style']) != '' ) ? trim($_POST['si_captcha_refresh_image_style']) : $si_captcha_option_defaults['si_captcha_refresh_image_style'],
          'si_captcha_required_indicator' =>    $_POST['si_captcha_required_indicator'],
+         'si_captcha_error_spambot' =>         trim($_POST['si_captcha_error_spambot']),
+         'si_captcha_error_incorrect' =>       trim($_POST['si_captcha_error_incorrect']),
+         'si_captcha_error_empty' =>           trim($_POST['si_captcha_error_empty']),
+         'si_captcha_error_token' =>           trim($_POST['si_captcha_error_token']),
+         'si_captcha_error_cookie' =>          trim($_POST['si_captcha_error_cookie']),
          'si_captcha_label_captcha' =>         trim($_POST['si_captcha_label_captcha']),
          'si_captcha_tooltip_captcha' =>       trim($_POST['si_captcha_tooltip_captcha']),
          'si_captcha_tooltip_refresh' =>       trim($_POST['si_captcha_tooltip_refresh']),
@@ -601,6 +606,13 @@ if( $si_captcha_opt['si_captcha_external_style'] == 'true' ) {
        </div>
        <br />
         <label for="si_captcha_required_indicator"><?php echo __('Required', 'si-captcha'); ?></label><input name="si_captcha_required_indicator" id="si_captcha_required_indicator" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_required_indicator']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_spambot"><?php echo __('Possible spam bot', 'si-captcha'); ?></label><input name="si_captcha_error_spambot" id="si_captcha_error_spambot" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_spambot']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_incorrect"><?php echo __('Wrong CAPTCHA', 'si-captcha'); ?></label><input name="si_captcha_error_incorrect" id="si_captcha_error_incorrect" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_incorrect']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_empty"><?php echo __('Empty CAPTCHA', 'si-captcha'); ?></label><input name="si_captcha_error_empty" id="si_captcha_error_empty" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_empty']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_token"><?php echo __('Missing CAPTCHA token', 'si-captcha'); ?></label><input name="si_captcha_error_token" id="si_captcha_error_token" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_token']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_unreadable"><?php echo __('Unreadable CAPTCHA token', 'si-captcha'); ?></label><input name="si_captcha_error_unreadable" id="si_captcha_error_unreadable" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_unreadable']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_cookie"><?php echo __('Unreadable CAPTCHA cookie', 'si-captcha'); ?></label><input name="si_captcha_error_cookie" id="si_captcha_error_cookie" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_cookie']);  ?>" size="50" /><br />
+        <label for="si_captcha_error_error"><?php echo __('ERROR', 'si-captcha'); ?></label><input name="si_captcha_error_error" id="si_captcha_error_error" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_error_error']);  ?>" size="50" /><br />
         <label for="si_captcha_label_captcha"><?php echo __('CAPTCHA Code', 'si-captcha'); ?></label><input name="si_captcha_label_captcha" id="si_captcha_label_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_label_captcha']);  ?>" size="50" /><br />
         <label for="si_captcha_tooltip_captcha"><?php echo __('CAPTCHA Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_captcha" id="si_captcha_tooltip_captcha" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_captcha']);  ?>" size="50" /><br />
         <label for="si_captcha_tooltip_refresh"><?php echo __('Refresh Image', 'si-captcha'); ?></label><input name="si_captcha_tooltip_refresh" id="si_captcha_tooltip_refresh" type="text" value="<?php echo esc_attr($si_captcha_opt['si_captcha_tooltip_refresh']);  ?>" size="50" />

@@ -39,8 +39,8 @@ Captcha Image Support:
 
 Requirements/Restrictions:
 -------------------------
- * Works with Wordpress 2.9+, WPMU, and BuddyPress (Wordpress 3.0+ is highly recommended)
- * PHP5 is highly recommended
+ * Works with Wordpress 2.9+, WPMU, and BuddyPress (Wordpress 3.5+ is highly recommended)
+ * PHP5+ is highly recommended
 
 
 
@@ -60,7 +60,7 @@ Requirements/Restrictions:
 
 3. Step 2: MOVE the si-captcha.php from the `/si-captcha-for-wordpress/` folder to the `/mu-plugins/` folder.
 
-4. Site wide Settings are located in "Site Admin", "SI CAPTCHA Optioins" 
+4. Site wide Settings are located in "Site Admin", "SI CAPTCHA Options" 
 
 
 
@@ -122,11 +122,6 @@ or Blog address (URL) are set incorrectly in WP settings: Admin,  Settings,  Gen
 
 [See FAQ page on fixing this problem](http://www.fastsecurecontactform.com/captcha-image-not-showing-si-captcha-anti-spam)
 
-This script can be used to test if your PHP installation will support the CAPTCHA:
-Click on the "Test if your PHP installation will support the CAPTCHA" link on the Options page.
-or open this URL in your web browser to run the test:
-`/wp-content/plugins/si-captcha-for-wordpress/captcha/test/index.php`
-
 = Sometimes the captcha image and captcha input field are displayed AFTER the submit button on the WP2 comment form. =
 
 WP2.0 themes must have a `<?php do_action('comment_form', $post->ID); ?>` tag inside the `/wp-content/themes/[your_theme]/comments.php` file. Most WP2 themes do.
@@ -165,8 +160,16 @@ If another security plugin is combined(not Akismet or WP-spamFree), the captcha 
 
 Sometimes your site becomes targeted by a spammer that uses a combination of a bot and human captcha solver. [See this help forum for a solution](http://wordpress.org/support/topic/plugin-si-captcha-for-wordpress-spammers-bypassed-captcha-registration-system?replies=13#post-2023124)
 
-= How han I change the color of the CAPTCHA input field on the comment form? =
+= How can I change the color of the CAPTCHA input field on the comment form? =
 If you need to learn how to adjust the captcha input form colors, [See this FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
+
+= The CAPTCHA is not working and I cannot login at my login page =
+This failure could have been caused by another plugin conflict with this one.
+If you use CAPTCHA on the login form and ever get locked out due to CAPTCHA is broken, here is how to get back in:
+FTP to your WordPress directory `/wp-content/plugins/`
+Delete this folder: 
+`si-captcha-for-wordpress`
+This manually removes the plugin so you should be able to login again. 
 
 
 = Is this plugin available in other languages? =
@@ -222,6 +225,11 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 
 == Changelog ==
+
+= 2.7.6.1 =
+- (17 Dec 2012) - fixed some bugs.
+- cleaned up some code.
+- added settings to change all the error messages.
 
 = 2.7.6 =
 - (15 Dec 2012) - Tested compatible with WP 3.5
