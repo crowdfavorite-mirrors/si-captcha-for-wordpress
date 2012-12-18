@@ -137,7 +137,7 @@ You can just check the 'Comment Form Rearrange' box on the admin plugins 'Captch
 = Why is it better to uncheck the 'Comment Form Rearrange' box and move the tag? =
 Because the XHTML will no longer validate if it is checked.
 
-= Why do I get "ERROR: Could not read CAPTCHA cookie. Make sure you have cookies enabled and not blocking in your web browser settings. Or another plugin is conflicting."? =
+= Why do I get "ERROR: Could not read CAPTCHA cookie."? =
 
 Check your web browser settings and make sure you are not blocking cookies for your blog domain. Cookies have to be enabled in your web browser and not blocked for the blog web domain.
 
@@ -150,7 +150,7 @@ or open this URL in your web browser to run the test: `/wp-content/plugins/si-ca
 
 Your theme could be missing the wp_footer PHP tag. Your theme should be considered broken if the wp_footer PHP tag is missing.
 
-All WordPress themes should always have `<?php wp_footer(); ?>` PHP tag just before the closing `</body>` tag of your theme's footer.php, or you will break many plugins which generally use this hook to reference JavaScript files. The solution – edit your theme's footer.php and make sure this tag is there. If it is missing, add it. Next, be sure to test that the CAPTCHA refresh button works, if it does not work and you have performed this step correctly, you could have some other cause.
+All WordPress themes should always have `<?php wp_footer(); ?>` PHP tag just before the closing `</body>` tag of your theme's footer.php, or you will break many plugins which generally use this hook to reference JavaScript files. The solution: edit your theme's footer.php and make sure this tag is there. If it is missing, add it. Next, be sure to test that the CAPTCHA refresh button works, if it does not work and you have performed this step correctly, you could have some other cause.
 
 = Spammers have been able to bypass my CAPTCHA, what can I do? =
 
