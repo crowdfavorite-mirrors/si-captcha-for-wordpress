@@ -374,7 +374,7 @@ echo '</div>
 	if( isset($_GET['captcha']) &&  $_GET['captcha'] == 'show_error' ) {
         if( $si_captcha_opt['si_captcha_disable_session'] != 'true' && isset($_SESSION['captcha_error']) ) {
             $show_error = $_SESSION['captcha_error'];
-            $_SESSION['captcha_error'] = '';
+            unset($_SESSION['captcha_error']);
          }else{
              $show_error = ($si_captcha_opt['si_captcha_error_incorrect'] != '') ? $si_captcha_opt['si_captcha_error_incorrect'] : __('Wrong CAPTCHA', 'si-captcha');
          }
