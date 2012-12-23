@@ -226,6 +226,9 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
+= 2.7.6.2 =
+- (23 Dec 2012) - fixed some bugs with login redirect.
+
 = 2.7.6.1 =
 - (17 Dec 2012) - fixed some bugs.
 - cleaned up some code.

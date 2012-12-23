@@ -3,12 +3,12 @@
 Plugin Name: SI CAPTCHA Anti-Spam
 Plugin URI: http://www.642weather.com/weather/scripts-wordpress-captcha.php
 Description: Adds CAPTCHA anti-spam methods to WordPress forms for comments, registration, lost password, login, or all. This prevents spam from automated bots. WP, WPMU, and BuddyPress compatible. <a href="plugins.php?page=si-captcha-for-wordpress/si-captcha.php">Settings</a> | <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KXJWLPPWZG83S">Donate</a>
-Version: 2.7.6.1
+Version: 2.7.6.2
 Author: Mike Challis
 Author URI: http://www.642weather.com/weather/scripts.php
 */
 
-$si_captcha_version = '2.7.6.1';
+$si_captcha_version = '2.7.6.2';
 
 /*  Copyright (C) 2008-2013 Mike Challis  (http://www.642weather.com/weather/contact_us.php)
 
@@ -369,19 +369,7 @@ echo ($si_captcha_opt['si_captcha_captcha_small'] == 'true') ? 'class="captchaSi
 echo '>';
 $this->si_captcha_captcha_html('si_image_log','log');
 echo '</div>
-';
-	// prints a message if the captcha was wrong
-	if( isset($_GET['captcha']) &&  $_GET['captcha'] == 'show_error' ) {
-        if( $si_captcha_opt['si_captcha_disable_session'] != 'true' && isset($_SESSION['captcha_error']) ) {
-            $show_error = $_SESSION['captcha_error'];
-            unset($_SESSION['captcha_error']);
-         }else{
-             $show_error = ($si_captcha_opt['si_captcha_error_incorrect'] != '') ? $si_captcha_opt['si_captcha_error_incorrect'] : __('Wrong CAPTCHA', 'si-captcha');
-         }
-		echo '<p style="color:#FF0000;">'.$show_error.'</p><div style="clear:both;"></div>';;
-
-	}
-echo '<p>
+<p>
  <label>';
   echo ($si_captcha_opt['si_captcha_label_captcha'] != '') ? $si_captcha_opt['si_captcha_label_captcha'] : __('CAPTCHA Code', 'si-captcha');
   echo '<br />
@@ -746,38 +734,6 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 		return $user;
 } // end function si_wp_authenticate_username_password
 
-// find out CAPTCHA errors while logging in
-// performed after si_captcha_login_redirect
-function si_captcha_login_errors($errors){
-    global $si_captcha_dir, $si_captcha_dir_ns, $si_captcha_opt;
-
-	if( isset( $_REQUEST['action'] ) && 'register' == $_REQUEST['action'] )
-		return($errors);
-
-    $validate_result = $this->si_captcha_validate_code('log', 'unlink');
-    if($validate_result != 'valid') {
-       $error = ($si_captcha_opt['si_captcha_error_error'] != '') ? $si_captcha_opt['si_captcha_error_error'] : __('ERROR', 'si-captcha');
-       return $errors."<strong>$error</strong>: $validate_result";
-    }
-
-	return $errors;
-} // end function si_captcha_login_errors
-
-// block login if CAPTCHA fails
-function si_captcha_login_redirect($url){
-    global $si_captcha_opt;
-
-    $validate_result = $this->si_captcha_validate_code('log', 'no_unlink');
-    if($validate_result != 'valid') {
-        if($si_captcha_opt['si_captcha_disable_session'] != 'true')
-            $_SESSION['captcha_error'] = $validate_result;
-		wp_clear_auth_cookie();
-        return $_SERVER["REQUEST_URI"].'/?captcha=show_error';
-    }
-
-	return home_url('/wp-admin/');  //  is this URL always correct?
-
-} // end function si_captcha_login_redirect
 
 // check the honeypot traps for spam bots
 function si_captcha_validate_tokens($form_id = 'com') {
@@ -1300,11 +1256,7 @@ else if (basename(dirname(__FILE__)) == "si-captcha-for-wordpress" && function_e
     add_action('login_head', array( &$si_image_captcha, 'si_captcha_login_head' ) );
     add_action('bp_login_bar_logged_out', array( &$si_image_captcha, 'si_captcha_bp_login_form' ) );
     add_action('bp_sidebar_login_form', array( &$si_image_captcha, 'si_captcha_bp_login_sidebar_form' ) );
-    // either this or the next two filters after it (take your pick)
-	//add_filter('authenticate', array( &$si_image_captcha, 'si_wp_authenticate_username_password'), 9, 3);
-    add_filter('login_errors',  array( &$si_image_captcha, 'si_captcha_login_errors'), 9, 3);
-    add_filter('login_redirect', array( &$si_image_captcha, 'si_captcha_login_redirect'), 9, 3);
-
+	add_filter('authenticate', array( &$si_image_captcha, 'si_wp_authenticate_username_password'), 9, 3);
   }
 
   if ($si_captcha_opt['si_captcha_lostpwd'] == 'true') {
