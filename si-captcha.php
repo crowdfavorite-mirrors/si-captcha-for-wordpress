@@ -882,7 +882,7 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   // server-side timestamp forgery token.
   echo '    <input name="si_tok_'.$form_id.'" type="hidden"  value="'. time() .'" />'."\n";
   // hidden empty honeypot field
-  echo '    <input name="email_'.$form_id.'" type="hidden"  value=""  autofill="off" style="display:none;" />'."\n";
+  echo '    <input name="email_'.$form_id.'" type="hidden"  value="" style="display:none;" />'."\n";
 
   echo '    <div id="si_refresh_'.$form_id.'">'."\n";
   echo '<a href="#" rel="nofollow" title="';
