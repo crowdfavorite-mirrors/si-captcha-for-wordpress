@@ -226,6 +226,8 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 == Changelog ==
 
+Jan 5 2013 added new setting "Enable honeypot spambot trap". Enables empty field and time based honyepot traps for spam bots. For best results, do not enable unless you have a spam bot problem. Does not stop human spammers.
+
 = 2.7.6.2 =
 - (23 Dec 2012) - fixed some bugs with login redirect.
 

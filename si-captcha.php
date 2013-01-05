@@ -77,6 +77,7 @@ function si_captcha_get_options() {
          'si_captcha_disable_session' => 'true',
          'si_captcha_captcha_small' => 'false',
          'si_captcha_no_trans' => 'false',
+         'si_captcha_honeypot_enable' => 'false',
          'si_captcha_aria_required' => 'false',
          'si_captcha_external_style' => 'false',
          'si_captcha_captcha_div_style' =>   'display:block;',
@@ -173,10 +174,10 @@ function si_captcha_perm_dropdown($select_name, $checked_value='') {
                  __('Administer site', 'si-captcha') => 'level_10'
                  );
         // print the <select> and loop through <options>
-        echo '<select name="' . $select_name . '" id="' . $select_name . '">' . "\n";
+        echo '<select name="' . esc_attr($select_name) . '" id="' . esc_attr($select_name) . '">' . "\n";
         foreach ($choices as $text => $capability) :
                 if ($capability == $checked_value) $checked = ' selected="selected" ';
-                echo "\t". '<option value="' . $capability . '"' . $checked . ">$text</option> \n";
+                echo "\t". '<option value="' . esc_attr($capability) . '"' . $checked . '>'.esc_html($text)."</option>\n";
                 $checked = '';
         endforeach;
         echo "\t</select>\n";
@@ -736,31 +737,39 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 
 
 // check the honeypot traps for spam bots
-function si_captcha_validate_tokens($form_id = 'com') {
+// this is a very basic implementation, more agressive approaches might have to be added later
+function si_captcha_check_honeypot($form_id = 'com') {
+      global $si_captcha_opt;
 
-      $si_tok = 'not-ok';
+      if ($si_captcha_opt['honeypot_enable'] == 'false')
+           return 'ok';
 
-      // hidden honeypot field
-      if( isset($_POST["email_$form_id"]) && trim($_POST["email_$form_id"]) != '')
+    // hidden honeypot field
+    if( isset($_POST["email_$form_id"]) && trim($_POST["email_$form_id"]) != '')
          return 'failed honeypot';
 
-      // server-side timestamp forgery token.
-      if (!isset($_POST["si_tok_$form_id"]) || empty($_POST["si_tok_$form_id"])  )
+    // server-side timestamp forgery token.
+    if (!isset($_POST["si_tok_$form_id"]) || empty($_POST["si_tok_$form_id"]) || strpos($_POST["si_tok_$form_id"] , ',') === false )
          return 'no timestamp';
 
-      if ( ! preg_match("/^[0-9]+$/",$_POST["si_tok_$form_id"]) )
+    $vars = explode(',', $_POST["si_tok_$form_id"]);
+    if ( empty($vars[0]) || empty($vars[1]) || ! preg_match("/^[0-9]+$/",$vars[1]) )
          return 'bad timestamp';
 
-      $comment_timestamp    = trim($_POST["si_tok_$form_id"]);
-      $submitted_timestamp  = time();
-      if ( $submitted_timestamp - $comment_timestamp < 5 )
+    if ( wp_hash( $vars[1] ) != $vars[0] )
+       return 'bad timestamp';
+
+      $form_timestamp = $vars[1];
+      $now_timestamp  = time();
+      $human_typing_time = 5; // page load (1s) + submit (1s) + typing time (3s)
+      if ( $now_timestamp - $form_timestamp < $human_typing_time )
 	     return 'too fast less than 5 sec';
-      if ( $submitted_timestamp - $comment_timestamp > 1800 )
+      if ( $now_timestamp - $form_timestamp > 1800 )
 	     return 'over 30 min';
 
       return 'ok';
 
-}  //  end function si_captcha_validate_tokens
+}  //  end function si_captcha_check_honeypot
 
 // check if the posted capcha code was valid
 function si_captcha_validate_code($form_id = 'com', $unlink = 'unlink') {
@@ -790,8 +799,8 @@ function si_captcha_validate_code($form_id = 'com', $unlink = 'unlink') {
              if($unlink == 'unlink')
                 @unlink ($si_captcha_dir_ns . $prefix . '.php');
                    // some empty field and time based honyepot traps for spam bots
-                   $si_tok = $this->si_captcha_validate_tokens("$form_id");
-                   if($si_tok != 'ok')
+                   $hp_check = $this->si_captcha_check_honeypot("$form_id");
+                   if($hp_check != 'ok')
                       return ($si_captcha_opt['si_captcha_error_spambot'] != '') ? $si_captcha_opt['si_captcha_error_spambot'] : __('Possible spam bot', 'si-captcha');
               return 'valid';
 			} else {
@@ -819,8 +828,8 @@ function si_captcha_validate_code($form_id = 'com', $unlink = 'unlink') {
       // Check, that the right CAPTCHA password has been entered, display an error message otherwise.
       if($valid == true) {
            // some empty field and time based honyepot traps for spam bots
-           $si_tok = $this->si_captcha_validate_tokens("$form_id");
-           if($si_tok != 'ok')
+           $hp_check= $this->si_captcha_check_honeypot("$form_id");
+           if($hp_check != 'ok')
                 return ($si_captcha_opt['si_captcha_error_spambot'] != '') ? $si_captcha_opt['si_captcha_error_spambot'] : __('Possible spam bot', 'si-captcha');
           // ok can continue
           return 'valid';
@@ -879,10 +888,14 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   if($capt_disable_sess) {
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
   }
-  // server-side timestamp forgery token.
-  echo '    <input name="si_tok_'.$form_id.'" type="hidden"  value="'. time() .'" />'."\n";
-  // hidden empty honeypot field
-  echo '    <input name="email_'.$form_id.'" type="hidden"  value="" style="display:none;" />'."\n";
+  if($si_captcha_opt['si_captcha_honeypot_enable'] == 'true' ) {
+      // hidden empty honeypot field
+      echo '    <input name="email_'.$form_id.'" value="" style="display:none;" />
+';
+      // server-side timestamp forgery token.
+      echo '    <input type="hidden" name="si_tok_'.$form_id.'" value="'. wp_hash( time() ).','.time() .'" />
+';
+  }
 
   echo '    <div id="si_refresh_'.$form_id.'">'."\n";
   echo '<a href="#" rel="nofollow" title="';
