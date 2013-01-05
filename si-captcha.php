@@ -741,7 +741,7 @@ function si_wp_authenticate_username_password($user, $username, $password) {
 function si_captcha_check_honeypot($form_id = 'com') {
       global $si_captcha_opt;
 
-      if ($si_captcha_opt['honeypot_enable'] == 'false')
+      if ($si_captcha_opt['si_captcha_honeypot_enable'] == 'false')
            return 'ok';
 
     // hidden honeypot field
