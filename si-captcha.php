@@ -880,6 +880,19 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
     $securimage_show_url .= '&amp;prefix='.$prefix;
   }
 
+   if($si_captcha_opt['si_captcha_honeypot_enable'] == 'true' ) {
+      // hidden empty honeypot field
+      echo '
+        <div style="display:none;">
+          <label for="email_'.$form_id.'"><small>'.__('Leave this field empty', 'si-captcha').'</small></label>
+          <input type="text" name="email_'.$form_id.'" id="email_'.$form_id.'" value="" />
+        </div>
+';
+      // server-side timestamp forgery token.
+      echo '    <input type="hidden" name="si_tok_'.$form_id.'" value="'. wp_hash( time() ).','.time() .'" />
+';
+  }
+
   echo '<img id="'.$label.'" class="si-captcha" src="'.$securimage_show_url.'" '.$securimage_size.' alt="';
   echo ($si_captcha_opt['si_captcha_tooltip_captcha'] != '') ? esc_attr( $si_captcha_opt['si_captcha_tooltip_captcha'] ) : esc_attr(__('CAPTCHA Image', 'si-captcha'));
   echo '" title="';
@@ -887,14 +900,6 @@ function si_captcha_captcha_html($label = 'si_image', $form_id = 'com') {
   echo '" />'."\n";
   if($capt_disable_sess) {
         echo '    <input id="si_code_'.$form_id.'" name="si_code_'.$form_id.'" type="hidden"  value="'.$prefix.'" />'."\n";
-  }
-  if($si_captcha_opt['si_captcha_honeypot_enable'] == 'true' ) {
-      // hidden empty honeypot field
-      echo '    <input name="email_'.$form_id.'" value="" style="display:none;" />
-';
-      // server-side timestamp forgery token.
-      echo '    <input type="hidden" name="si_tok_'.$form_id.'" value="'. wp_hash( time() ).','.time() .'" />
-';
   }
 
   echo '    <div id="si_refresh_'.$form_id.'">'."\n";
