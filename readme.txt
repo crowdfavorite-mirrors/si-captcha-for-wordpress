@@ -96,7 +96,7 @@ Sometimes your site becomes targeted by a spammer that uses a combination of a b
 Try enabling the setting "Enable honeypot spambot trap" on the plugin settings page.
 
 Try allowing only Registered users to post, and or moderating comments.
-Read more about [Combating Comment Spam](http://codex.wordpress.org/Combating_Comment_Spam"
+Read more about [Combating Comment Spam](http://codex.wordpress.org/Combating_Comment_Spam)
 
 = How can I change the color of the CAPTCHA input field on the comment form? =
 If you need to learn how to adjust the captcha input form colors, [See this FAQ](http://www.fastsecurecontactform.com/si-captcha-comment-form-css)
@@ -207,7 +207,7 @@ The following translations are included in the download zip file:
 * Spanish (en_ES) - Translated by [zinedine](http://www.informacioniphone.com/)
 * Swedish (sv_SE) - Translated by [Benct]
 * Traditional Chinese, Taiwan Language (zh_TW) - Translated by [Cjh]
-* Turkish (tr_TR) - Translated by [Volkan](http://www.kirpininyeri.com/)
+* Turkish (tr_TR) - Translated by [Burak Yavuz]
 * More are needed... Please help translate.
 
 
@@ -226,6 +226,7 @@ Please read [How to update a translation of SI Captcha Anti-Spam for WordPress](
 
 = 2.7.7 =
 - (13 Jul 2013) - Bug fixes and code cleanup.
+- Update Turkish language (tr_TR) - Translated by [Burak Yavuz] 
 
 = 2.7.6.4 =
 - (05 Jan 2013) - added new setting "Enable honeypot spambot trap". Enables empty field token honyepot trap. For best results, do not enable unless you have a spam bot problem. Does not stop human spammers.
